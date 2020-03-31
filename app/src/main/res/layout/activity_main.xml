@@ -44,9 +44,10 @@
         app:layout_constraintVertical_bias="0.239" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logoApp"
         android:layout_width="144dp"
         android:layout_height="143dp"
+        android:contentDescription="Logotipo da aplicação"
         app:layout_constraintBottom_toTopOf="@+id/boasVindas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
