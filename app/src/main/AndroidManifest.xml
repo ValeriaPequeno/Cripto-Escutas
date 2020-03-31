@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".EcraEncriptacao"></activity>
+        <activity android:name=".EcraDesencriptacao"></activity>
+        <activity android:name=".EcraResultado"></activity>
     </application>
 
 </manifest>
