@@ -1,7 +1,6 @@
 package com.example.bhjencryption;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
 
 //extrair texto da TextView
 //String stringFromTextView = theTextView.getText().toString();
