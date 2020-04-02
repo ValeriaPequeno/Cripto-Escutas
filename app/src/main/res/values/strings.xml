@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">BHJEncryption</string>
 
-    <string-array name="encriptacoes">
-        <item>Encriptações:</item>
+    <string-array name="cifras">
+        <item>Selecione uma cifra:</item>
         <item>César</item>
-        <item>Substituição</item>
     </string-array>
 </resources>

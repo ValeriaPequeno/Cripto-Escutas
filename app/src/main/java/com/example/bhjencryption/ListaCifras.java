@@ -1,6 +1,6 @@
 package com.example.bhjencryption;
 
-public class Encriptacoes {
+public class ListaCifras {
 
     /*DESENCRIPTADORES*/
 
@@ -8,14 +8,6 @@ public class Encriptacoes {
         return cesarEncode(enc, 26-offset);
     }
 
-    static String substituicaoDecode(String s, String chave) {
-        StringBuilder sb = new StringBuilder(s.length());
-
-        for (char c : s.toCharArray())
-            sb.append((char) (chave.indexOf((int) c) + 32));
-
-        return sb.toString();
-    }
 
     /*ENCRIPTADORES*/
 
@@ -36,12 +28,5 @@ public class Encriptacoes {
         return encoded.toString();
     }
 
-    static String substituicaoEncode(String s, String chave) {
-        StringBuilder sb = new StringBuilder(s.length());
 
-        for (char c : s.toCharArray())
-            sb.append(chave.charAt((int) c - 32));
-
-        return sb.toString();
-    }
 }
