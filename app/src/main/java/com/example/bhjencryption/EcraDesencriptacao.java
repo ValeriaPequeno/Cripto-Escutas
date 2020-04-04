@@ -72,8 +72,7 @@ public class EcraDesencriptacao extends AppCompatActivity {
                 //CÓDIGO ONDE VAI ESTAR A AGLOMERAÇÃO DOS DADOS RECEBIDOS POR INPUT PARA SEREM DECIFRADOS
 
                 /*mensagem = menInput.getText().toString();
-                passString = passInput.getText().toString();
-                passInt = Integer.valueOf(passInput.getText().toString());*/
+                passString = passInput.getText().toString();*/
 
                 if(dropCifraSelecionada == 0){
                     showToast("Tem que ser selecionada uma cifra para continuar");

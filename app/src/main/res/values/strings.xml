@@ -3,6 +3,31 @@
 
     <string-array name="cifras">
         <item>Selecione uma cifra:</item>
+        <item>Alfabeto Invertido</item>
+        <item>Alfabeto Numeral</item>
+        <item>Angular</item>
+        <item>Batalha Naval</item>
+        <item>Caranguejo</item>
         <item>César</item>
+        <item>Código Braille (Falso)</item>
+        <item>Código +3</item>
+        <item>Código Chinês 1</item>
+        <item>Código Chinês 2</item>
+        <item>Data</item>
+        <item>Frase-Chave-Vertical</item>
+        <item>Frase-Chave-Horizontal</item>
+        <item>Homógrafo</item>
+        <item>Metades</item>
+        <item>Morse</item>
+        <item>Nós de Morse</item>
+        <item>Passa um Melro</item>
+        <item>Passa dois Melros</item>
+        <item>Picos de Morse</item>
+        <item>Primeira Letra Falsa</item>
+        <item>Romano-Árabe</item>
+        <item>SMS</item>
+        <item>Transposto</item>
+        <item>Última Letra Falsa</item>
+        <item>Vogais por Pontos</item>
     </string-array>
 </resources>
