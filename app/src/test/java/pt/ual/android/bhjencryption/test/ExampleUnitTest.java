@@ -1,4 +1,4 @@
-package com.example.bhjencryption;
+package pt.ual.android.bhjencryption.test;
 
 import org.junit.Test;
 

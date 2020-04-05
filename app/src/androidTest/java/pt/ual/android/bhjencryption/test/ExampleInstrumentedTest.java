@@ -1,4 +1,4 @@
-package com.example.bhjencryption;
+package pt.ual.android.bhjencryption.test;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.bhjencryption", appContext.getPackageName());
+        assertEquals("pt.ual.android.bhjencryption", appContext.getPackageName());
     }
 }
