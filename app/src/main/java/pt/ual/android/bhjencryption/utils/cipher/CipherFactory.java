@@ -59,7 +59,7 @@ public class CipherFactory {
             case "Primeira Letra Falsa":
                 break;
             case "Romano-Árabe":
-                break;
+                return new CipherResult(CipherUtils.romaArabEncode(this.message));
             case "SMS":
                 break;
             case "Transposto":
@@ -123,7 +123,7 @@ public class CipherFactory {
             case "Primeira Letra Falsa":
                 break;
             case "Romano-Árabe":
-                break;
+                return new CipherResult(CipherUtils.romaArabDecode(this.message));
             case "SMS":
                 break;
             case "Transposto":
