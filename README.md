@@ -1,5 +1,5 @@
 # BHJEncryption
-Projeto final de curso sobre encriptação de mensagens
+Projeto final de curso sobre encriptação de mensagens usando cifras utilizadas no Escutismo
 
 Cifras implementadas na aplicação:
 
