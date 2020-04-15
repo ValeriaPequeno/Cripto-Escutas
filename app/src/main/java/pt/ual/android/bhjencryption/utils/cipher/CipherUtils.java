@@ -11,8 +11,60 @@ public class CipherUtils {
         return cesarEncode(enc, 26 - offset);
     }
 
+    public static String morseDecode(String enc) {
+        StringBuilder decoded = new StringBuilder();
+
+        Map<String, Character> alfabeto = new HashMap<>();
+        alfabeto.put("._", 'a');
+        alfabeto.put("_...", 'b');
+        alfabeto.put("_._.", 'c');
+        alfabeto.put("_..", 'd');
+        alfabeto.put(".", 'e');
+        alfabeto.put(".._.", 'f');
+        alfabeto.put("__.", 'g');
+        alfabeto.put("....", 'h');
+        alfabeto.put("..", 'i');
+        alfabeto.put(".___", 'j');
+        alfabeto.put("_._", 'k');
+        alfabeto.put("._..", 'l');
+        alfabeto.put("__", 'm');
+        alfabeto.put("_.", 'n');
+        alfabeto.put("___", 'o');
+        alfabeto.put(".__.", 'p');
+        alfabeto.put("__._", 'q');
+        alfabeto.put("._.", 'r');
+        alfabeto.put("...", 's');
+        alfabeto.put("_", 't');
+        alfabeto.put(".._", 'u');
+        alfabeto.put("..._", 'v');
+        alfabeto.put(".__", 'w');
+        alfabeto.put("_.._", 'x');
+        alfabeto.put("_.__", 'y');
+        alfabeto.put("__..", 'z');
+        alfabeto.put(".____", '1');
+        alfabeto.put("..___", '2');
+        alfabeto.put("...__", '3');
+        alfabeto.put("...._", '4');
+        alfabeto.put(".....", '5');
+        alfabeto.put("_....", '6');
+        alfabeto.put("__...", '7');
+        alfabeto.put("___..", '8');
+        alfabeto.put("____.", '9');
+        alfabeto.put("_____", '0');
+
+        String[] letra = enc.split(" ");
+
+        for (String i : letra) {
+            char val = alfabeto.get(i);
+            decoded.append(val);
+        }
+
+        return decoded.toString();
+    }
+
     public static String romaArabDecode(String enc) {
         StringBuilder decoded = new StringBuilder();
+
         Map<String, Character> alfabeto = new HashMap<>();
         alfabeto.put("I", 'a');
         alfabeto.put("1", 'b');
@@ -41,9 +93,9 @@ public class CipherUtils {
         alfabeto.put("20", 'y');
         alfabeto.put("21", 'z');
 
-        String[] letter = enc.split(" ");
+        String[] letra = enc.split(" ");
 
-        for (String i : letter) {
+        for (String i : letra) {
             char val = alfabeto.get(i);
             decoded.append(val);
         }
@@ -67,6 +119,58 @@ public class CipherUtils {
                 encoded.append(i);
             }
         }
+        return encoded.toString();
+    }
+
+    public static String morseEncode(String enc) {
+        StringBuilder encoded = new StringBuilder();
+
+        Map<Character, String> alfabeto = new HashMap<>();
+        alfabeto.put('a', "._");
+        alfabeto.put('b', "_...");
+        alfabeto.put('c', "_._.");
+        alfabeto.put('d', "_..");
+        alfabeto.put('e', ".");
+        alfabeto.put('f', ".._.");
+        alfabeto.put('g', "__.");
+        alfabeto.put('h', "....");
+        alfabeto.put('i', "..");
+        alfabeto.put('j', ".___");
+        alfabeto.put('k', "_._");
+        alfabeto.put('l', "._..");
+        alfabeto.put('m', "__");
+        alfabeto.put('n', "_.");
+        alfabeto.put('o', "___");
+        alfabeto.put('p', ".__.");
+        alfabeto.put('q', "__._");
+        alfabeto.put('r', "._.");
+        alfabeto.put('s', "...");
+        alfabeto.put('t', "_");
+        alfabeto.put('u', ".._");
+        alfabeto.put('v', "..._");
+        alfabeto.put('w', ".__");
+        alfabeto.put('x', "_.._");
+        alfabeto.put('y', "_.__");
+        alfabeto.put('z', "__..");
+        alfabeto.put('1', ".____");
+        alfabeto.put('2', "..___");
+        alfabeto.put('3', "...__");
+        alfabeto.put('4', "...._");
+        alfabeto.put('5', ".....");
+        alfabeto.put('6', "_....");
+        alfabeto.put('7', "__...");
+        alfabeto.put('8', "___..");
+        alfabeto.put('9', "____.");
+        alfabeto.put('0', "_____");
+
+        for (char i : enc.toCharArray()) {
+            if (Character.isLetter(i) || Character.isDigit(i)) {
+                String val = alfabeto.get(Character.toLowerCase(i));
+                encoded.append(val);
+                encoded.append(" ");
+            }
+        }
+
         return encoded.toString();
     }
 
@@ -114,4 +218,5 @@ public class CipherUtils {
 
         return encoded.toString();
     }
+
 }

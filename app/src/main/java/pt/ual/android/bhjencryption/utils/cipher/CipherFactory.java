@@ -31,7 +31,10 @@ public class CipherFactory {
             case "Código Braille (Falso)":
                 break;
             case "Código +3":
-                break;
+                return new CipherResult(CipherUtils.cesarEncode(
+                        this.message,
+                        3)
+                );
             case "Código Chinês 1":
                 break;
             case "Código Chinês 2":
@@ -47,7 +50,7 @@ public class CipherFactory {
             case "Metades":
                 break;
             case "Morse":
-                break;
+                return new CipherResult(CipherUtils.morseEncode(this.message));
             case "Nós de Morse":
                 break;
             case "Passa um Melro":
@@ -95,7 +98,10 @@ public class CipherFactory {
             case "Código Braille (Falso)":
                 break;
             case "Código +3":
-                break;
+                return new CipherResult(CipherUtils.cesarDecode(
+                        this.message,
+                        3)
+                );
             case "Código Chinês 1":
                 break;
             case "Código Chinês 2":
@@ -111,7 +117,7 @@ public class CipherFactory {
             case "Metades":
                 break;
             case "Morse":
-                break;
+                return new CipherResult(CipherUtils.morseDecode(this.message));
             case "Nós de Morse":
                 break;
             case "Passa um Melro":
