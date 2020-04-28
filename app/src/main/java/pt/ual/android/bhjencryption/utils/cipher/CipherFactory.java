@@ -47,6 +47,8 @@ public class CipherFactory {
                 break;
             case "Homógrafo":
                 break;
+            case "Horizontal":
+                break;
             case "Metades":
                 break;
             case "Morse":
@@ -69,6 +71,10 @@ public class CipherFactory {
                 break;
             case "Última Letra Falsa":
                 break;
+            case "Vertical":
+                return new CipherResult(CipherUtils.verticalEncode(this.message,
+                        Integer.parseInt(this.password),
+                        "cima"));
             case "Vogais por Pontos":
                 break;
             default:
@@ -112,6 +118,8 @@ public class CipherFactory {
                 break;
             case "Frase-Chave-Horizontal":
                 break;
+            case "Horizontal":
+                break;
             case "Homógrafo":
                 break;
             case "Metades":
@@ -136,6 +144,10 @@ public class CipherFactory {
                 break;
             case "Última Letra Falsa":
                 break;
+            case "Vertical":
+                return new CipherResult(CipherUtils.verticalDecode(this.message,
+                        Integer.parseInt(this.password),
+                        "cima"));
             case "Vogais por Pontos":
                 break;
             default:

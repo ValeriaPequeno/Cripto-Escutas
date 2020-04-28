@@ -5,104 +5,6 @@ import java.util.Map;
 
 public class CipherUtils {
 
-    /*DESENCRIPTADORES*/
-
-    public static String cesarDecode(String enc, int offset) {
-        return cesarEncode(enc, 26 - offset);
-    }
-
-    public static String morseDecode(String enc) {
-        StringBuilder decoded = new StringBuilder();
-
-        Map<String, Character> alfabeto = new HashMap<>();
-        alfabeto.put("._", 'a');
-        alfabeto.put("_...", 'b');
-        alfabeto.put("_._.", 'c');
-        alfabeto.put("_..", 'd');
-        alfabeto.put(".", 'e');
-        alfabeto.put(".._.", 'f');
-        alfabeto.put("__.", 'g');
-        alfabeto.put("....", 'h');
-        alfabeto.put("..", 'i');
-        alfabeto.put(".___", 'j');
-        alfabeto.put("_._", 'k');
-        alfabeto.put("._..", 'l');
-        alfabeto.put("__", 'm');
-        alfabeto.put("_.", 'n');
-        alfabeto.put("___", 'o');
-        alfabeto.put(".__.", 'p');
-        alfabeto.put("__._", 'q');
-        alfabeto.put("._.", 'r');
-        alfabeto.put("...", 's');
-        alfabeto.put("_", 't');
-        alfabeto.put(".._", 'u');
-        alfabeto.put("..._", 'v');
-        alfabeto.put(".__", 'w');
-        alfabeto.put("_.._", 'x');
-        alfabeto.put("_.__", 'y');
-        alfabeto.put("__..", 'z');
-        alfabeto.put(".____", '1');
-        alfabeto.put("..___", '2');
-        alfabeto.put("...__", '3');
-        alfabeto.put("...._", '4');
-        alfabeto.put(".....", '5');
-        alfabeto.put("_....", '6');
-        alfabeto.put("__...", '7');
-        alfabeto.put("___..", '8');
-        alfabeto.put("____.", '9');
-        alfabeto.put("_____", '0');
-
-        String[] letra = enc.split(" ");
-
-        for (String i : letra) {
-            char val = alfabeto.get(i);
-            decoded.append(val);
-        }
-
-        return decoded.toString();
-    }
-
-    public static String romaArabDecode(String enc) {
-        StringBuilder decoded = new StringBuilder();
-
-        Map<String, Character> alfabeto = new HashMap<>();
-        alfabeto.put("I", 'a');
-        alfabeto.put("1", 'b');
-        alfabeto.put("2", 'c');
-        alfabeto.put("3", 'd');
-        alfabeto.put("II", 'e');
-        alfabeto.put("4", 'f');
-        alfabeto.put("5", 'g');
-        alfabeto.put("6", 'h');
-        alfabeto.put("III", 'i');
-        alfabeto.put("7", 'j');
-        alfabeto.put("8", 'k');
-        alfabeto.put("9", 'l');
-        alfabeto.put("10", 'm');
-        alfabeto.put("11", 'n');
-        alfabeto.put("IV", 'o');
-        alfabeto.put("12", 'p');
-        alfabeto.put("13", 'q');
-        alfabeto.put("14", 'r');
-        alfabeto.put("15", 's');
-        alfabeto.put("16", 't');
-        alfabeto.put("V", 'u');
-        alfabeto.put("17", 'v');
-        alfabeto.put("18", 'w');
-        alfabeto.put("19", 'x');
-        alfabeto.put("20", 'y');
-        alfabeto.put("21", 'z');
-
-        String[] letra = enc.split(" ");
-
-        for (String i : letra) {
-            char val = alfabeto.get(i);
-            decoded.append(val);
-        }
-
-        return decoded.toString();
-    }
-
     /*ENCRIPTADORES*/
 
     public static String cesarEncode(String enc, int offset) {
@@ -219,4 +121,227 @@ public class CipherUtils {
         return encoded.toString();
     }
 
+    public static String verticalEncode(String enc, int size, String sentido) {
+        StringBuilder encoded = new StringBuilder();
+
+        String[] palavras = enc.split(" ");
+
+        for (String pal : palavras) {
+            //determinar o tamanho da matriz
+            int tamHorizontal = (int) Math.ceil((double) pal.length() / (double) size);
+
+            char[][] palMatriz = new char[size][tamHorizontal];
+
+            //meter letras na matriz
+            if (sentido == "cima") {
+                int xIndex = size - 1, yIndex = 0;
+                for (char letra : pal.toCharArray()) {
+                    palMatriz[xIndex][yIndex] = letra;
+                    xIndex--;
+                    if (xIndex < 0) {
+                        xIndex = size - 1;
+                        yIndex++;
+                    }
+                }
+
+                if (palMatriz[0][tamHorizontal - 1] == '\u0000') {
+                    while (palMatriz[0][tamHorizontal - 1] == '\u0000') {
+                        for (int i = 0; i < size - 1; i++) {
+                            palMatriz[i][tamHorizontal - 1] = palMatriz[i + 1][tamHorizontal - 1];
+                            palMatriz[i + 1][tamHorizontal - 1] = '\u0000';
+                        }
+                    }
+                }
+            } else if (sentido == "baixo") {
+                int xIndex = 0, yIndex = 0;
+                for (char letra : pal.toCharArray()) {
+                    palMatriz[xIndex][yIndex] = letra;
+                    xIndex++;
+                    if (xIndex == size) {
+                        xIndex = 0;
+                        yIndex++;
+                    }
+                }
+            }
+
+            for (int i = 0; i < size; i++) {
+                for (char n : palMatriz[i]) {
+                    if (n != '\u0000') {
+                        encoded.append(n);
+                    }
+                }
+            }
+
+            encoded.append(" ");
+        }
+
+        return encoded.toString();
+    }
+
+    /*DESENCRIPTADORES*/
+
+    public static String cesarDecode(String enc, int offset) {
+        return cesarEncode(enc, 26 - offset);
+    }
+
+    public static String morseDecode(String enc) {
+        StringBuilder decoded = new StringBuilder();
+
+        Map<String, Character> alfabeto = new HashMap<>();
+        alfabeto.put("._", 'a');
+        alfabeto.put("_...", 'b');
+        alfabeto.put("_._.", 'c');
+        alfabeto.put("_..", 'd');
+        alfabeto.put(".", 'e');
+        alfabeto.put(".._.", 'f');
+        alfabeto.put("__.", 'g');
+        alfabeto.put("....", 'h');
+        alfabeto.put("..", 'i');
+        alfabeto.put(".___", 'j');
+        alfabeto.put("_._", 'k');
+        alfabeto.put("._..", 'l');
+        alfabeto.put("__", 'm');
+        alfabeto.put("_.", 'n');
+        alfabeto.put("___", 'o');
+        alfabeto.put(".__.", 'p');
+        alfabeto.put("__._", 'q');
+        alfabeto.put("._.", 'r');
+        alfabeto.put("...", 's');
+        alfabeto.put("_", 't');
+        alfabeto.put(".._", 'u');
+        alfabeto.put("..._", 'v');
+        alfabeto.put(".__", 'w');
+        alfabeto.put("_.._", 'x');
+        alfabeto.put("_.__", 'y');
+        alfabeto.put("__..", 'z');
+        alfabeto.put(".____", '1');
+        alfabeto.put("..___", '2');
+        alfabeto.put("...__", '3');
+        alfabeto.put("...._", '4');
+        alfabeto.put(".....", '5');
+        alfabeto.put("_....", '6');
+        alfabeto.put("__...", '7');
+        alfabeto.put("___..", '8');
+        alfabeto.put("____.", '9');
+        alfabeto.put("_____", '0');
+
+        String[] letra = enc.split(" ");
+
+        for (String i : letra) {
+            char val = alfabeto.get(i);
+            decoded.append(val);
+        }
+
+        return decoded.toString();
+    }
+
+    public static String romaArabDecode(String enc) {
+        StringBuilder decoded = new StringBuilder();
+
+        Map<String, Character> alfabeto = new HashMap<>();
+        alfabeto.put("I", 'a');
+        alfabeto.put("1", 'b');
+        alfabeto.put("2", 'c');
+        alfabeto.put("3", 'd');
+        alfabeto.put("II", 'e');
+        alfabeto.put("4", 'f');
+        alfabeto.put("5", 'g');
+        alfabeto.put("6", 'h');
+        alfabeto.put("III", 'i');
+        alfabeto.put("7", 'j');
+        alfabeto.put("8", 'k');
+        alfabeto.put("9", 'l');
+        alfabeto.put("10", 'm');
+        alfabeto.put("11", 'n');
+        alfabeto.put("IV", 'o');
+        alfabeto.put("12", 'p');
+        alfabeto.put("13", 'q');
+        alfabeto.put("14", 'r');
+        alfabeto.put("15", 's');
+        alfabeto.put("16", 't');
+        alfabeto.put("V", 'u');
+        alfabeto.put("17", 'v');
+        alfabeto.put("18", 'w');
+        alfabeto.put("19", 'x');
+        alfabeto.put("20", 'y');
+        alfabeto.put("21", 'z');
+
+        String[] letra = enc.split(" ");
+
+        for (String i : letra) {
+            char val = alfabeto.get(i);
+            decoded.append(val);
+        }
+
+        return decoded.toString();
+    }
+
+    public static String verticalDecode(String enc, int size, String sentido) {
+        StringBuilder decoded = new StringBuilder();
+
+        String[] palavras = enc.split(" ");
+
+        for (String pal : palavras) {
+            int tamHorizontal = (int) Math.ceil((double) pal.length() / (double) size);
+
+            char[][] palMatriz = new char[size][tamHorizontal];
+            int xIndex = 0, yIndex = 0;
+
+            for (char letra : pal.toCharArray()) {
+                palMatriz[xIndex][yIndex] = letra;
+                int[] proximoPonto = verticalGetProximaCoordenada(pal.length(), size, tamHorizontal, xIndex, yIndex);
+                xIndex = proximoPonto[0];
+                yIndex = proximoPonto[1];
+            }
+
+            if (sentido == "cima") {
+                xIndex = size - 1;
+                yIndex = 0;
+                while (yIndex < tamHorizontal) {
+                    while (xIndex >= 0) {
+                        if (palMatriz[xIndex][yIndex] != '\u0000') {
+                            decoded.append(palMatriz[xIndex][yIndex]);
+                            xIndex--;
+                        } else {
+                            xIndex--;
+                        }
+                    }
+                    xIndex = size - 1;
+                    yIndex++;
+                }
+            } else if (sentido == "baixo") {
+                xIndex = 0;
+                yIndex = 0;
+                while (yIndex < tamHorizontal) {
+                    while (xIndex < size) {
+                        if (palMatriz[xIndex][yIndex] != '\u0000') {
+                            decoded.append(palMatriz[xIndex][yIndex]);
+                            xIndex++;
+                        } else {
+                            xIndex++;
+                        }
+                    }
+                    xIndex = 0;
+                    yIndex++;
+                }
+            }
+
+            decoded.append(" ");
+        }
+
+        return decoded.toString();
+    }
+
+    /*OUTRAS FUNÇÕES UTILIZADAS PELAS CIFRAS*/
+
+    public static int[] verticalGetProximaCoordenada(int tamanhoPalavra, int tamanhoV, int tamanhoH, int posicaoV, int posicaoH) {
+        int leap = tamanhoPalavra % tamanhoV;
+        if (leap > 0 && ((posicaoV == leap && posicaoH == tamanhoH - 2) || (posicaoV > leap))) {
+            tamanhoH = tamanhoH - 1;
+        }
+        if (posicaoH < tamanhoH - 1) {
+            return new int[]{posicaoV, posicaoH + 1};
+        }
+        return new int[]{posicaoV + 1, (posicaoH + 1) % tamanhoH};
+    }
 }
