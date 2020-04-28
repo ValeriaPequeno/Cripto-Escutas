@@ -11,6 +11,7 @@ Desenvolvido por:
 Cifras implementadas na aplicação:
 
 - Cifra de César;
+- Cifra Horizontal;
 - Cifra Romano-Árabe;
 - Código Morse;
 - Cifra Vertical;

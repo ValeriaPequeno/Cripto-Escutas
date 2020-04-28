@@ -48,7 +48,9 @@ public class CipherFactory {
             case "Homógrafo":
                 break;
             case "Horizontal":
-                break;
+                return new CipherResult(CipherUtils.horizontalEncode(this.message,
+                        Integer.parseInt(this.password),
+                        "esquerda"));
             case "Metades":
                 break;
             case "Morse":
@@ -119,7 +121,9 @@ public class CipherFactory {
             case "Frase-Chave-Horizontal":
                 break;
             case "Horizontal":
-                break;
+                return new CipherResult(CipherUtils.horizontalDecode(this.message,
+                        Integer.parseInt(this.password),
+                        "esquerda"));
             case "Homógrafo":
                 break;
             case "Metades":
