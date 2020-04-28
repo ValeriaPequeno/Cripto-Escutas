@@ -1,6 +1,6 @@
 # BHJEncryption
 
-![Logo](https://i.imgur.com/WXAqdAe.png)
+![Logo](https://i.imgur.com/Tgu1KJt.png)
 
 Projeto final de curso sobre encriptação de mensagens usando cifras utilizadas no Escutismo no âmbito do curso de Licenciatura em Engenharia de Informática da [Universidade Autónoma de Lisboa](https://autonoma.pt/) e com a parceria da [Nil Language Schools](https://www.nil.pt/web/)
 
