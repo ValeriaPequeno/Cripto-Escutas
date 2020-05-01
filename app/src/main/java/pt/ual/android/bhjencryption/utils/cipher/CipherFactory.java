@@ -1,8 +1,6 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
 public class CipherFactory {
-    private static String UNKNOWN_CIPHER = "CF00";
-
     private String message;
     private String password;
     private String cipherType;
@@ -84,20 +82,20 @@ public class CipherFactory {
         if(cipher != null)
             return this.cipher.validate();
 
-        return new CipherResult(new CipherErrorCode(UNKNOWN_CIPHER));
+        return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
     }
 
     public CipherResult encrypt() {
         if(cipher != null)
             return this.cipher.encrypt();
 
-        return new CipherResult(new CipherErrorCode(UNKNOWN_CIPHER));
+        return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
     }
 
     public CipherResult decrypt() {
         if(cipher != null)
             return this.cipher.decrypt();
 
-        return new CipherResult(new CipherErrorCode(UNKNOWN_CIPHER));
+        return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
     }
 }

@@ -4,9 +4,7 @@ import pt.ual.android.bhjencryption.ui.utils.StringUtils;
 
 public class ReverseAlphatedCipher extends Cipher {
 
-    public static String ALPHABET_LOWER = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz"; // abcdefghijklmnopqrstuvwxyz
-
-    private static final String MESSAGE_HAS_DIGITS = "IAC00";
+    public static final String ALPHABET_LOWER = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz"; // abcdefghijklmnopqrstuvwxyz
 
     ReverseAlphatedCipher(String message) {
         super(message);
@@ -28,7 +26,7 @@ public class ReverseAlphatedCipher extends Cipher {
 
         if(!super.validate().hasErrors())
             if(StringUtils.hasDigit(getMessage()))
-                return new CipherResult(new CipherErrorCode(MESSAGE_HAS_DIGITS));
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_DIGITS));
 
         return result;
     }
@@ -57,6 +55,11 @@ public class ReverseAlphatedCipher extends Cipher {
         for(int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
             int alphaChIdx;
+
+            if(ch == ' ')  {
+                sbOut.append(ch);
+                continue;
+            }
 
             if(Character.isUpperCase(ch)) {
                 alphaChIdx = upperAlpha.indexOf(ch);

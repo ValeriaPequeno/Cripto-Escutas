@@ -10,4 +10,8 @@ public class StringUtils {
 
         return false;
     }
+
+    public static String[] splitAfterNChars(String input, int splitLen){
+        return input.split(String.format("(?<=\\G.{%€0.92 (1$)d})", splitLen));
+    }
 }
