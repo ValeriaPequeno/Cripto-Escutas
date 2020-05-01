@@ -1,6 +1,8 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CipherUtils {
@@ -127,7 +129,7 @@ public class CipherUtils {
         String[] palavras = enc.split(" ");
 
         for (String pal : palavras) {
-            //determinar o tamanho da matriz
+            int nEspaco = 1;
             int tamHorizontal = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[size][tamHorizontal];
@@ -172,7 +174,12 @@ public class CipherUtils {
                 }
             }
 
-            encoded.append(" ");
+            if (nEspaco > 1) {
+                encoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
         }
 
         return encoded.toString();
@@ -184,12 +191,11 @@ public class CipherUtils {
         String[] palavras = enc.split(" ");
 
         for (String pal : palavras) {
-            //determinar o tamanho da matriz
+            int nEspaco = 1;
             int tamVertical = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[tamVertical][size];
 
-            //meter letras na matriz
             if (sentido == "esquerda") {
                 int xIndex = 0, yIndex = size - 1;
                 for (char letra : pal.toCharArray()) {
@@ -229,7 +235,51 @@ public class CipherUtils {
                 }
             }
 
-            encoded.append(" ");
+            if (nEspaco > 1) {
+                encoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
+        }
+
+        return encoded.toString();
+    }
+
+    public static String dataEncode(String enc, String pass) {
+        StringBuilder encoded = new StringBuilder();
+
+        char[][] alfaNumerico = new char[][]{{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'},
+                {'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'},
+                {'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3'},
+                {'4', '5', '6', '7', '8', '9', '\u0000', '\u0000', '\u0000', '\u0000'}};
+
+        String[] palavras = enc.split(" ");
+
+        for (String pal : palavras) {
+            int nEspaco = 1;
+            for (char letra : pal.toCharArray()) {
+                for (int y = 0; y < alfaNumerico.length; y++) {
+                    for (int x = 0; x < alfaNumerico[y].length; x++) {
+                        if (Character.toLowerCase(letra) == alfaNumerico[y][x]) {
+                            encoded.append(pass.charAt(y));
+                            int xIndex = x + 1;
+                            if (xIndex == 10) {
+                                encoded.append(0);
+                            } else {
+                                encoded.append(xIndex);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (nEspaco > 1) {
+                encoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
         }
 
         return encoded.toString();
@@ -339,6 +389,7 @@ public class CipherUtils {
         String[] palavras = enc.split(" ");
 
         for (String pal : palavras) {
+            int nEspaco = 1;
             int tamHorizontal = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[size][tamHorizontal];
@@ -383,7 +434,12 @@ public class CipherUtils {
                 }
             }
 
-            decoded.append(" ");
+            if (nEspaco > 1) {
+                decoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
         }
 
         return decoded.toString();
@@ -395,6 +451,7 @@ public class CipherUtils {
         String[] palavras = enc.split(" ");
 
         for (String pal : palavras) {
+            int nEspaco = 1;
             int tamVertical = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[tamVertical][size];
@@ -439,7 +496,58 @@ public class CipherUtils {
                 }
             }
 
-            decoded.append(" ");
+            if (nEspaco > 1) {
+                decoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
+        }
+
+        return decoded.toString();
+    }
+
+    public static String dataDecode(String enc, String pass) {
+        StringBuilder decoded = new StringBuilder();
+
+        char[][] alfaNumerico = new char[][]{{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'},
+                {'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'},
+                {'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3'},
+                {'4', '5', '6', '7', '8', '9', '\u0000', '\u0000', '\u0000', '\u0000'}};
+
+        String[] palavras = enc.split(" ");
+
+        for (String pal : palavras) {
+            int nEspaco = 1;
+            String[] paresIndex = splitLetras(pal);
+            int xIndex = 0, yIndex = 0;
+
+            for (String letra : paresIndex) {
+                yIndex = Integer.valueOf(Character.toString(letra.charAt(0)));
+                xIndex = Integer.valueOf(Character.toString(letra.charAt(1)));
+
+                for (int i = 0; i < 4; i++) {
+                    if (yIndex == Integer.valueOf(Character.toString(pass.charAt(i)))) {
+                        yIndex = i;
+                        break;
+                    }
+                }
+
+                if (xIndex == 0) {
+                    xIndex = 9;
+                } else {
+                    xIndex--;
+                }
+
+                decoded.append(alfaNumerico[yIndex][xIndex]);
+            }
+
+            if (nEspaco > 1) {
+                decoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
         }
 
         return decoded.toString();
@@ -447,7 +555,7 @@ public class CipherUtils {
 
     /*OUTRAS FUNÇÕES UTILIZADAS PELAS CIFRAS*/
 
-    public static int[] getProximaCoordenada(int tamanhoPalavra, int tamanhoV, int tamanhoH, int posicaoV, int posicaoH) {
+    private static int[] getProximaCoordenada(int tamanhoPalavra, int tamanhoV, int tamanhoH, int posicaoV, int posicaoH) {
         int leap = tamanhoPalavra % tamanhoV;
         if (leap > 0 && ((posicaoV == leap && posicaoH == tamanhoH - 2) || (posicaoV > leap))) {
             tamanhoH = tamanhoH - 1;
@@ -457,4 +565,15 @@ public class CipherUtils {
         }
         return new int[]{posicaoV + 1, (posicaoH + 1) % tamanhoH};
     }
+
+    private static String[] splitLetras(String palavra) {
+        List<String> partes = new ArrayList<>();
+
+        int length = palavra.length();
+        for (int i = 0; i < length; i += 2) {
+            partes.add(palavra.substring(i, Math.min(length, i + 2)));
+        }
+        return partes.toArray(new String[0]);
+    }
+
 }
