@@ -32,4 +32,8 @@
         <item>Vertical</item>
         <item>Vogais por Pontos</item>
     </string-array>
+
+    <string name="CF00">Cifra não reconhecida.</string>
+    <string name="C00">Mensagem vazia.</string>
+    <string name="IAC00">A mensagem tem dígitos.</string>
 </resources>

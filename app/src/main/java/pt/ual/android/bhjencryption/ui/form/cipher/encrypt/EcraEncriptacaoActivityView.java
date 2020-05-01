@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import pt.ual.android.bhjencryption.R;
+import pt.ual.android.bhjencryption.ui.form.cipher.decrypt.EcraDesencriptacaoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoModel;
 
@@ -124,13 +125,16 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
         EcraResultadoModel result = this.ecraEncriptacaoPresenter.encrypt(this.mensagem, this.password, this.strCifraSelecionada, this.posCifraSelecionada);
 
         if (result != null) {
-            Intent entrarEcraResultado = new Intent(EcraEncriptacaoActivityView.this, EcraResultadoActivityView.class);
+            if(!result.hasErrors()) {
+                Intent entrarEcraResultado = new Intent(EcraEncriptacaoActivityView.this, EcraResultadoActivityView.class);
 
-            Bundle params = new Bundle();
-            params.putSerializable("model", result);
-            entrarEcraResultado.putExtras(params);
+                Bundle params = new Bundle();
+                params.putSerializable("model", result);
+                entrarEcraResultado.putExtras(params);
 
-            startActivity(entrarEcraResultado);
+                startActivity(entrarEcraResultado);
+            }
+            else showToast(getResources().getString(getResources().getIdentifier(result.getErrorCode(), "string", getPackageName())));
         } else showToast("Não foi possível cifrar a mensagem solicitada.");
     }
 
