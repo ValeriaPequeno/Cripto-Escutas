@@ -130,6 +130,13 @@ public class CipherUtils {
 
         for (String pal : palavras) {
             int nEspaco = 1;
+
+            if (nEspaco > 1) {
+                encoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
             int tamHorizontal = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[size][tamHorizontal];
@@ -173,13 +180,6 @@ public class CipherUtils {
                     }
                 }
             }
-
-            if (nEspaco > 1) {
-                encoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
-            }
         }
 
         return encoded.toString();
@@ -192,6 +192,14 @@ public class CipherUtils {
 
         for (String pal : palavras) {
             int nEspaco = 1;
+
+            if (nEspaco > 1) {
+                encoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
+
             int tamVertical = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[tamVertical][size];
@@ -234,13 +242,6 @@ public class CipherUtils {
                     }
                 }
             }
-
-            if (nEspaco > 1) {
-                encoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
-            }
         }
 
         return encoded.toString();
@@ -258,6 +259,14 @@ public class CipherUtils {
 
         for (String pal : palavras) {
             int nEspaco = 1;
+
+            if (nEspaco > 1) {
+                encoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
+
             for (char letra : pal.toCharArray()) {
                 for (int y = 0; y < alfaNumerico.length; y++) {
                     for (int x = 0; x < alfaNumerico[y].length; x++) {
@@ -272,13 +281,6 @@ public class CipherUtils {
                         }
                     }
                 }
-            }
-
-            if (nEspaco > 1) {
-                encoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
             }
         }
 
@@ -390,6 +392,14 @@ public class CipherUtils {
 
         for (String pal : palavras) {
             int nEspaco = 1;
+
+            if (nEspaco > 1) {
+                decoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
+
             int tamHorizontal = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[size][tamHorizontal];
@@ -433,13 +443,6 @@ public class CipherUtils {
                     yIndex++;
                 }
             }
-
-            if (nEspaco > 1) {
-                decoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
-            }
         }
 
         return decoded.toString();
@@ -452,6 +455,14 @@ public class CipherUtils {
 
         for (String pal : palavras) {
             int nEspaco = 1;
+
+            if (nEspaco > 1) {
+                decoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
+
             int tamVertical = (int) Math.ceil((double) pal.length() / (double) size);
 
             char[][] palMatriz = new char[tamVertical][size];
@@ -495,13 +506,6 @@ public class CipherUtils {
                     yIndex = 0;
                 }
             }
-
-            if (nEspaco > 1) {
-                decoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
-            }
         }
 
         return decoded.toString();
@@ -519,6 +523,14 @@ public class CipherUtils {
 
         for (String pal : palavras) {
             int nEspaco = 1;
+
+            if (nEspaco > 1) {
+                decoded.append(" ");
+                nEspaco++;
+            } else {
+                nEspaco++;
+            }
+
             String[] paresIndex = splitLetras(pal);
             int xIndex = 0, yIndex = 0;
 
@@ -540,13 +552,6 @@ public class CipherUtils {
                 }
 
                 decoded.append(alfaNumerico[yIndex][xIndex]);
-            }
-
-            if (nEspaco > 1) {
-                decoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
             }
         }
 
