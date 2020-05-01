@@ -13,6 +13,7 @@ Desenvolvido por:
 Cifras implementadas na aplicação:
 
 - Cifra de César;
+- Cifra de Data;
 - Cifra Horizontal;
 - Cifra Romano-Árabe;
 - Código Morse;
