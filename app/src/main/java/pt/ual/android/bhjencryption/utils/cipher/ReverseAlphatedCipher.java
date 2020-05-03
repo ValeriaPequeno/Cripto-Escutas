@@ -4,8 +4,6 @@ import pt.ual.android.bhjencryption.ui.utils.StringUtils;
 
 public class ReverseAlphatedCipher extends Cipher {
 
-    public static final String ALPHABET_LOWER = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz"; // abcdefghijklmnopqrstuvwxyz
-
     ReverseAlphatedCipher(String message) {
         super(message);
     }
@@ -24,19 +22,33 @@ public class ReverseAlphatedCipher extends Cipher {
     public CipherValidationResult validate() {
         CipherValidationResult result = super.validate();
 
-        if(!super.validate().hasErrors())
-            if(StringUtils.hasDigit(getMessage()))
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_DIGITS));
+        if(!super.validate().hasErrors()) {
+            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+
+            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+        }
 
         return result;
     }
 
+    @Override
+    public CipherValidationResult validateEncrypt() {
+       return this.validate();
+    }
+
+    @Override
+    public CipherValidationResult validateDecrypt() {
+        return this.validate();
+    }
+
     public static String encrypt(String message) {
-        return encryptCustomAlphabet(message, ALPHABET_LOWER);
+        return encryptCustomAlphabet(message, CipherUtils.ALPHABET_LOWER);
     }
 
     public static String decrypt(String message) {
-        return encryptCustomAlphabet(message, new StringBuilder(ALPHABET_LOWER).reverse().toString());
+        return encryptCustomAlphabet(message, new StringBuilder(CipherUtils.ALPHABET_LOWER).reverse().toString());
     }
 
     /**
@@ -48,8 +60,8 @@ public class ReverseAlphatedCipher extends Cipher {
     public static String encryptCustomAlphabet(String message, String alphabet) {
         StringBuilder sbOut = new StringBuilder();
         String upperAlpha = alphabet.toUpperCase();
-        String reversedAlpha = new StringBuilder(alphabet).reverse().toString();
-        String upperReversedAlpa = reversedAlpha.toUpperCase();
+        String lowerReversedAlpha = new StringBuilder(alphabet.toLowerCase()).reverse().toString();
+        String upperReversedAlpa = lowerReversedAlpha.toUpperCase();
         String input = message.trim();
 
         for(int i = 0; i < input.length(); i++) {
@@ -67,9 +79,8 @@ public class ReverseAlphatedCipher extends Cipher {
             }
             else {
                 alphaChIdx = alphabet.indexOf(ch);
-                sbOut.append(reversedAlpha.charAt(alphaChIdx));
+                sbOut.append(lowerReversedAlpha.charAt(alphaChIdx));
             }
-
         }
 
         return sbOut.toString();

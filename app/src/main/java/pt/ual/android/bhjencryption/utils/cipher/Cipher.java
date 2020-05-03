@@ -11,7 +11,7 @@ public abstract class Cipher {
         return message;
     }
 
-    public CipherValidationResult validate() {
+    protected CipherValidationResult validate() {
         if(getMessage() == null)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_MESSAGE));
 
@@ -20,6 +20,10 @@ public abstract class Cipher {
 
         return new CipherResult();
     }
+
+    public abstract CipherValidationResult validateEncrypt();
+
+    public abstract CipherValidationResult validateDecrypt();
 
     public abstract CipherResult encrypt();
 

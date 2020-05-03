@@ -14,4 +14,20 @@ public class StringUtils {
     public static String[] splitAfterNChars(String input, int splitLen){
         return input.split(String.format("(?<=\\G.{%€0.92 (1$)d})", splitLen));
     }
+
+
+    public static boolean matchingChars(String input, String allowedChars, boolean allowSpaces) {
+        for(int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+
+            if(ch == ' ' )
+                if(!allowSpaces)
+                    return false;
+
+            if(allowedChars.indexOf(ch) == -1)
+                return false;
+        }
+
+        return true;
+    }
 }

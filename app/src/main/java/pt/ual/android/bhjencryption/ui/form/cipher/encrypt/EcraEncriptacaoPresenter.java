@@ -16,8 +16,8 @@ public class EcraEncriptacaoPresenter implements EcraEncriptacaoContract.Present
 
     @Override
     public EcraResultadoModel encrypt(String mensagem, String password, String cifraSelecionada, int posCifraSelecionada) {
-        CipherFactory cipherFactory = new CipherFactory(mensagem, password, cifraSelecionada);
-        CipherValidationResult cvr = cipherFactory.validate();
+        CipherFactory cipherFactory = new CipherFactory(mensagem.trim(), password, cifraSelecionada);
+        CipherValidationResult cvr = cipherFactory.validateEncrypt();
 
         if(cvr.hasErrors())
             return new EcraResultadoModel(null, cvr.getCipherErrorCode().getErrorCode());

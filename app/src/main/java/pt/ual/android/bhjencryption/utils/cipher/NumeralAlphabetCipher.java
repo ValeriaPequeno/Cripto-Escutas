@@ -7,8 +7,6 @@ import pt.ual.android.bhjencryption.ui.utils.StringUtils;
 
 public class NumeralAlphabetCipher extends Cipher{
 
-    public static final String ALPHABET_LOWER = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz"; // abcdefghijklmnopqrstuvwxyz
-
     private int password;
 
     private NumeralAlphabetCipher(String message) {
@@ -21,13 +19,37 @@ public class NumeralAlphabetCipher extends Cipher{
         this.password = password;
     }
 
+    /**
+     * Validação para quando se cifra do alfabeto para numérico
+     * @return
+     */
     @Override
-    public CipherValidationResult validate() {
+    public CipherValidationResult validateEncrypt() {
         CipherValidationResult result = super.validate();
 
-        if(!super.validate().hasErrors())
-            if(StringUtils.hasDigit(getMessage()))
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_DIGITS));
+        if(!super.validate().hasErrors()) {
+            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+
+            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+        }
+
+        return result;
+    }
+
+    /**
+     * Validação para quando se cifra do numérico para alfabeto de volta
+     * @return
+     */
+    @Override
+    public CipherValidationResult validateDecrypt() {
+        CipherValidationResult result = super.validate();
+
+        if(!super.validate().hasErrors()) {
+            if (StringUtils.matchingChars(getMessage(), CipherUtils.NUMERIC, true))
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+        }
 
         return result;
     }
@@ -43,11 +65,11 @@ public class NumeralAlphabetCipher extends Cipher{
     }
 
     public static String encrypt(String message, int password) {
-        return NumeralAlphabetCipher.encryptCustomAlphabet(message, password, ALPHABET_LOWER, false);
+        return NumeralAlphabetCipher.encryptCustomAlphabet(message, password, CipherUtils.ALPHABET_LOWER, false);
     }
 
     public static String decrypt(String message, int password) {
-        return NumeralAlphabetCipher.encryptCustomAlphabet(message, password, ALPHABET_LOWER, true);
+        return NumeralAlphabetCipher.encryptCustomAlphabet(message, password, CipherUtils.ALPHABET_LOWER, true);
     }
 
     /**
@@ -61,8 +83,9 @@ public class NumeralAlphabetCipher extends Cipher{
      */
     public static String encryptCustomAlphabet(String message, int password, String alphabet, boolean isNumeralMessage) {
         //String[][] alphaEncodingTable = buildEncodingTable(password, alphabet);
+        String input = message.trim();
         Map<String, String> alphaEncodingTable = buildEncodingTable(password, alphabet, isNumeralMessage);
-        String[] splitedMessage = isNumeralMessage ? message.split(" ") : message.split("");
+        String[] splitedMessage = isNumeralMessage ? input.split(" ") : input.split("");
         StringBuilder sbOut = new StringBuilder();
 
         for(int i = 0; i < splitedMessage.length; i++) {
@@ -76,7 +99,7 @@ public class NumeralAlphabetCipher extends Cipher{
     }
 
     private static Map<String, String> buildEncodingTable(int password, String alphabet, boolean isNumeralMessage) {
-        String caseSensitiveAlphabet = new String(alphabet + alphabet.toUpperCase());
+        String caseSensitiveAlphabet = new String(alphabet.toLowerCase() + alphabet.toUpperCase());
         String[] alphaArr = caseSensitiveAlphabet.split("");
         Map<String, String> alphaEncodingTable = new HashMap<>();
 
@@ -88,7 +111,7 @@ public class NumeralAlphabetCipher extends Cipher{
 
         if(isNumeralMessage)
             alphaEncodingTable.put(String.valueOf(password), " "); // incluír o espaço na conversão da mensagem, caso contrário não se converterá frases.
-        else alphaEncodingTable.put(" ", String.valueOf(password)); // incluír o espaço na conversão da mensagem, caso contrário não se converterá frases.
+        else alphaEncodingTable.put(" ", String.valueOf(password));
 
         return alphaEncodingTable;
     }

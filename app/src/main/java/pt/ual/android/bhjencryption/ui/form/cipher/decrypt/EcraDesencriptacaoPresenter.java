@@ -17,8 +17,8 @@ public class EcraDesencriptacaoPresenter implements EcraDesencriptacaoContract.P
 
     @Override
     public EcraResultadoModel decrypt(String mensagem, String password, String cifraSelecionada, int posCifraSelecionada) {
-        CipherFactory cipherFactory = new CipherFactory(mensagem, password, cifraSelecionada);
-        CipherValidationResult cvr = cipherFactory.validate();
+        CipherFactory cipherFactory = new CipherFactory(mensagem.trim(), password, cifraSelecionada);
+        CipherValidationResult cvr = cipherFactory.validateDecrypt();
 
         if(cvr.hasErrors())
             return new EcraResultadoModel(null, cvr.getCipherErrorCode().getErrorCode());

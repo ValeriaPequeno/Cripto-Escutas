@@ -33,7 +33,7 @@
         <item>Vogais por Pontos</item>
     </string-array>
 
-    <string name="CF00">Cifra não reconhecida.</string>
-    <string name="C00">Mensagem vazia.</string>
-    <string name="IAC00">A mensagem tem dígitos.</string>
+    <string name="C00">A mensagem tem caracteres não reconhecidos.</string>
+    <string name="C01">Mensagem vazia.</string>
+    <string name="C02">Cifra não reconhecida.</string>
 </resources>

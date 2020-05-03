@@ -5,6 +5,9 @@ import java.util.Map;
 
 public class CipherUtils {
 
+    public static final String ALPHABET_LOWER = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz"; // abcdefghijklmnopqrstuvwxyz
+    public static final String NUMERIC = "0123456789"; // abcdefghijklmnopqrstuvwxyz
+
     /*ENCRIPTADORES*/
 
 
