@@ -10,7 +10,7 @@ public class CipherFactory {
         this.password = password;
         this.cipherType = cipherType;
     }
-//teste
+
     public CipherResult encrypt() {
         switch (cipherType) {
             case "Alfabeto Invertido":
