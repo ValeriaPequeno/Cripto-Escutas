@@ -2,7 +2,7 @@ package pt.ual.android.bhjencryption.ui.form.cipher.encrypt;
 
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoModel;
 import pt.ual.android.bhjencryption.utils.cipher.CipherFactory;
-import pt.ual.android.bhjencryption.utils.cipher.CipherResult;
+import pt.ual.android.bhjencryption.utils.cipher.CipherValidationResult;
 
 public class EcraEncriptacaoPresenter implements EcraEncriptacaoContract.Presenter {
 
@@ -16,9 +16,12 @@ public class EcraEncriptacaoPresenter implements EcraEncriptacaoContract.Present
 
     @Override
     public EcraResultadoModel encrypt(String mensagem, String password, String cifraSelecionada, int posCifraSelecionada) {
-        CipherFactory cipherFactory = new CipherFactory(mensagem, password, cifraSelecionada);
-        CipherResult cipherResult = cipherFactory.encrypt();
+        CipherFactory cipherFactory = new CipherFactory(mensagem.trim(), password, cifraSelecionada);
+        CipherValidationResult cvr = cipherFactory.validateEncrypt();
 
-        return new EcraResultadoModel(cipherResult.getResultAsString());
+        if(cvr.hasErrors())
+            return new EcraResultadoModel(null, cvr.getCipherErrorCode().getErrorCode());
+
+        return new EcraResultadoModel(cipherFactory.encrypt().getResultAsString());
     }
 }

@@ -6,25 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 public class CipherUtils {
+    public static final String ASCII_ALPHABET_LOWER = "abcdefghijklmnopqrstuvwxyz";
+    public static final String ASCII_ALPHABET_LOWER_AND_NUMERIC = "abcdefghijklmnopqrstuvwxyz0123456789";
+    public static final String ALPHABET_LOWER = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz";
+    public static final String NUMERIC = "0123456789";
+    public static final String ALPHABET_LOWER_AND_NUMERIC = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz0123456789";
 
     /*ENCRIPTADORES Teste*/
 
-    public static String cesarEncode(String enc, int offset) {
-        offset = offset % 26 + 26;
-        StringBuilder encoded = new StringBuilder();
-        for (char i : enc.toCharArray()) {
-            if (Character.isLetter(i)) {
-                if (Character.isUpperCase(i)) {
-                    encoded.append((char) ('A' + (i - 'A' + offset) % 26));
-                } else {
-                    encoded.append((char) ('a' + (i - 'a' + offset) % 26));
-                }
-            } else {
-                encoded.append(i);
-            }
-        }
-        return encoded.toString();
-    }
+
 
     public static String morseEncode(String enc) {
         StringBuilder encoded = new StringBuilder();
@@ -288,10 +278,6 @@ public class CipherUtils {
     }
 
     /*DESENCRIPTADORES*/
-
-    public static String cesarDecode(String enc, int offset) {
-        return cesarEncode(enc, 26 - offset);
-    }
 
     public static String morseDecode(String enc) {
         StringBuilder decoded = new StringBuilder();
