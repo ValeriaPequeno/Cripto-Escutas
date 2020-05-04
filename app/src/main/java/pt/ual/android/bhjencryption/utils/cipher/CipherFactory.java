@@ -42,7 +42,7 @@ public class CipherFactory {
             case "Código Chinês 2":
                 break;
             case "Data":
-                break;
+                return new CipherResult(CipherUtils.dataEncode(this.message, this.password));
             case "Frase-Chave-Vertical":
                 break;
             case "Frase-Chave-Horizontal":
