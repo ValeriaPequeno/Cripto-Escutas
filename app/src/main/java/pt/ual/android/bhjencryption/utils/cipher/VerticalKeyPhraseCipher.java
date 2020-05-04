@@ -15,12 +15,14 @@ public class VerticalKeyPhraseCipher extends Cipher {
     public CipherValidationResult validate() {
         CipherValidationResult result = super.validate();
 
-        if(!super.validate().hasErrors()) {
-            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
+        if(!result.hasErrors()) {
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
 
-            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+
+            // TODO: validate password
         }
 
         return result;
@@ -84,7 +86,7 @@ public class VerticalKeyPhraseCipher extends Cipher {
         return encodingTable.charAt(idx + (encodingTable.length() / 2));
     }
 
-    private static String buildEncodingTable(String password, String alphabet) {
+    protected static String buildEncodingTable(String password, String alphabet) {
         char[] alphaEncodingTable = new char[alphabet.length()];
         String passwordAux = password.replace(" ", "");
         String alphaAux = alphabet;

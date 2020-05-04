@@ -7,6 +7,16 @@ public class CesarCipher extends Cipher {
         super(message);
     }
 
+    @Override
+    public CipherValidationResult validateEncrypt() {
+        return null;
+    }
+
+    @Override
+    public CipherValidationResult validateDecrypt() {
+        return null;
+    }
+
     public CesarCipher(String message, int password) {
         this(message);
 

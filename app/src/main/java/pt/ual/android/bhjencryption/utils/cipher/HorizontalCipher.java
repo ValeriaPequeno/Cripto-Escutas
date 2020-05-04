@@ -10,6 +10,16 @@ public class HorizontalCipher extends Cipher {
     }
 
     @Override
+    public CipherValidationResult validateEncrypt() {
+        return null;
+    }
+
+    @Override
+    public CipherValidationResult validateDecrypt() {
+        return null;
+    }
+
+    @Override
     public CipherResult encrypt() {
         return new CipherResult(CipherUtils.horizontalEncode(getMessage(), password,"esquerda"));
     }

@@ -22,11 +22,11 @@ public class ReverseAlphatedCipher extends Cipher {
     public CipherValidationResult validate() {
         CipherValidationResult result = super.validate();
 
-        if(!super.validate().hasErrors()) {
-            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
+        if(!result.hasErrors()) {
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
 
-            if (StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
         }
 
