@@ -48,8 +48,8 @@ public class TheRightBattleshipCipherCoord {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.indexOf(x));
-        sb.append(y);
+        sb.append(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.charAt(x));
+        sb.append(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD.charAt(y));
 
         return sb.toString();
     }
