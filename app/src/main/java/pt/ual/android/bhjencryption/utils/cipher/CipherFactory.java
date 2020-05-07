@@ -10,7 +10,7 @@ public class CipherFactory {
         this.password = password;
         this.cipherType = cipherType;
     }
-//teste 1
+
     public CipherResult encrypt() {
         switch (cipherType) {
             case "Alfabeto Invertido":
@@ -21,6 +21,11 @@ public class CipherFactory {
                 break;
             case "Batalha Naval":
                 break;
+            case "Caracol":
+                return new CipherResult(CipherUtils.caracolEnc(
+                                this.message,
+                        Integer.parseInt(this.password))
+                );
             case "Caranguejo":
                 break;
             case "César":
@@ -52,19 +57,19 @@ public class CipherFactory {
                         Integer.parseInt(this.password),
                         "esquerda"));
             case "Metades":
-                break;
+                return new CipherResult(CipherUtils.metadeEnc(this.message));
             case "Morse":
                 return new CipherResult(CipherUtils.morseEncode(this.message));
             case "Nós de Morse":
                 break;
             case "Passa um Melro":
-                break;
+                return new CipherResult(CipherUtils.melroEnc(this.message));
             case "Passa dois Melros":
-                break;
+                return new CipherResult(CipherUtils.melro2Enc(this.message));
             case "Picos de Morse":
                 break;
             case "Primeira Letra Falsa":
-                break;
+                return new CipherResult(CipherUtils.pFalsaEnc(this.message));
             case "Romano-Árabe":
                 return new CipherResult(CipherUtils.romaArabEncode(this.message));
             case "SMS":
@@ -72,7 +77,7 @@ public class CipherFactory {
             case "Transposto":
                 break;
             case "Última Letra Falsa":
-                break;
+                return new CipherResult(CipherUtils.ulFalsaEnc(this.message));
             case "Vertical":
                 return new CipherResult(CipherUtils.verticalEncode(this.message,
                         Integer.parseInt(this.password),
@@ -96,6 +101,11 @@ public class CipherFactory {
                 break;
             case "Batalha Naval":
                 break;
+            case "Caracol":
+                return new CipherResult(CipherUtils.caracolDec(
+                        this.message,
+                        Integer.parseInt(this.password))
+                );
             case "Caranguejo":
                 break;
             case "César":
@@ -127,19 +137,19 @@ public class CipherFactory {
             case "Homógrafo":
                 break;
             case "Metades":
-                break;
+                return new CipherResult(CipherUtils.metadeDec(this.message));
             case "Morse":
                 return new CipherResult(CipherUtils.morseDecode(this.message));
             case "Nós de Morse":
                 break;
             case "Passa um Melro":
-                break;
+                return new CipherResult(CipherUtils.melroDec(this.message));
             case "Passa dois Melros":
-                break;
+                return new CipherResult(CipherUtils.melro2Dec(this.message));
             case "Picos de Morse":
                 break;
             case "Primeira Letra Falsa":
-                break;
+                return new CipherResult(CipherUtils.pFalsaDec(this.message));
             case "Romano-Árabe":
                 return new CipherResult(CipherUtils.romaArabDecode(this.message));
             case "SMS":
@@ -147,7 +157,7 @@ public class CipherFactory {
             case "Transposto":
                 break;
             case "Última Letra Falsa":
-                break;
+                return new CipherResult(CipherUtils.ulFalsaDec(this.message));
             case "Vertical":
                 return new CipherResult(CipherUtils.verticalDecode(this.message,
                         Integer.parseInt(this.password),
