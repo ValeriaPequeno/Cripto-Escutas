@@ -19,26 +19,28 @@ public class TheRightBattleshipCipherCoord {
     }
 
     private void setCoord(String coord) throws Exception {
-        if(!TheRightBattleshipCipherCoord.validateCoord(coord))
-            throw new Exception("Fatal cipher mismatch: invalid coordinate at BattleShip Coord creation");
+        if(!TheRightBattleshipCipherCoord.validateCoord(coord, false))
+            throw new Exception("Fatal cipher mismatch: invalid coordinate at BattleShip Coord creation. Contact the App support team.");
 
-        this.x = Character.getNumericValue(coord.charAt(0));
-        this.y = Character.getNumericValue(coord.charAt(1));
+        this.x = TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.indexOf(coord.toUpperCase().charAt(0));
+        this.y = TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD.indexOf(coord.toUpperCase().charAt(1));
     }
 
-    public static boolean validateCoords(String[] coords) {
+    public static boolean validateCoords(String[] coords, boolean isCaseSensitive) {
         for(int i = 0; i < coords.length; i++) {
-            validateCoord(coords[i]);
+            validateCoord(coords[i], isCaseSensitive);
         }
 
         return true;
     }
 
-    public static boolean validateCoord(String coord) {
-        if(coord != null)
-            if(coord.length() == 2)
-                if(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.indexOf(coord.charAt(0)) != -1)
-                    if(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD.indexOf(coord.charAt(1)) != -1)
+    public static boolean validateCoord(String coord, boolean isCaseSensitive) {
+        String caseSensitiveCoord = isCaseSensitive ? coord : coord.toUpperCase();
+
+        if(caseSensitiveCoord != null)
+            if(caseSensitiveCoord.length() == 2)
+                if(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.indexOf(caseSensitiveCoord.charAt(0)) != -1)
+                    if(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD.indexOf(caseSensitiveCoord.charAt(1)) != -1)
                         return true;
 
         return false;
@@ -48,8 +50,8 @@ public class TheRightBattleshipCipherCoord {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.charAt(x));
-        sb.append(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD.charAt(y));
+        sb.append(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.charAt(this.x));
+        sb.append(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD.charAt(this.y));
 
         return sb.toString();
     }

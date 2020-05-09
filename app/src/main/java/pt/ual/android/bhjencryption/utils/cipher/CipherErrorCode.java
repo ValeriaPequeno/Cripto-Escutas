@@ -8,6 +8,7 @@ public class CipherErrorCode {
     public static final String PASSWORD_HAS_NOT_ALLOWED_CHARS = "C04";
     public static final String INVALID_PASSWORD_SIZE = "C05";
     public static final String EMPTY_PASSWORD = "C06";
+    public static final String NEGATIVE_INTEGER_PASSWORD = "C07";
 
     private String errorCode;
 
