@@ -30,8 +30,7 @@ public class CesarCipher extends Cipher {
 
     @Override
     public CipherResult decrypt() {
-        return new CipherResult(decrypt(getMessage(), this.password)
-        );
+        return new CipherResult(decrypt(getMessage(), this.password));
     }
 
     public static String encrypt(String enc, int offset) {

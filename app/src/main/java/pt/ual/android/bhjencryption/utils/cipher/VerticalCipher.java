@@ -5,6 +5,7 @@ public class VerticalCipher extends Cipher {
 
     public VerticalCipher(String message, int password) {
         super(message);
+        this.password = password;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class VerticalCipher extends Cipher {
         return new CipherResult(decrypt(getMessage(), this.password, "cima"));
     }
 
-    public static String encrypt(String enc, int size, String sentido) {
+    private static String encrypt(String enc, int size, String sentido) {
         StringBuilder encoded = new StringBuilder();
 
         String[] palavras = enc.split(" ");
@@ -89,7 +90,7 @@ public class VerticalCipher extends Cipher {
         return encoded.toString();
     }
 
-    public static String decrypt(String enc, int size, String sentido) {
+    private static String decrypt(String enc, int size, String sentido) {
         StringBuilder decoded = new StringBuilder();
 
         String[] palavras = enc.split(" ");
