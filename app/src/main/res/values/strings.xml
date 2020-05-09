@@ -41,4 +41,5 @@
     <string name="C04">A password tem caracteres não reconhecidos.</string>
     <string name="C05">Tamanho da password inválida.</string>
     <string name="C06">Password vazia.</string>
+    <string name="C07">A password só pode ter valores inteiros positivos.</string>
 </resources>

@@ -23,10 +23,7 @@ public class ReverseAlphatedCipher extends Cipher {
         CipherValidationResult result = super.validate();
 
         if(!result.hasErrors()) {
-            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
-
-            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
         }
 
@@ -44,20 +41,22 @@ public class ReverseAlphatedCipher extends Cipher {
     }
 
     public static String encrypt(String message) {
-        return encryptCustomAlphabet(message, CipherUtils.ALPHABET_LOWER);
+        return encryptCustomAlphabet(message, CipherUtils.ASCII_ALPHABET_LOWER, false);
     }
 
     public static String decrypt(String message) {
-        return encryptCustomAlphabet(message, new StringBuilder(CipherUtils.ALPHABET_LOWER).reverse().toString());
+        return encryptCustomAlphabet(message, new StringBuilder(CipherUtils.ASCII_ALPHABET_LOWER).reverse().toString(), false);
     }
 
     /**
-     * Trata de letras maiúsculas e minúsculas. Só o alfabeto Português é tratado.
+     * Trata de letras maiúsculas e minúsculas.
+     *
      * @param message
      * @param alphabet
+     * @param isCaseSensitive implementado após a implementação inicial. Funcionalidade que permite ignorar o output em minúsculas
      * @return string codificada
      */
-    public static String encryptCustomAlphabet(String message, String alphabet) {
+    public static String encryptCustomAlphabet(String message, String alphabet, boolean isCaseSensitive) {
         StringBuilder sbOut = new StringBuilder();
         String upperAlpha = alphabet.toUpperCase();
         String lowerReversedAlpha = new StringBuilder(alphabet.toLowerCase()).reverse().toString();
@@ -83,6 +82,6 @@ public class ReverseAlphatedCipher extends Cipher {
             }
         }
 
-        return sbOut.toString();
+        return isCaseSensitive ? sbOut.toString() : sbOut.toString().toUpperCase();
     }
 }

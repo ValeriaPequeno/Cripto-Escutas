@@ -36,7 +36,7 @@ public class TheRightBattleshipCipher extends Cipher {
         if(this.password.length() != 1)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
 
-        if (!StringUtils.matchingChars(this.password.toUpperCase(), CipherUtils.ASCII_ALPHABET_LOWER.toUpperCase(), false)) // validate password
+        if (!StringUtils.matchingChars(this.password, CipherUtils.ASCII_ALPHABET_LOWER, false, false)) // validate password
             return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
 
         return new CipherResult();
@@ -47,7 +47,7 @@ public class TheRightBattleshipCipher extends Cipher {
         CipherValidationResult result = this.validate();
 
         if(!result.hasErrors()) {
-            if (!StringUtils.matchingChars(getMessage().toUpperCase(), CipherUtils.ASCII_ALPHABET_LOWER.toUpperCase(), true))
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
         }
 
@@ -59,12 +59,12 @@ public class TheRightBattleshipCipher extends Cipher {
         CipherValidationResult result = this.validate();
 
         if(!result.hasErrors()) {
-            if (!StringUtils.matchingChars(getMessage().toUpperCase(), new String(
+            if (!StringUtils.matchingChars(getMessage(), new String(
                             TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD + TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD),
-                    true))
+                    true, false))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
 
-            if (!TheRightBattleshipCipherCoord.validateCoords(this.getMessage().split(" "))) // Validar se contém coordenadas válidas
+            if (!TheRightBattleshipCipherCoord.validateCoords(this.getMessage().split(" "), false)) // Validar se contém coordenadas válidas
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
         }
 
@@ -81,7 +81,7 @@ public class TheRightBattleshipCipher extends Cipher {
         for(int i = 0; i < upperMessage.length(); i++) {
             char ch = upperMessage.charAt(i);
 
-            if(ch == ' ' && ch == upperPassword.charAt(0)) // validar se a letra a cifrar é igual à pw e se for um espaço, fazer skip
+            if(ch == ' ' || ch == upperPassword.charAt(0)) // validar se a letra a cifrar é igual à pw e se for um espaço, fazer skip
                 continue;
 
             sbOutput.append(encodingTable.get(String.valueOf(ch)));
@@ -119,12 +119,14 @@ public class TheRightBattleshipCipher extends Cipher {
         int passIdx = upperAlpha.indexOf(password.toUpperCase());
         int countAlpha = 0;
 
-        for(int i = passIdx + 1; i < passIdx; i = (i + 1) % 25) { // 25 ou 26?
+        for(int i = passIdx + 1; i != passIdx; i = (i + 1) % 26) {
             TheRightBattleshipCipherCoord coord = new TheRightBattleshipCipherCoord(countAlpha % 5, countAlpha / 5);
 
             if(isToDecrypt)
                 encodingTable.put(coord.toString(), Character.toString(upperAlpha.charAt(i)));
             else encodingTable.put(Character.toString(upperAlpha.charAt(i)), coord.toString());
+
+            countAlpha++;
         }
 
         return encodingTable;
