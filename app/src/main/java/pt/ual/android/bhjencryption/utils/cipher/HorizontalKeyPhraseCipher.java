@@ -16,16 +16,26 @@ public class HorizontalKeyPhraseCipher extends Cipher {
         CipherValidationResult result = super.validate();
 
         if(!result.hasErrors()) {
-            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true))
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
 
-            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER.toUpperCase(), true))
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
-
-            // TODO: validate password
+            result = validatePassword();
         }
 
         return result;
+    }
+
+    public CipherValidationResult validatePassword() {
+        if(this.password == null) // validate password
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
+
+        if(this.password.length() > 0)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
+
+        if (!StringUtils.matchingChars(this.password, CipherUtils.ASCII_ALPHABET_LOWER, true, false))
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
+
+        return new CipherResult();
     }
 
     @Override
@@ -40,12 +50,12 @@ public class HorizontalKeyPhraseCipher extends Cipher {
 
     @Override
     public CipherResult encrypt() {
-        return new CipherResult(HorizontalKeyPhraseCipher.encryptWithCustomAlphabet(getMessage(), password, CipherUtils.ALPHABET_LOWER, false));
+        return new CipherResult(HorizontalKeyPhraseCipher.encryptWithCustomAlphabet(getMessage(), password, CipherUtils.ASCII_ALPHABET_LOWER, false, false));
     }
 
     @Override
     public CipherResult decrypt() {
-        return new CipherResult(HorizontalKeyPhraseCipher.encryptWithCustomAlphabet(getMessage(), password, CipherUtils.ALPHABET_LOWER, true));
+        return new CipherResult(HorizontalKeyPhraseCipher.encryptWithCustomAlphabet(getMessage(), password, CipherUtils.ASCII_ALPHABET_LOWER, true, false));
     }
 
     /**
@@ -54,7 +64,7 @@ public class HorizontalKeyPhraseCipher extends Cipher {
      * @param message
      * @return
      */
-    public static String encryptWithCustomAlphabet(String message, String password, String alphabet, boolean isPasswordAlphabet) {
+    public static String encryptWithCustomAlphabet(String message, String password, String alphabet, boolean isPasswordAlphabet, boolean isCaseSensitive) {
         String inputMessage = message.trim();
         String inputPassword = password.trim();
         String lowerAlpha = alphabet.toLowerCase();
@@ -76,7 +86,7 @@ public class HorizontalKeyPhraseCipher extends Cipher {
             else sbOutput.append(findEncodingChar(ch, alphaUpperEncodingTable, upperAlpha, isPasswordAlphabet));
         }
 
-        return sbOutput.toString();
+        return isCaseSensitive ? sbOutput.toString() : sbOutput.toString().toUpperCase();
     }
 
     private static char findEncodingChar(char ch, String alphaEncodingTable, String passwordEncodingTable, boolean isPasswordAlphabet) {

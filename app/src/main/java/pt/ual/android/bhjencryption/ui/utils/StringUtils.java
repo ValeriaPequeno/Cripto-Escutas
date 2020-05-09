@@ -16,15 +16,18 @@ public class StringUtils {
     }
 
 
-    public static boolean matchingChars(String input, String allowedChars, boolean allowSpaces) {
-        for(int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
+    public static boolean matchingChars(String input, String allowedChars, boolean allowSpaces, boolean isCaseSensitive) {
+        String caseSensAllowedChars = isCaseSensitive ? allowedChars : allowedChars.toUpperCase();
+        String caseSensInput = isCaseSensitive ? input : input.toUpperCase();
+
+        for(int i = 0; i < caseSensInput.length(); i++) {
+            char ch = caseSensInput.charAt(i);
 
             if(ch == ' ' )
                 if(!allowSpaces)
                     return false;
 
-            if(allowedChars.indexOf(ch) == -1)
+            if(caseSensAllowedChars.indexOf(ch) == -1)
                 return false;
         }
 
