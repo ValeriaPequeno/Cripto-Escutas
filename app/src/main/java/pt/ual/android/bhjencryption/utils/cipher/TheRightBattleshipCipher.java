@@ -81,7 +81,7 @@ public class TheRightBattleshipCipher extends Cipher {
         for(int i = 0; i < upperMessage.length(); i++) {
             char ch = upperMessage.charAt(i);
 
-            if(ch == ' ' && ch == upperPassword.charAt(0)) // validar se a letra a cifrar é igual à pw e se for um espaço, fazer skip
+            if(ch == ' ' || ch == upperPassword.charAt(0)) // validar se a letra a cifrar é igual à pw e se for um espaço, fazer skip
                 continue;
 
             sbOutput.append(encodingTable.get(String.valueOf(ch)));
@@ -119,12 +119,14 @@ public class TheRightBattleshipCipher extends Cipher {
         int passIdx = upperAlpha.indexOf(password.toUpperCase());
         int countAlpha = 0;
 
-        for(int i = passIdx + 1; i < passIdx; i = (i + 1) % 25) { // 25 ou 26?
+        for(int i = passIdx + 1; i != passIdx; i = (i + 1) % 26) {
             TheRightBattleshipCipherCoord coord = new TheRightBattleshipCipherCoord(countAlpha % 5, countAlpha / 5);
 
             if(isToDecrypt)
                 encodingTable.put(coord.toString(), Character.toString(upperAlpha.charAt(i)));
             else encodingTable.put(Character.toString(upperAlpha.charAt(i)), coord.toString());
+
+            countAlpha++;
         }
 
         return encodingTable;
