@@ -27,7 +27,7 @@ public class CipherFactory {
             case "Batalha Naval":
                 break;
             case "Caracol":
-                break;
+                this.cipher = new SnailCipher(this.message, Integer.parseInt(this.password));
             case "Caranguejo":
                 this.cipher = new CrabCipher(this.message);
                 break;
@@ -55,14 +55,20 @@ public class CipherFactory {
                 this.cipher = new HorizontalCipher(this.message, Integer.parseInt(this.password));
                 break;
             case "Metades":
-                break;
+                this.cipher = new HalfCipher(this.message);
             case "Morse":
                 this.cipher = new MorseCipher(this.message);
                 break;
             case "Nós de Morse":
                 break;
             case "Passa um Melro":
+                this.cipher = new BlackbirdCipher(this.message);
+            case "Passa dois Melros":
+                this.cipher = new Blackbird2Cipher(this.message);
+            case "Picos de Morse":
                 break;
+            case "Primeira Letra Falsa":
+                this.cipher = new FirstFakeCipher(this.message);
             case "Passa dois Melros":
                 break;
             case "Picos de Morse":
@@ -77,7 +83,7 @@ public class CipherFactory {
             case "Transposto":
                 break;
             case "Última Letra Falsa":
-                break;
+                this.cipher = new LastFakeCipher(this.message);
             case "Vertical":
                 this.cipher = new VerticalCipher(this.message, Integer.parseInt(this.password));
                 break;
