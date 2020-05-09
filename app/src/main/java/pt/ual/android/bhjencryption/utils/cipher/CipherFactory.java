@@ -109,4 +109,11 @@ public class CipherFactory {
         return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
     }
 
+    public CipherResult decrypt() {
+        if(cipher != null)
+            return this.cipher.decrypt();
+
+        return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
+    }
+
 }
