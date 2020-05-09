@@ -26,6 +26,11 @@ public class CipherFactory {
                 break;
             case "Batalha Naval":
                 break;
+            case "Caracol":
+                return new CipherResult(CipherUtils.caracolEnc(
+                                this.message,
+                        Integer.parseInt(this.password))
+                );
             case "Caranguejo":
                 this.cipher = new CrabCipher(this.message);
                 break;
@@ -53,20 +58,20 @@ public class CipherFactory {
                 this.cipher = new HorizontalCipher(this.message, Integer.parseInt(this.password));
                 break;
             case "Metades":
-                break;
+                return new CipherResult(CipherUtils.metadeEnc(this.message));
             case "Morse":
                 this.cipher = new MorseCipher(this.message);
                 break;
             case "Nós de Morse":
                 break;
             case "Passa um Melro":
-                break;
+                return new CipherResult(CipherUtils.melroEnc(this.message));
             case "Passa dois Melros":
-                break;
+                return new CipherResult(CipherUtils.melro2Enc(this.message));
             case "Picos de Morse":
                 break;
             case "Primeira Letra Falsa":
-                break;
+                return new CipherResult(CipherUtils.pFalsaEnc(this.message));
             case "Romano-Árabe":
                 this.cipher = new RomanArabCipher(this.message);
                 break;
@@ -75,7 +80,7 @@ public class CipherFactory {
             case "Transposto":
                 break;
             case "Última Letra Falsa":
-                break;
+                return new CipherResult(CipherUtils.ulFalsaEnc(this.message));
             case "Vertical":
                 this.cipher = new VerticalCipher(this.message, Integer.parseInt(this.password));
                 break;
@@ -107,10 +112,7 @@ public class CipherFactory {
         return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
     }
 
-    public CipherResult decrypt() {
-        if(cipher != null)
-            return this.cipher.decrypt();
-
+  
         return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
     }
 }
