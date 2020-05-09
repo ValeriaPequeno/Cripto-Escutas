@@ -12,9 +12,7 @@ public class CipherUtils {
     public static final String NUMERIC = "0123456789";
     public static final String ALPHABET_LOWER_AND_NUMERIC = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz0123456789";
 
-    /*ENCRIPTADORES Teste*/
-
-
+    /*ENCRIPTADORES*/
 
     public static String morseEncode(String enc) {
         StringBuilder encoded = new StringBuilder();
