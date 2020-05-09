@@ -26,6 +26,8 @@ public class CipherFactory {
                 break;
             case "Batalha Naval":
                 break;
+            case "Caracol":
+                this.cipher = new SnailCipher(this.message, Integer.parseInt(this.password));
             case "Caranguejo":
                 this.cipher = new CrabCipher(this.message);
                 break;
@@ -42,7 +44,7 @@ public class CipherFactory {
             case "Código Chinês 2":
                 break;
             case "Data":
-                //return new CipherResult(CipherUtils.dataEncode(this.message, this.password));
+                this.cipher = new DateCipher(this.message, this.password);
             case "Frase-Chave-Vertical":
                 break;
             case "Frase-Chave-Horizontal":
@@ -53,20 +55,20 @@ public class CipherFactory {
                 this.cipher = new HorizontalCipher(this.message, Integer.parseInt(this.password));
                 break;
             case "Metades":
-                break;
+                this.cipher = new HalfCipher(this.message);
             case "Morse":
                 this.cipher = new MorseCipher(this.message);
                 break;
             case "Nós de Morse":
                 break;
             case "Passa um Melro":
-                break;
+                this.cipher = new BlackbirdCipher(this.message);
             case "Passa dois Melros":
-                break;
+                this.cipher = new Blackbird2Cipher(this.message);
             case "Picos de Morse":
                 break;
             case "Primeira Letra Falsa":
-                break;
+                this.cipher = new FirstFakeCipher(this.message);
             case "Romano-Árabe":
                 this.cipher = new RomanArabCipher(this.message);
                 break;
@@ -75,7 +77,7 @@ public class CipherFactory {
             case "Transposto":
                 break;
             case "Última Letra Falsa":
-                break;
+                this.cipher = new LastFakeCipher(this.message);
             case "Vertical":
                 this.cipher = new VerticalCipher(this.message, Integer.parseInt(this.password));
                 break;
@@ -113,4 +115,5 @@ public class CipherFactory {
 
         return new CipherResult(new CipherErrorCode(CipherErrorCode.UNKNOWN_CIPHER));
     }
+
 }
