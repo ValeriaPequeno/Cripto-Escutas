@@ -12,7 +12,13 @@ Desenvolvido por:
 
 Cifras implementadas na aplicação:
 
+- Cifra do Alfabeto Invertido;
+- Cifra de Alfabeto-Numeral;
+- Cifra de Batalha Naval Certa;
+- Cifra de Caranguejo;
 - Cifra de César;
+- Cifra de Chave Horizontal;
+- Cifra de Chave Vertical;
 - Cifra de Data;
 - Cifra Horizontal;
 - Cifra Romano-Árabe;
