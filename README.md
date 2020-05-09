@@ -21,7 +21,7 @@ Cifras implementadas na aplicação:
 - Cifra de Chave Vertical;
 - Cifra de Data;
 - Cifra Horizontal;
-- Cifra Romano-Árabe;
-- Código Morse;
+- Cifra de Romano-Árabe;
+- Cifra do Código Morse;
 - Cifra Vertical;
-- Código +3.
+- Cifra do Código +3.
