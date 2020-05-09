@@ -69,12 +69,6 @@ public class CipherFactory {
                 break;
             case "Primeira Letra Falsa":
                 this.cipher = new FirstFakeCipher(this.message);
-            case "Passa dois Melros":
-                break;
-            case "Picos de Morse":
-                break;
-            case "Primeira Letra Falsa":
-                break;
             case "Romano-Árabe":
                 this.cipher = new RomanArabCipher(this.message);
                 break;
