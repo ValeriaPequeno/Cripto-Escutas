@@ -36,7 +36,7 @@ public class TheRightBattleshipCipher extends Cipher {
         if(this.password.length() != 1)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
 
-        if (!StringUtils.matchingChars(this.password.toUpperCase(), CipherUtils.ASCII_ALPHABET_LOWER.toUpperCase(), false)) // validate password
+        if (!StringUtils.matchingChars(this.password, CipherUtils.ASCII_ALPHABET_LOWER, false, false)) // validate password
             return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
 
         return new CipherResult();
@@ -47,7 +47,7 @@ public class TheRightBattleshipCipher extends Cipher {
         CipherValidationResult result = this.validate();
 
         if(!result.hasErrors()) {
-            if (!StringUtils.matchingChars(getMessage().toUpperCase(), CipherUtils.ASCII_ALPHABET_LOWER.toUpperCase(), true))
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
         }
 
@@ -59,12 +59,12 @@ public class TheRightBattleshipCipher extends Cipher {
         CipherValidationResult result = this.validate();
 
         if(!result.hasErrors()) {
-            if (!StringUtils.matchingChars(getMessage().toUpperCase(), new String(
+            if (!StringUtils.matchingChars(getMessage(), new String(
                             TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD + TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD),
-                    true))
+                    true, false))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
 
-            if (!TheRightBattleshipCipherCoord.validateCoords(this.getMessage().split(" "))) // Validar se contém coordenadas válidas
+            if (!TheRightBattleshipCipherCoord.validateCoords(this.getMessage().split(" "), false)) // Validar se contém coordenadas válidas
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
         }
 
