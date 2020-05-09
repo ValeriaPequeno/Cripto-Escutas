@@ -33,4 +33,12 @@
         <item>Vertical</item>
         <item>Vogais por Pontos</item>
     </string-array>
+
+    <string name="C00">A mensagem tem caracteres não reconhecidos.</string>
+    <string name="C01">Mensagem vazia.</string>
+    <string name="C02">Cifra não reconhecida.</string>
+    <string name="C03">Formato da mensagem não reconhecido.</string>
+    <string name="C04">A password tem caracteres não reconhecidos.</string>
+    <string name="C05">Tamanho da password inválida.</string>
+    <string name="C06">Password vazia.</string>
 </resources>

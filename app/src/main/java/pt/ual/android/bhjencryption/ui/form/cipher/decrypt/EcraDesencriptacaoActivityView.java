@@ -124,13 +124,16 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         EcraResultadoModel result = this.ecraDesencriptacaoPresenter.decrypt(this.mensagem, this.password, this.strCifraSelecionada, this.posCifraSelecionada);
 
         if (result != null) {
-            Intent entrarEcraResultado = new Intent(EcraDesencriptacaoActivityView.this, EcraResultadoActivityView.class);
+            if(!result.hasErrors()) {
+                Intent entrarEcraResultado = new Intent(EcraDesencriptacaoActivityView.this, EcraResultadoActivityView.class);
 
-            Bundle params = new Bundle();
-            params.putSerializable("model", result);
-            entrarEcraResultado.putExtras(params);
+                Bundle params = new Bundle();
+                params.putSerializable("model", result);
+                entrarEcraResultado.putExtras(params);
 
-            startActivity(entrarEcraResultado);
+                startActivity(entrarEcraResultado);
+            }
+            else showToast(getResources().getString(getResources().getIdentifier(result.getErrorCode(), "string", getPackageName())));
         } else showToast("Não foi possível cifrar a mensagem solicitada.");
     }
 
