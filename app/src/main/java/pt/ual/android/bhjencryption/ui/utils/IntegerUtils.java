@@ -21,14 +21,14 @@ public class IntegerUtils {
 
     public static boolean validateRangeValues(int[] values, int minValue, int maxValue) {
         for(int value : values) {
-            if (!validateRangeValues(value, minValue, maxValue)) ;
-            return false;
+            if (!validateRangeValues(value, minValue, maxValue))
+                return false;
         }
 
         return true;
     }
 
     public static boolean validateRangeValues(int value, int minValue, int maxValue) {
-        return value >= minValue && value <= maxValue ? true : false;
+        return (value >= minValue && value <= maxValue);
     }
 }

@@ -23,9 +23,12 @@ public class StringUtils {
         for(int i = 0; i < caseSensInput.length(); i++) {
             char ch = caseSensInput.charAt(i);
 
-            if(ch == ' ' )
-                if(!allowSpaces)
-                    return false;
+            if(ch == ' ' ) {
+                if (allowSpaces)
+                    continue;
+
+                return false;
+            }
 
             if(caseSensAllowedChars.indexOf(ch) == -1)
                 return false;

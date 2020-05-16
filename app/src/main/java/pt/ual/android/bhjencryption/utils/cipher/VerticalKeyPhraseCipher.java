@@ -29,7 +29,7 @@ public class VerticalKeyPhraseCipher extends Cipher {
         if(this.password == null)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
 
-        if(this.password.length() > 0)
+        if(this.password.length() == 0)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
 
         if (!StringUtils.matchingChars(this.password, CipherUtils.ASCII_ALPHABET_LOWER, true, false))
