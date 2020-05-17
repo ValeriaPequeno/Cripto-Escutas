@@ -2,6 +2,8 @@ package pt.ual.android.bhjencryption.utils.cipher;
 
 import java.util.Random;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class Blackbird2Cipher  extends Cipher {
 
     public Blackbird2Cipher(String message) {
@@ -10,12 +12,25 @@ public class Blackbird2Cipher  extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = super.validate();
+
+        if(!result.hasErrors()) {
+            if (!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true, false))
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = super.validate();
+
+        if(!result.hasErrors()) {
+            // TODO: código para validar a mensagem da maneira específica desta cifra.
+        }
+
+        return result;
     }
 
     @Override
@@ -29,7 +44,7 @@ public class Blackbird2Cipher  extends Cipher {
     }
 
     public static String blackbird2Enc(String enc) {
-        char[] alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        char[] alfabeto = CipherUtils.ALPHABET_LOWER.toUpperCase().toCharArray();
 
         Random random = new Random();
         char[] inputLetters = enc.toCharArray();
