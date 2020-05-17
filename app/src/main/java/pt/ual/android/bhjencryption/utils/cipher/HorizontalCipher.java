@@ -1,5 +1,7 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class HorizontalCipher extends Cipher {
     private int password;
 
@@ -10,13 +12,54 @@ public class HorizontalCipher extends Cipher {
     }
 
     @Override
+    public CipherValidationResult validate() {
+
+        CipherValidationResult result = super.validate();
+
+        if(!result.hasErrors()) {
+            result = validatePassword();
+        }
+
+        return result;
+    }
+
+    public CipherValidationResult validatePassword() {
+        if(this.password == Integer.MIN_VALUE)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
+
+        if(this.password == Integer.MIN_VALUE + 1)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
+
+        if(this.password < 0)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.NEGATIVE_INTEGER_PASSWORD));
+
+        return new CipherResult();
+    }
+
+    @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER_AND_NUMERIC, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER_AND_NUMERIC, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -35,14 +78,14 @@ public class HorizontalCipher extends Cipher {
         String[] palavras = enc.split(" ");
 
         for (String pal : palavras) {
-            int nEspaco = 1;
+            /*int nEspaco = 1;
 
             if (nEspaco > 1) {
                 encoded.append(" ");
                 nEspaco++;
             } else {
                 nEspaco++;
-            }
+            }*/
 
             int tamVertical = (int) Math.ceil((double) pal.length() / (double) size);
 
@@ -86,6 +129,7 @@ public class HorizontalCipher extends Cipher {
                     }
                 }
             }
+            encoded.append(" ");
         }
 
         return encoded.toString();
