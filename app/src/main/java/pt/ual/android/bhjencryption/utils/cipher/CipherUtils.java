@@ -7,4 +7,4 @@ public class CipherUtils {
     public static final String ALPHABET_LOWER_AND_NUMERIC = "aàáâãbcçdeéêfghiíjklmnoóôõpqrstuúvwxyz0123456789";
     public static final String VOWELS_LOWER = "aàáâãeéêiíjoóôõuú";
     public static final String NUMERIC = "0123456789";
-    }
+}

@@ -103,6 +103,8 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
 
     private void onSelectedDropEncriptacoes(AdapterView<?> parent, View view, int position, long id) {
         this.posCifraSelecionada = position;
+
+        // TODO: criar lógica para mostrar/esconder a caixa de texto da password e outros controlos necessários para cifras específicas.
     }
 
     private void onClickEncriptResultButton(View view) {

@@ -29,7 +29,7 @@ public class HorizontalKeyPhraseCipher extends Cipher {
         if(this.password == null) // validate password
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
 
-        if(this.password.length() > 0)
+        if(this.password.length() == 0)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
 
         if (!StringUtils.matchingChars(this.password, CipherUtils.ASCII_ALPHABET_LOWER, true, false))
@@ -91,8 +91,8 @@ public class HorizontalKeyPhraseCipher extends Cipher {
 
     private static char findEncodingChar(char ch, String alphaEncodingTable, String passwordEncodingTable, boolean isPasswordAlphabet) {
         if(isPasswordAlphabet)
-            return alphaEncodingTable.charAt(passwordEncodingTable.indexOf(ch));
+            return passwordEncodingTable.charAt(alphaEncodingTable.indexOf(ch));
 
-        return passwordEncodingTable.charAt(alphaEncodingTable.indexOf(ch));
+        return alphaEncodingTable.charAt(passwordEncodingTable.indexOf(ch));
     }
 }

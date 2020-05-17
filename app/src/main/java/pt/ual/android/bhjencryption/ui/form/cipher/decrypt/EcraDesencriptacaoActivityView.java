@@ -102,6 +102,10 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
     private void onSelectedDropDesencriptacoes(AdapterView<?> parent, View view, int position, long id) {
         this.posCifraSelecionada = position;
+
+        /* TODO:
+            - Criar lógica para esconder/mostrar caixa de texto da PW, caixa de texto da mensagem ou teclado virtual de imagens
+        */
     }
 
     private void onClickDecriptResultButton(View view) {
