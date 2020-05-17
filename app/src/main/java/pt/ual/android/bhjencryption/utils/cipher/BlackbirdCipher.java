@@ -29,29 +29,29 @@ public class BlackbirdCipher extends Cipher {
     }
 
     public static String blackbirdEnc(String enc) {
+        StringBuilder output = new StringBuilder();
         char[] alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
         Random random = new Random();
         char[] inputLetters = enc.toCharArray();
-        String output="";
 
         for (int i=0; i<inputLetters.length; i++){
 
             int randomChartPosition = random.nextInt(alfabeto.length -1);
-            output += inputLetters[i] + "" + alfabeto[randomChartPosition];
+            output.append(inputLetters[i]).append("").append(alfabeto[randomChartPosition]);
         }
-        return output;
+        return output.toString();
     }
 
     public static String blackbirdDecode(String enc) {
-
+        StringBuilder output = new StringBuilder();
         char[] inputLetters = enc.toCharArray();
-        String output="";
+
         for (int i = 0; i < inputLetters.length; i += 2) {
             //char result = input.charAt(i);
-            output += inputLetters[i];
+            output.append(inputLetters[i]);
         }
-        return output;
+        return output.toString();
     }
 
 }

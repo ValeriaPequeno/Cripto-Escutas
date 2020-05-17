@@ -25,39 +25,40 @@ public class FirstFakeCipher extends Cipher {
 
     @Override
     public CipherResult decrypt() {
+        StringBuilder output = new StringBuilder();
         return new CipherResult(FirstFakeCipher.firstFakeDecode(getMessage()));
     }
 
 
     public static String firstFakeEnc(String enc) {
+        StringBuilder output = new StringBuilder();
         char[] alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
         Random random = new Random();
-        String output="";
         String [] inputLetters;
         inputLetters = enc.split("\\s+");
         for (String inputLetter : inputLetters) {
             int randomChartPosition = random.nextInt(alfabeto.length -1);
             if (!inputLetter.isEmpty()) {
-                output +=  alfabeto[randomChartPosition]+ "" + inputLetter+ " ";
+                output.append(alfabeto[randomChartPosition]).append("").append(inputLetter).append(" ");
 
             }
         }
-        return output;
+        return output.toString();
     }
 
 
     public static String firstFakeDecode(String enc) {
 
-        String output="";
+        StringBuilder output = new StringBuilder();
         String [] inputLetters;
         inputLetters = enc.split("\\s+");
         for (String inputLetter : inputLetters) {
 
             if (!inputLetter.isEmpty()) {
-                output += inputLetter.substring(1) + " ";
+                output.append(inputLetter.substring(1)).append(" ");
             }
         }
-        return output;
+        return output.toString();
     }
 }
