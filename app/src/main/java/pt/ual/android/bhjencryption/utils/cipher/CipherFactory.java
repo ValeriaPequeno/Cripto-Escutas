@@ -78,16 +78,16 @@ public class CipherFactory {
                 this.cipher = new RomanArabCipher(this.message);
                 break;
             case "SMS":
-                break;
+                this.cipher = new SmsCipher(this.message);
             case "Transposto":
-                break;
+                this.cipher = new TransposedCipher(this.message, this.password);
             case "Última Letra Falsa":
                 this.cipher = new LastFakeCipher(this.message);
             case "Vertical":
                 this.cipher = new VerticalCipher(this.message, parsePasswordToInt());
                 break;
             case "Vogais por Pontos":
-                break;
+                this.cipher = new VowelsByPointsCipher(this.message);
             default:
                 this.cipher = null;
         }
