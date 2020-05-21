@@ -32,4 +32,4 @@ Cifras implementadas na aplicação:
 - Transposto;
 - Última Letra Falsa;
 - Vertical;
-- Romano-Árabe;
+- Romano-Árabe.
