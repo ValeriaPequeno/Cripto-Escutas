@@ -3,6 +3,8 @@ package pt.ual.android.bhjencryption.utils.cipher;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class TransposedCipher extends Cipher {
     private String password;
 
@@ -12,13 +14,54 @@ public class TransposedCipher extends Cipher {
     }
 
     @Override
+    public CipherValidationResult validate() {
+
+        CipherValidationResult result = super.validate();
+
+        if(!result.hasErrors()) {
+            result = validatePassword();
+        }
+
+        return result;
+    }
+
+    public CipherValidationResult validatePassword() {
+        if(this.password.isEmpty())
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
+
+        if(!StringUtils.matchingChars(this.password, CipherUtils.ASCII_ALPHABET_LOWER, false, false))
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
+
+        if(this.password.length() > 1){
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
+        }
+
+        return new CipherResult();
+    }
+    @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override

@@ -3,6 +3,8 @@ package pt.ual.android.bhjencryption.utils.cipher;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class RomanArabCipher extends Cipher {
     public RomanArabCipher(String message) {
         super(message);
@@ -10,12 +12,40 @@ public class RomanArabCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.NUMERIC_AND_ROMAN, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+            String[] letra = getMessage().split(" ");
+            for(String i : letra){
+                try{
+                    if(Integer.valueOf(i) < 1 || Integer.valueOf(i) > 21){
+                        return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
+                    }
+                } catch (Exception e){
+                    if(i != "I" || i != "II" || i != "III" || i != "IV" || i != "V"){
+                        return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override

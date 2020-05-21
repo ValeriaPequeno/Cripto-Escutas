@@ -3,17 +3,45 @@ package pt.ual.android.bhjencryption.utils.cipher;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class SmsCipher extends Cipher{
     public SmsCipher(String message){super(message);}
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.NUMERIC_NATURAL, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+            String[] letra = getMessage().split(" ");
+            for (String i : letra){
+                if((Integer.valueOf(String.valueOf(i.charAt(0))) == 7 || Integer.valueOf(String.valueOf(i.charAt(0))) == 9) && i.length() > 4 ||
+                        (Integer.valueOf(String.valueOf(i.charAt(0))) == 1 || Integer.valueOf(String.valueOf(i.charAt(0))) == 2 ||
+                                Integer.valueOf(String.valueOf(i.charAt(0))) == 3 || Integer.valueOf(String.valueOf(i.charAt(0))) == 4 ||
+                                Integer.valueOf(String.valueOf(i.charAt(0))) == 5 || Integer.valueOf(String.valueOf(i.charAt(0))) == 6 ||
+                                Integer.valueOf(String.valueOf(i.charAt(0))) == 8) && i.length() > 3){
+                    return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override

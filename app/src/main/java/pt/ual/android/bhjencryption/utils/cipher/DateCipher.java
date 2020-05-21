@@ -3,24 +3,80 @@ package pt.ual.android.bhjencryption.utils.cipher;
 import java.util.ArrayList;
 import java.util.List;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class DateCipher extends Cipher{
     private String password;
 
-    private DateCipher(String message){super(message);}
+    public DateCipher(String message, String password){
+        super(message);
+        this.password = password;
+    }
+
+    @Override
+    public CipherValidationResult validate() {
+
+        CipherValidationResult result = super.validate();
+
+        if(!result.hasErrors()) {
+            result = validatePassword();
+        }
+
+        return result;
+    }
+
+    public CipherValidationResult validatePassword() {
+        if(Integer.valueOf(this.password) == Integer.MIN_VALUE)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
+
+        else if(this.password.length() != 4)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
+
+        else if(Integer.valueOf(this.password) == Integer.MIN_VALUE + 1)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
+
+        else if(Integer.valueOf(this.password)  < 0)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.NEGATIVE_INTEGER_PASSWORD));
+
+        return new CipherResult();
+    }
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER_AND_NUMERIC, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
-    }
+        CipherValidationResult result = this.validate();
 
-    public DateCipher(String message, String password){
-        this(message);
-        this.password = password;
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.NUMERIC, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+
+            String[] palavras = getMessage().split(" ");
+            for(String i : palavras){
+                String[] paresIndex = splitLetras(i);
+
+                for(String n : paresIndex){
+                    if(n.length() != 2){
+                        return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
+                    }
+                }
+            }
+
+        }
+
+        return result;
     }
 
     @Override
@@ -44,15 +100,6 @@ public class DateCipher extends Cipher{
         String[] palavras = enc.split(" ");
 
         for (String pal : palavras) {
-            int nEspaco = 1;
-
-            if (nEspaco > 1) {
-                encoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
-            }
-
             for (char letra : pal.toCharArray()) {
                 for (int y = 0; y < alfaNumerico.length; y++) {
                     for (int x = 0; x < alfaNumerico[y].length; x++) {
@@ -68,6 +115,8 @@ public class DateCipher extends Cipher{
                     }
                 }
             }
+
+            encoded.append(" ");
         }
 
         return encoded.toString();
@@ -84,15 +133,6 @@ public class DateCipher extends Cipher{
         String[] palavras = enc.split(" ");
 
         for (String pal : palavras) {
-            int nEspaco = 1;
-
-            if (nEspaco > 1) {
-                decoded.append(" ");
-                nEspaco++;
-            } else {
-                nEspaco++;
-            }
-
             String[] paresIndex = splitLetras(pal);
             int xIndex = 0, yIndex = 0;
 
@@ -115,6 +155,8 @@ public class DateCipher extends Cipher{
 
                 decoded.append(alfaNumerico[yIndex][xIndex]);
             }
+
+            decoded.append(" ");
         }
 
         return decoded.toString();

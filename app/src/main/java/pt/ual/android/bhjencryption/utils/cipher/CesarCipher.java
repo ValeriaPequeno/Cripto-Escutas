@@ -1,5 +1,7 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class CesarCipher extends Cipher {
     private int password;
 
@@ -8,13 +10,54 @@ public class CesarCipher extends Cipher {
     }
 
     @Override
+    public CipherValidationResult validate() {
+
+        CipherValidationResult result = super.validate();
+
+        if(!result.hasErrors()) {
+            result = validatePassword();
+        }
+
+        return result;
+    }
+
+    public CipherValidationResult validatePassword() {
+        if(this.password == Integer.MIN_VALUE)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
+
+        if(this.password == Integer.MIN_VALUE + 1)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
+
+        if(this.password < 0)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.NEGATIVE_INTEGER_PASSWORD));
+
+        return new CipherResult();
+    }
+
+    @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     public CesarCipher(String message, int password) {
