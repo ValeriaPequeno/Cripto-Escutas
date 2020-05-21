@@ -1,13 +1,16 @@
 package pt.ual.android.bhjencryption.ui.form.cipher.result;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -17,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -87,6 +91,7 @@ public class EcraResultadoActivityView extends AppCompatActivity implements Ecra
 
         // Definir os event handlers
         this.btnPartilhar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
                 onClickShareButton(v);
@@ -100,17 +105,27 @@ public class EcraResultadoActivityView extends AppCompatActivity implements Ecra
         imgResultado.setImageBitmap(this.model.getResultAsBitmap());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void onClickShareButton(View view) {
         Log.d(TAG, "onClick: Cliquei no botão de partilha do resultado");
 
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/*");
-        share.putExtra(Intent.EXTRA_STREAM, getImageUri(this.getApplicationContext(), getBitmapFromView(this.imgResultado)));
+        String permit = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        int checkVal = getApplicationContext().checkCallingOrSelfPermission(permit);
 
-        try {
-            startActivity(Intent.createChooser(share, "My Profile ..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            ex.printStackTrace();
+        if(checkVal == PackageManager.PERMISSION_GRANTED){
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            share.setType("image/jpeg");
+            share.putExtra(Intent.EXTRA_STREAM, getImageUri(this.getApplicationContext(), getBitmapFromView(this.imgResultado)));
+
+            try {
+                startActivity(Intent.createChooser(share, "My Profile ..."));
+            } catch (android.content.ActivityNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else{
+            requestPermissions(new String[] {permit},1024);
         }
     }
 
