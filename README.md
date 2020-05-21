@@ -12,16 +12,24 @@ Desenvolvido por:
 
 Cifras implementadas na aplicação:
 
-- Cifra do Alfabeto Invertido;
-- Cifra de Alfabeto-Numeral;
-- Cifra de Batalha Naval Certa;
-- Cifra de Caranguejo;
-- Cifra de César;
-- Cifra de Chave Horizontal;
-- Cifra de Chave Vertical;
-- Cifra de Data;
-- Cifra Horizontal;
-- Cifra de Romano-Árabe;
-- Cifra do Código Morse;
-- Cifra Vertical;
-- Cifra do Código +3.
+- Alfabeto Invertido;
+- Alfabeto-Numeral;
+- Batalha Naval Certa;
+- Caracol;
+- Caranguejo;
+- César;
+- Chave Horizontal;
+- Chave Vertical;
+- Código +3;
+- Data;
+- Horizontal;
+- Metades;
+- Morse;
+- Passa um Melro;
+- Passa dois Melros;
+- Primeira Letra Falsa;
+- SMS;
+- Transposto;
+- Última Letra Falsa;
+- Vertical;
+- Romano-Árabe;
