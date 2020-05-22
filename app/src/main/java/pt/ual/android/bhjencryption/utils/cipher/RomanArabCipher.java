@@ -33,15 +33,19 @@ public class RomanArabCipher extends Cipher {
             }
             String[] letra = getMessage().split(" ");
             for(String i : letra){
-                try{
-                    if(Integer.valueOf(i) < 1 || Integer.valueOf(i) > 21){
-                        return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
-                    }
-                } catch (Exception e){
-                    if(i != "I" || i != "II" || i != "III" || i != "IV" || i != "V"){
+
+                if(Character.isDigit(i.charAt(0)) && (Integer.parseInt(i) < 1 || Integer.parseInt(i) > 21)){
+                    return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
+                }
+
+                if(Character.isAlphabetic(i.charAt(0))){
+                    if(i.equals("I") || i.equals("II") || i.equals("III") || i.equals("IV") || i.equals("V")){}
+                    else{
                         return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
                     }
                 }
+
+
             }
         }
 

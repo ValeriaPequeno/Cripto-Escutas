@@ -6,9 +6,9 @@ import java.util.List;
 import pt.ual.android.bhjencryption.ui.utils.StringUtils;
 
 public class DateCipher extends Cipher{
-    private String password;
+    private int password;
 
-    public DateCipher(String message, String password){
+    public DateCipher(String message, int password){
         super(message);
         this.password = password;
     }
@@ -26,16 +26,16 @@ public class DateCipher extends Cipher{
     }
 
     public CipherValidationResult validatePassword() {
-        if(Integer.valueOf(this.password) == Integer.MIN_VALUE)
+        if(this.password == Integer.MIN_VALUE)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
 
-        else if(this.password.length() != 4)
+        if(String.valueOf(this.password).length() != 4)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
 
-        else if(Integer.valueOf(this.password) == Integer.MIN_VALUE + 1)
+        if(this.password == Integer.MIN_VALUE + 1)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
 
-        else if(Integer.valueOf(this.password)  < 0)
+        if(this.password  < 0)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.NEGATIVE_INTEGER_PASSWORD));
 
         return new CipherResult();
@@ -81,12 +81,12 @@ public class DateCipher extends Cipher{
 
     @Override
     public CipherResult encrypt() {
-        return new CipherResult(encrypt(getMessage(), this.password));
+        return new CipherResult(encrypt(getMessage(), String.valueOf(this.password)));
     }
 
     @Override
     public CipherResult decrypt() {
-        return new CipherResult(decrypt(getMessage(), this.password));
+        return new CipherResult(decrypt(getMessage(), String.valueOf(this.password)));
     }
 
     public static String encrypt(String enc, String pass) {

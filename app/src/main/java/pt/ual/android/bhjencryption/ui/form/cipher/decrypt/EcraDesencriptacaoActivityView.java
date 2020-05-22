@@ -104,7 +104,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.posCifraSelecionada = position;
 
         if(position == 2 || position == 4 || position == 5 || position == 7 || position == 12 || position == 13 ||
-                position == 14 || position == 16 || position == 24 || position == 26 || position == 28){
+                position == 14 || position == 16 || position == 26 || position == 28){
             etxtPassInput.setVisibility(view.VISIBLE);
         }
         else{

@@ -1,16 +1,34 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class VowelsByPointsCipher extends Cipher {
     public VowelsByPointsCipher(String message){ super(message); }
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER_AND_NUMERIC, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_CONSONANTS_LOWER_NUMERIC_AND_POINT, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -54,6 +72,12 @@ public class VowelsByPointsCipher extends Cipher {
         StringBuilder decoded = new StringBuilder();
 
         String[] palavras = enc.split(" ");
+
+        /**
+         *  TODO:
+         *  - https://developer.android.com/guide/topics/text/spell-checker-framework ,
+         *  - https://code.tutsplus.com/tutorials/an-introduction-to-androids-spelling-checker-framework--cms-23754
+         */
 
         return decoded.toString();
     }

@@ -47,7 +47,7 @@ public class CipherFactory {
             case "Código Chinês 2":
                 break;
             case "Data":
-                this.cipher = new DateCipher(this.message, this.password);
+                this.cipher = new DateCipher(this.message, Integer.parseInt(this.password));
             case "Frase-Chave-Vertical":
                 this.cipher = new VerticalKeyPhraseCipher(this.message, this.password);
                 break;
