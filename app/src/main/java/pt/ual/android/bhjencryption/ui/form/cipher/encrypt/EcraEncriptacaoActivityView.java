@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import pt.ual.android.bhjencryption.R;
-import pt.ual.android.bhjencryption.ui.form.cipher.decrypt.EcraDesencriptacaoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoModel;
 
@@ -104,7 +103,14 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
     private void onSelectedDropEncriptacoes(AdapterView<?> parent, View view, int position, long id) {
         this.posCifraSelecionada = position;
 
-        // TODO: criar lógica para mostrar/esconder a caixa de texto da password e outros controlos necessários para cifras específicas.
+        //Como habilitar a visibilidade de uma view
+        if(position == 2 || position == 4 || position == 5 || position == 7 || position == 12 || position == 13 ||
+                position == 14 || position == 16 || position == 24 || position == 26 || position == 28){
+            etxtPassInput.setVisibility(view.VISIBLE);
+        }
+        else{
+            etxtPassInput.setVisibility(view.INVISIBLE);
+        }
     }
 
     private void onClickEncriptResultButton(View view) {
