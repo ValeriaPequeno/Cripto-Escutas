@@ -38,15 +38,10 @@ public class TransposedCipher extends Cipher {
 
         return new CipherResult();
     }
+
     @Override
     public CipherValidationResult validateEncrypt() {
         CipherValidationResult result = this.validate();
-
-        if(!result.hasErrors()){
-            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
-            }
-        }
 
         return result;
     }
@@ -54,12 +49,6 @@ public class TransposedCipher extends Cipher {
     @Override
     public CipherValidationResult validateDecrypt() {
         CipherValidationResult result = this.validate();
-
-        if(!result.hasErrors()){
-            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
-            }
-        }
 
         return result;
     }
@@ -105,18 +94,23 @@ public class TransposedCipher extends Cipher {
         alfabeto.put('y', 25);
         alfabeto.put('z', 26);
 
-        int offset = alfabeto.get(pass) % 26 + 26;
+        int offset = alfabeto.get(pass.charAt(0)) % 26 + 26;
 
-        for (char i : enc.toCharArray()) {
-            if (Character.isLetter(i)) {
-                if (Character.isUpperCase(i)) {
-                    encoded.append((char) ('A' + (i - 'A' + offset) % 26));
+        String[] palavra = enc.split(" ");
+
+        for(String p : palavra){
+            for (char i : p.toCharArray()) {
+                if (Character.isLetter(i)) {
+                    if (Character.isUpperCase(i)) {
+                        encoded.append((char) ('A' + (i - 'A' + offset) % 26));
+                    } else {
+                        encoded.append((char) ('a' + (i - 'a' + offset) % 26));
+                    }
                 } else {
-                    encoded.append((char) ('a' + (i - 'a' + offset) % 26));
+                    encoded.append(i);
                 }
-            } else {
-                encoded.append(i);
             }
+            encoded.append(" ");
         }
 
         return encoded.toString();
@@ -153,18 +147,22 @@ public class TransposedCipher extends Cipher {
         alfabeto.put('y', 25);
         alfabeto.put('z', 26);
 
-        int offset = (26 - alfabeto.get(pass)) % 26 + 26;
+        int offset = (26 - alfabeto.get(pass.charAt(0))) % 26 + 26;
 
-        for (char i : enc.toCharArray()) {
-            if (Character.isLetter(i)) {
-                if (Character.isUpperCase(i)) {
-                    decoded.append((char) ('A' + (i - 'A' + offset) % 26));
+        String[] palavra = enc.split(" ");
+        for(String p : palavra){
+            for (char i : p.toCharArray()) {
+                if (Character.isLetter(i)) {
+                    if (Character.isUpperCase(i)) {
+                        decoded.append((char) ('A' + (i - 'A' + offset) % 26));
+                    } else {
+                        decoded.append((char) ('a' + (i - 'a' + offset) % 26));
+                    }
                 } else {
-                    decoded.append((char) ('a' + (i - 'a' + offset) % 26));
+                    decoded.append(i);
                 }
-            } else {
-                decoded.append(i);
             }
+            decoded.append(" ");
         }
 
         return decoded.toString();

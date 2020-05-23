@@ -121,7 +121,7 @@ public class SmsCipher extends Cipher{
                     encoded.append(" ");
                 }
                 else{
-                    String val = alfabeto.get(Character.toLowerCase(i));
+                    String val = alfabeto.get(l);
                     encoded.append(val);
                     encoded.append(" ");
                 }

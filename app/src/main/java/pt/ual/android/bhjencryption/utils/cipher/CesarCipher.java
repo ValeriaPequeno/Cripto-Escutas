@@ -1,7 +1,5 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
-import pt.ual.android.bhjencryption.ui.utils.StringUtils;
-
 public class CesarCipher extends Cipher {
     private int password;
 
@@ -38,24 +36,12 @@ public class CesarCipher extends Cipher {
     public CipherValidationResult validateEncrypt() {
         CipherValidationResult result = this.validate();
 
-        if(!result.hasErrors()){
-            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
-            }
-        }
-
         return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
         CipherValidationResult result = this.validate();
-
-        if(!result.hasErrors()){
-            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ASCII_ALPHABET_LOWER, true, false)){
-                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
-            }
-        }
 
         return result;
     }
@@ -79,16 +65,20 @@ public class CesarCipher extends Cipher {
     public static String encrypt(String enc, int offset) {
         offset = offset % 26 + 26;
         StringBuilder encoded = new StringBuilder();
-        for (char i : enc.toCharArray()) {
-            if (Character.isLetter(i)) {
-                if (Character.isUpperCase(i)) {
-                    encoded.append((char) ('A' + (i - 'A' + offset) % 26));
+        String[] palavra = enc.split(" ");
+        for(String p : palavra){
+            for (char i : p.toCharArray()) {
+                if (Character.isLetter(i)) {
+                    if (Character.isUpperCase(i)) {
+                        encoded.append((char) ('A' + (i - 'A' + offset) % 26));
+                    } else {
+                        encoded.append((char) ('a' + (i - 'a' + offset) % 26));
+                    }
                 } else {
-                    encoded.append((char) ('a' + (i - 'a' + offset) % 26));
+                    encoded.append(i);
                 }
-            } else {
-                encoded.append(i);
             }
+            encoded.append(" ");
         }
         return encoded.toString();
     }

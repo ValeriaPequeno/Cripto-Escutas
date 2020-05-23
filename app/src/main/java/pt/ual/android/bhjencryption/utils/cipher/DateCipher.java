@@ -115,7 +115,6 @@ public class DateCipher extends Cipher{
                     }
                 }
             }
-
             encoded.append(" ");
         }
 
