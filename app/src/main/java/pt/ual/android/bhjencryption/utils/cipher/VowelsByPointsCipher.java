@@ -1,8 +1,18 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
+import android.view.textservice.SentenceSuggestionsInfo;
+import android.view.textservice.SpellCheckerSession;
+import android.view.textservice.SuggestionsInfo;
+import android.view.textservice.TextInfo;
+import android.view.textservice.TextServicesManager;
+
 import pt.ual.android.bhjencryption.ui.utils.StringUtils;
 
-public class VowelsByPointsCipher extends Cipher {
+import static androidx.core.content.ContextCompat.getSystemService;
+
+public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.SpellCheckerSessionListener {
+    String correctedString;
+
     public VowelsByPointsCipher(String message){ super(message); }
 
     @Override
@@ -68,7 +78,7 @@ public class VowelsByPointsCipher extends Cipher {
         return encoded.toString();
     }
 
-    public static String decrypt(String enc){
+    public String decrypt(String enc){
         StringBuilder decoded = new StringBuilder();
 
         String[] palavras = enc.split(" ");
@@ -79,6 +89,41 @@ public class VowelsByPointsCipher extends Cipher {
          *  - https://code.tutsplus.com/tutorials/an-introduction-to-androids-spelling-checker-framework--cms-23754
          */
 
+        for(String i : palavras){
+            fetchSuggestionsFor(i);
+        }
+
         return decoded.toString();
+    }
+
+    @Override
+    public void onGetSuggestions(SuggestionsInfo[] results) {
+    }
+
+    @Override
+    public void onGetSentenceSuggestions(SentenceSuggestionsInfo[] results) {
+        for(SentenceSuggestionsInfo result:results){
+            int n = result.getSuggestionsCount();
+            for(int i=0; i < n; i++){
+                int m = result.getSuggestionsInfoAt(i).getSuggestionsCount();
+
+                for(int k=0; k < m; k++) {
+                    correctedString = result.getSuggestionsInfoAt(i).getSuggestionAt(k);
+                }
+            }
+        }
+    }
+
+    private void fetchSuggestionsFor(String input){
+        TextServicesManager tsm =
+                (TextServicesManager) getSystemService(TEXT_SERVICES_MANAGER_SERVICE);
+
+        SpellCheckerSession session =
+                tsm.newSpellCheckerSession(null, null, VowelsByPointsCipher.this, true);
+
+        session.getSentenceSuggestions(
+                new TextInfo[]{ new TextInfo(input) },
+                1
+        );
     }
 }
