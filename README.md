@@ -30,8 +30,8 @@ Cifras implementadas na aplicação:
 - Passa um Melro;
 - Passa dois Melros;
 - Primeira Letra Falsa;
+- Romano-Árabe;
 - SMS;
 - Transposto;
 - Última Letra Falsa;
-- Vertical;
-- Romano-Árabe.
+- Vertical.
