@@ -107,6 +107,14 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
                 position == 14 || position == 16 || position == 26 || position == 28){
             etxtPassInput.setVisibility(view.VISIBLE);
         }
+        else if(position == 3 || position == 8 || position == 10 || position == 11 || position == 15 ||
+                position == 19 || position == 22){
+            etxtPassInput.setVisibility(view.INVISIBLE);
+
+            /**
+             *  Desenvolvimento do teclado dinãmico para as cifras por imagem
+             */
+        }
         else{
             etxtPassInput.setVisibility(view.INVISIBLE);
         }

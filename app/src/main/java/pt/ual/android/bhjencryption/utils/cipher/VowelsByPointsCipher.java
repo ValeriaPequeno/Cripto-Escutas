@@ -92,7 +92,7 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
 
         for(String i : palavras){
             String input = i.replace(".", "");
-            fetchSuggestionsFor(input);
+            //fetchSuggestionsFor(input);
             decoded.append(correctedString + " ");
         }
 
@@ -117,7 +117,7 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
         }
     }
 
-    private void fetchSuggestionsFor(String input){
+    /*private void fetchSuggestionsFor(String input){
         TextServicesManager tsm =
                 (TextServicesManager) getSystemService(TEXT_SERVICES_MANAGER_SERVICE);
 
@@ -128,5 +128,5 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
                 new TextInfo[]{ new TextInfo(input) },
                 1
         );
-    }
+    }*/
 }

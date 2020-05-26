@@ -1,7 +1,5 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
-import pt.ual.android.bhjencryption.ui.utils.StringUtils;
-
 public class CipherFactory {
     private String message;
     private String password;
