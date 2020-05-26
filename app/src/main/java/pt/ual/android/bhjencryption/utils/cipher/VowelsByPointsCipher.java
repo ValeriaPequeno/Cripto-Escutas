@@ -59,7 +59,7 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
         for(String pal : palavras){
             for(char let : pal.toCharArray()){
                 for(char vow : CipherUtils.VOWELS_LOWER.toCharArray()){
-                    if(let == Character.toLowerCase(vow) || let == Character.toUpperCase(vow)){
+                    if(Character.toLowerCase(let) == vow || let == Character.toUpperCase(vow)){
                         encoded.append('.');
                         break;
                     }
@@ -68,6 +68,7 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
                     }
                     else{
                         encoded.append(let);
+                        break;
                     }
                 }
             }
@@ -90,7 +91,9 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
          */
 
         for(String i : palavras){
-            fetchSuggestionsFor(i);
+            String input = i.replace(".", "");
+            fetchSuggestionsFor(input);
+            decoded.append(correctedString + " ");
         }
 
         return decoded.toString();
