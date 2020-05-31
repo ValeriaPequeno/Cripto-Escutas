@@ -1,7 +1,5 @@
 package pt.ual.android.bhjencryption.utils.cipher;
 
-import pt.ual.android.bhjencryption.ui.utils.StringUtils;
-
 public class CipherFactory {
     private String message;
     private String password;
@@ -30,7 +28,8 @@ public class CipherFactory {
                 this.cipher = new TheRightBattleshipCipher(this.message, this.password);
                 break;
             case "Caracol":
-                this.cipher = new SnailCipher(this.message, Integer.parseInt(this.password));
+                this.cipher = new SnailCipher(this.message, parsePasswordToInt());
+                break;
             case "Caranguejo":
                 this.cipher = new CrabCipher(this.message);
                 break;
@@ -47,7 +46,8 @@ public class CipherFactory {
             case "Código Chinês 2":
                 break;
             case "Data":
-                this.cipher = new DateCipher(this.message, this.password);
+                this.cipher = new DateCipher(this.message, parsePasswordToInt());
+                break;
             case "Frase-Chave-Vertical":
                 this.cipher = new VerticalKeyPhraseCipher(this.message, this.password);
                 break;
@@ -61,6 +61,7 @@ public class CipherFactory {
                 break;
             case "Metades":
                 this.cipher = new HalfCipher(this.message);
+                break;
             case "Morse":
                 this.cipher = new MorseCipher(this.message);
                 break;
@@ -68,26 +69,33 @@ public class CipherFactory {
                 break;
             case "Passa um Melro":
                 this.cipher = new BlackbirdCipher(this.message);
+                break;
             case "Passa dois Melros":
                 this.cipher = new Blackbird2Cipher(this.message);
+                break;
             case "Picos de Morse":
                 break;
             case "Primeira Letra Falsa":
                 this.cipher = new FirstFakeCipher(this.message);
+                break;
             case "Romano-Árabe":
                 this.cipher = new RomanArabCipher(this.message);
                 break;
             case "SMS":
                 this.cipher = new SmsCipher(this.message);
+                break;
             case "Transposto":
                 this.cipher = new TransposedCipher(this.message, this.password);
+                break;
             case "Última Letra Falsa":
                 this.cipher = new LastFakeCipher(this.message);
+                break;
             case "Vertical":
                 this.cipher = new VerticalCipher(this.message, parsePasswordToInt());
                 break;
             case "Vogais por Pontos":
                 this.cipher = new VowelsByPointsCipher(this.message);
+                break;
             default:
                 this.cipher = null;
         }

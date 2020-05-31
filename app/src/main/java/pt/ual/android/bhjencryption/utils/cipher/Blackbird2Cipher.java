@@ -35,37 +35,37 @@ public class Blackbird2Cipher  extends Cipher {
 
     @Override
     public CipherResult encrypt() {
-        return new CipherResult(Blackbird2Cipher.blackbird2Enc(getMessage()));
+        return new CipherResult(blackbird2Enc(getMessage()));
     }
 
     @Override
     public CipherResult decrypt() {
-        return new CipherResult(Blackbird2Cipher.blackbird2Decode(getMessage()));
+        return new CipherResult(blackbird2Decode(getMessage()));
     }
 
     public static String blackbird2Enc(String enc) {
+
         char[] alfabeto = CipherUtils.ALPHABET_LOWER.toUpperCase().toCharArray();
+        StringBuilder output = new StringBuilder();
 
         Random random = new Random();
         char[] inputLetters = enc.toCharArray();
-        String output="";
 
         for (int i=0; i<inputLetters.length; i++){
 
             int randomChartPosition = random.nextInt(alfabeto.length -1);
-            output += inputLetters[i] + "" + alfabeto[randomChartPosition]+ "" + alfabeto[randomChartPosition];
+            output.append(inputLetters[i]).append("").append(alfabeto[randomChartPosition]).append("").append(alfabeto[randomChartPosition]);
         }
-        return output;
+        return output.toString();
     }
 
     public static String blackbird2Decode(String enc) {
-
+        StringBuilder output = new StringBuilder();
         char[] inputLetters = enc.toCharArray();
-        String output="";
+
         for (int i = 0; i < inputLetters.length; i += 3) {
-            //char result = input.charAt(i);
-            output += inputLetters[i];
+            output.append(inputLetters[i]);
         }
-        return output;
+        return output.toString();
     }
 }

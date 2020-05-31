@@ -3,6 +3,8 @@ package pt.ual.android.bhjencryption.utils.cipher;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ual.android.bhjencryption.ui.utils.StringUtils;
+
 public class MorseCipher extends Cipher {
 
     public MorseCipher(String message) {
@@ -11,12 +13,97 @@ public class MorseCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.ALPHABET_LOWER_NUMERIC_AND_SIGNS, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getMessage(), CipherUtils.MORSE_SIGNS, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+
+            String[] palavras = getMessage().split("/");
+
+            Map<String, Character> alfabeto = new HashMap<>();
+            alfabeto.put(".-", 'a');
+            alfabeto.put("-...", 'b');
+            alfabeto.put("-.-.", 'c');
+            alfabeto.put("-..", 'd');
+            alfabeto.put(".", 'e');
+            alfabeto.put("..-.", 'f');
+            alfabeto.put("--.", 'g');
+            alfabeto.put("....", 'h');
+            alfabeto.put("..", 'i');
+            alfabeto.put(".---", 'j');
+            alfabeto.put("-.-", 'k');
+            alfabeto.put("._..", 'l');
+            alfabeto.put("__", 'm');
+            alfabeto.put("-.", 'n');
+            alfabeto.put("---", 'o');
+            alfabeto.put(".--.", 'p');
+            alfabeto.put("--.-", 'q');
+            alfabeto.put(".-.", 'r');
+            alfabeto.put("...", 's');
+            alfabeto.put("-", 't');
+            alfabeto.put("..-", 'u');
+            alfabeto.put("...-", 'v');
+            alfabeto.put(".--", 'w');
+            alfabeto.put("_.._", 'x');
+            alfabeto.put("-.--", 'y');
+            alfabeto.put("--..", 'z');
+            alfabeto.put(".----", '1');
+            alfabeto.put("..---", '2');
+            alfabeto.put("...--", '3');
+            alfabeto.put("....-", '4');
+            alfabeto.put(".....", '5');
+            alfabeto.put("-....", '6');
+            alfabeto.put("--...", '7');
+            alfabeto.put("---..", '8');
+            alfabeto.put("----.", '9');
+            alfabeto.put("-----", '0');
+            alfabeto.put("·-·-·-", '.');
+            alfabeto.put("--··--", ',');
+            alfabeto.put("··--··", '?');
+            alfabeto.put("-·-·--", '!');
+            alfabeto.put("-··-·", '/');
+            alfabeto.put("-·--·", '(');
+            alfabeto.put("-·--·-", ')');
+            alfabeto.put("·-···", '&');
+            alfabeto.put("---···", ':');
+            alfabeto.put("-·-·-·", ';');
+            alfabeto.put("-···-", '=');
+            alfabeto.put("-····-", '-');
+            alfabeto.put("··--·-", '_');
+            alfabeto.put("·-··-·", '"');
+            alfabeto.put("···-··-", '$');
+            alfabeto.put("·--·-·", '@');
+            alfabeto.put("·----·", '\'');
+
+            for(String pal : palavras){
+                String[] letra = pal.split(" ");
+                for(String i : letra){
+                    try{
+                        char n = alfabeto.get(i);
+                    }
+                    catch (Exception e){
+                        return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_INVALID_FORMAT));
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -91,6 +178,7 @@ public class MorseCipher extends Cipher {
 
         for(String pal : palavras){
             for (char i : pal.toCharArray()) {
+                i = Character.toLowerCase(i);
                 if(i == 'à' || i == 'á' || i == 'ã' || i == 'â'){
                     String val = alfabeto.get(Character.toLowerCase('a'));
                     encoded.append(val);

@@ -2,6 +2,8 @@
 
 ![Logo](https://i.imgur.com/Tgu1KJt.png)
 
+[Download da aplicação](https://github.com/mrhenry549/BHJEncryption/releases)
+
 Projeto final de curso sobre encriptação de mensagens usando cifras utilizadas no Escutismo no âmbito do curso de Licenciatura em Engenharia de Informática da [Universidade Autónoma de Lisboa](https://autonoma.pt/) e com a parceria da [Nil Language Schools](https://www.nil.pt/web/)
 
 Desenvolvido por:
@@ -12,16 +14,24 @@ Desenvolvido por:
 
 Cifras implementadas na aplicação:
 
-- Cifra do Alfabeto Invertido;
-- Cifra de Alfabeto-Numeral;
-- Cifra de Batalha Naval Certa;
-- Cifra de Caranguejo;
-- Cifra de César;
-- Cifra de Chave Horizontal;
-- Cifra de Chave Vertical;
-- Cifra de Data;
-- Cifra Horizontal;
-- Cifra de Romano-Árabe;
-- Cifra do Código Morse;
-- Cifra Vertical;
-- Cifra do Código +3.
+- Alfabeto Invertido;
+- Alfabeto-Numeral;
+- Batalha Naval Certa;
+- Caracol;
+- Caranguejo;
+- César;
+- Chave Horizontal;
+- Chave Vertical;
+- Código +3;
+- Data;
+- Horizontal;
+- Metades;
+- Morse;
+- Passa um Melro;
+- Passa dois Melros;
+- Primeira Letra Falsa;
+- Romano-Árabe;
+- SMS;
+- Transposto;
+- Última Letra Falsa;
+- Vertical.

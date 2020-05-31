@@ -29,33 +29,33 @@ public class LastFakeCipher extends Cipher {
     }
 
     public static String lastFakeEnc(String enc) {
+        StringBuilder output = new StringBuilder();
         char[] alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
         Random random = new Random();
-        String output="";
         String [] inputLetters;
         inputLetters = enc.split("\\s+");
         for (String inputLetter : inputLetters) {
             int randomChartPosition = random.nextInt(alfabeto.length -1);
             if (!inputLetter.isEmpty()) {
-                output += inputLetter + alfabeto[randomChartPosition]+ " " ;
+                output.append(inputLetter).append(alfabeto[randomChartPosition]).append(" ");
             }
         }
-        return output;
+        return output.toString();
     }
 
 
     public static String lastFakeDecode(String enc) {
 
-        String output="";
+        StringBuilder output = new StringBuilder();
         String [] inputLetters;
         inputLetters = enc.split("\\s+");
         for (String inputLetter : inputLetters) {
 
             if (!inputLetter.isEmpty()) {
-                output += inputLetter.substring(0, inputLetter.length()-1) + " ";
+                output.append(inputLetter.substring(0, inputLetter.length()-1)).append(" ");
             }
         }
-        return output;
+        return output.toString();
     }
 }
