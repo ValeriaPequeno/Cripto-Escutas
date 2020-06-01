@@ -107,9 +107,15 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
         if(position == 2 || position == 4 || position == 5 || position == 7 || position == 12 || position == 13 ||
                 position == 14 || position == 16 || position == 26 || position == 28){
             etxtPassInput.setVisibility(view.VISIBLE);
+            etxtMenInput.setVisibility(view.VISIBLE);
+        }
+        else if(position == 0){
+            etxtPassInput.setVisibility(view.INVISIBLE);
+            etxtMenInput.setVisibility(view.INVISIBLE);
         }
         else{
             etxtPassInput.setVisibility(view.INVISIBLE);
+            etxtMenInput.setVisibility(view.VISIBLE);
         }
     }
 

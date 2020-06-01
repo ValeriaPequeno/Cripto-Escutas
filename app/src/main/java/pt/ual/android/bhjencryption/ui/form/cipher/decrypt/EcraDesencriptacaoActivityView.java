@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,34 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private EditText etxtPassInput;
     private TextView txtvMenDecript;
     private Spinner spnDropEncriptacoes;
+    private LinearLayout llTecaldoImagens;
+    private Button btnTecladoQ;
+    private Button btnTecladoW;
+    private Button btnTecladoE;
+    private Button btnTecladoR;
+    private Button btnTecladoT;
+    private Button btnTecladoY;
+    private Button btnTecladoU;
+    private Button btnTecladoI;
+    private Button btnTecladoO;
+    private Button btnTecladoP;
+    private Button btnTecladoA;
+    private Button btnTecladoS;
+    private Button btnTecladoD;
+    private Button btnTecladoF;
+    private Button btnTecladoG;
+    private Button btnTecladoH;
+    private Button btnTecladoJ;
+    private Button btnTecladoK;
+    private Button btnTecladoL;
+    private Button btnTecladoZ;
+    private Button btnTecladoX;
+    private Button btnTecladoC;
+    private Button btnTecladoV;
+    private Button btnTecladoB;
+    private Button btnTecladoN;
+    private Button btnTecladoM;
+    private Button btnTecladoSpace;
 
     // Atributos de instância
     private String mensagem;
@@ -65,6 +94,34 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.etxtPassInput = findViewById(R.id.decriptCaixaPass);
         this.btnDecriptResult = findViewById(R.id.btDecriptResult);
         this.spnDropEncriptacoes = findViewById(R.id.decriptDrop);
+        this.llTecaldoImagens = findViewById(R.id.tecladoImagens);
+        this.btnTecladoQ = findViewById(R.id.button_q);
+        this.btnTecladoW = findViewById(R.id.button_w);
+        this.btnTecladoE = findViewById(R.id.button_e);
+        this.btnTecladoR = findViewById(R.id.button_r);
+        this.btnTecladoT = findViewById(R.id.button_t);
+        this.btnTecladoY = findViewById(R.id.button_y);
+        this.btnTecladoU = findViewById(R.id.button_u);
+        this.btnTecladoI = findViewById(R.id.button_i);
+        this.btnTecladoO = findViewById(R.id.button_o);
+        this.btnTecladoP = findViewById(R.id.button_p);
+        this.btnTecladoA = findViewById(R.id.button_a);
+        this.btnTecladoS = findViewById(R.id.button_s);
+        this.btnTecladoD = findViewById(R.id.button_d);
+        this.btnTecladoF = findViewById(R.id.button_f);
+        this.btnTecladoG = findViewById(R.id.button_g);
+        this.btnTecladoH = findViewById(R.id.button_h);
+        this.btnTecladoJ = findViewById(R.id.button_j);
+        this.btnTecladoK = findViewById(R.id.button_k);
+        this.btnTecladoL = findViewById(R.id.button_l);
+        this.btnTecladoZ = findViewById(R.id.button_z);
+        this.btnTecladoX = findViewById(R.id.button_x);
+        this.btnTecladoC = findViewById(R.id.button_c);
+        this.btnTecladoV = findViewById(R.id.button_v);
+        this.btnTecladoB = findViewById(R.id.button_b);
+        this.btnTecladoN = findViewById(R.id.button_n);
+        this.btnTecladoM = findViewById(R.id.button_m);
+        this.btnTecladoSpace = findViewById(R.id.button_space);
 
         // Inicializar o controlo menEcript com a mensagem desejada
         this.txtvMenDecript.setText("Este é o ecrã de desencriptação");
@@ -92,8 +149,169 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
         this.btnDecriptResult.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View v) { onClickDecriptResultButton(v);
+            }
+        });
+
+        this.btnTecladoQ.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                onClickDecriptResultButton(v);
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoZ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoX.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardButton(v);
+            }
+        });
+        this.btnTecladoSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickKeyboardButton(v);
             }
         });
     }
@@ -106,17 +324,28 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         if(position == 2 || position == 4 || position == 5 || position == 7 || position == 12 || position == 13 ||
                 position == 14 || position == 16 || position == 26 || position == 28){
             etxtPassInput.setVisibility(view.VISIBLE);
+            etxtMenInput.setVisibility(view.VISIBLE);
+            llTecaldoImagens.setVisibility(view.INVISIBLE);
         }
         else if(position == 3 || position == 8 || position == 10 || position == 11 || position == 15 ||
                 position == 19 || position == 22){
             etxtPassInput.setVisibility(view.INVISIBLE);
+            etxtMenInput.setVisibility(view.VISIBLE);
+            llTecaldoImagens.setVisibility(view.VISIBLE);
 
             /**
-             *  Desenvolvimento do teclado dinãmico para as cifras por imagem
+             *  inserção das imagens para cada botão do teclado
              */
+        }
+        else if(position == 0){
+            etxtPassInput.setVisibility(view.INVISIBLE);
+            etxtMenInput.setVisibility(view.INVISIBLE);
+            llTecaldoImagens.setVisibility(view.INVISIBLE);
         }
         else{
             etxtPassInput.setVisibility(view.INVISIBLE);
+            etxtMenInput.setVisibility(view.VISIBLE);
+            llTecaldoImagens.setVisibility(view.INVISIBLE);
         }
     }
 
@@ -132,6 +361,10 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
             triggerDecrypt();
         }
+    }
+
+    private void onClickKeyboardButton(View view){
+        Log.d(TAG, "onClick: Cliquei no botão" + view.getId());
     }
 
     /* Outros métodos de instância */
