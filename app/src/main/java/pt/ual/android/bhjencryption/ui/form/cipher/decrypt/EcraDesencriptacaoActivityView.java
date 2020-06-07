@@ -18,11 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import pt.ual.android.bhjencryption.R;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoModel;
+import pt.ual.android.bhjencryption.ui.graphics.ImageTextMessage;
 
 public class EcraDesencriptacaoActivityView extends AppCompatActivity implements EcraDesencriptacaoContract.View {
 
     // Atributos de classe
     private static final String TAG = "EcraDesencriptacaoView";
+    private static final String CIPHER_IMAGE_RESOURCE_NAME = "cipher_image_";
 
     // Presenter
     private EcraDesencriptacaoContract.Presenter ecraDesencriptacaoPresenter;
@@ -40,6 +42,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private int posCifraSelecionada;
     private String strCifraSelecionada;
     private ArrayAdapter<String> myAdapter;
+    private ImageTextMessage imageMessage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,7 +96,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.btnDecriptResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickDecriptResultButton(v);
+                onClickDecryptResultButton(v);
             }
         });
     }
@@ -103,13 +106,12 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private void onSelectedDropDesencriptacoes(AdapterView<?> parent, View view, int position, long id) {
         this.posCifraSelecionada = position;
 
-        if(position == 2 || position == 4 || position == 5 || position == 7 || position == 12 || position == 13 ||
-                position == 14 || position == 16 || position == 26 || position == 28){
+        if(isTextCipher()){
             etxtPassInput.setVisibility(view.VISIBLE);
         }
-        else if(position == 3 || position == 8 || position == 10 || position == 11 || position == 15 ||
-                position == 19 || position == 22){
+        else if(isImageCipher()){
             etxtPassInput.setVisibility(view.INVISIBLE);
+            this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
 
             /**
              *  Desenvolvimento do teclado dinãmico para as cifras por imagem
@@ -120,7 +122,30 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         }
     }
 
-    private void onClickDecriptResultButton(View view) {
+    private String getCipherImageName() {
+        return CIPHER_IMAGE_RESOURCE_NAME + posCifraSelecionada;
+    }
+
+    private boolean isTextCipher() {
+        if(this.posCifraSelecionada == 2 || this.posCifraSelecionada == 4 || this.posCifraSelecionada == 5 ||
+                this.posCifraSelecionada == 7 || this.posCifraSelecionada == 12 || this.posCifraSelecionada == 13 ||
+                this.posCifraSelecionada == 14 || this.posCifraSelecionada == 16 || this.posCifraSelecionada == 26 ||
+                this.posCifraSelecionada == 28)
+            return true;
+
+        return false;
+    }
+
+    private boolean isImageCipher() {
+        if(this.posCifraSelecionada == 3 || this.posCifraSelecionada == 8 || this.posCifraSelecionada == 10 ||
+                this.posCifraSelecionada == 11 || this.posCifraSelecionada == 15 ||
+                this.posCifraSelecionada == 19 || this.posCifraSelecionada == 22)
+            return true;
+
+        return false;
+    }
+
+    private void onClickDecryptResultButton(View view) {
         Log.d(TAG, "onClick: Cliquei no botão de resultado da encriptação");
 
         if (posCifraSelecionada == 0) {
@@ -129,6 +154,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
             this.mensagem = etxtMenInput.getText().toString();
             this.password = etxtPassInput.getText().toString();
             this.strCifraSelecionada = this.myAdapter.getItem(posCifraSelecionada);
+            this.imageMessage = new ImageTextMessage(this.mensagem, getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
 
             triggerDecrypt();
         }
@@ -137,14 +163,14 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     /* Outros métodos de instância */
 
     private void triggerDecrypt() {
-        EcraResultadoModel result = this.ecraDesencriptacaoPresenter.decrypt(this.mensagem, this.password, this.strCifraSelecionada, this.posCifraSelecionada);
+        EcraResultadoModel result = this.ecraDesencriptacaoPresenter.decrypt(this.imageMessage, this.password, this.strCifraSelecionada);
 
         if (result != null) {
             if(!result.hasErrors()) {
                 Intent entrarEcraResultado = new Intent(EcraDesencriptacaoActivityView.this, EcraResultadoActivityView.class);
 
                 Bundle params = new Bundle();
-                params.putSerializable("model", result);
+                params.putParcelable("model", result);
                 entrarEcraResultado.putExtras(params);
 
                 startActivity(entrarEcraResultado);

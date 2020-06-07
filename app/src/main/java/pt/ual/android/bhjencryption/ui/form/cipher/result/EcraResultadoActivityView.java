@@ -69,7 +69,8 @@ public class EcraResultadoActivityView extends AppCompatActivity implements Ecra
     public void loadModel() {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        this.model = (EcraResultadoModel) bundle.getSerializable("model");
+        //this.model = (EcraResultadoModel) bundle.getSerializable("model");
+        this.model = (EcraResultadoModel) bundle.getParcelable("model");
 
         if (this.model == null)
             this.model = new EcraResultadoModel();
@@ -102,7 +103,7 @@ public class EcraResultadoActivityView extends AppCompatActivity implements Ecra
     /* Eventos */
 
     private void renderResult() {
-        imgResultado.setImageBitmap(this.model.getResultAsBitmap());
+        imgResultado.setImageBitmap(this.model.getResultAsBitmap(getBaseContext()));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

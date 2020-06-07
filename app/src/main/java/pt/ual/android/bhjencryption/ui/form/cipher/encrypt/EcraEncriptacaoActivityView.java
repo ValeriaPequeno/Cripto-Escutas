@@ -18,11 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import pt.ual.android.bhjencryption.R;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoModel;
+import pt.ual.android.bhjencryption.ui.graphics.ImageTextMessage;
 
 public class EcraEncriptacaoActivityView extends AppCompatActivity implements EcraEncriptacaoContract.View {
 
     // Atributos de classe
     private static final String TAG = "EcraEncriptacaoView";
+    private static final String CIPHER_IMAGE_RESOURCE_NAME = "cipher_image_";
 
     // Presenter
     private EcraEncriptacaoContract.Presenter ecraEncriptacaoPresenter;
@@ -113,6 +115,15 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
         }
     }
 
+    private boolean isImageCipher() {
+        if(this.posCifraSelecionada == 3 || this.posCifraSelecionada == 8 || this.posCifraSelecionada == 10 ||
+                this.posCifraSelecionada == 11 || this.posCifraSelecionada == 15 ||
+                this.posCifraSelecionada == 19 || this.posCifraSelecionada == 22)
+            return true;
+
+        return false;
+    }
+
     private void onClickEncriptResultButton(View view) {
         Log.d(TAG, "onClick: Cliquei no botão de resultado da encriptação");
 
@@ -130,14 +141,22 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
     /* Outros métodos de instância */
 
     private void triggerEncrypt() {
-        EcraResultadoModel result = this.ecraEncriptacaoPresenter.encrypt(this.mensagem, this.password, this.strCifraSelecionada, this.posCifraSelecionada);
+        EcraResultadoModel result = null;
+
+        if(isImageCipher())
+            result = this.ecraEncriptacaoPresenter.encrypt(new ImageTextMessage(this.mensagem,
+                    getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName()))),
+                    this.password,
+                    this.strCifraSelecionada);
+        else result = this.ecraEncriptacaoPresenter.encrypt(new ImageTextMessage(this.mensagem,null), this.password, this.strCifraSelecionada);
 
         if (result != null) {
             if(!result.hasErrors()) {
                 Intent entrarEcraResultado = new Intent(EcraEncriptacaoActivityView.this, EcraResultadoActivityView.class);
 
                 Bundle params = new Bundle();
-                params.putSerializable("model", result);
+                //params.putSerializable("model", result);
+                params.putParcelable("model", result);
                 entrarEcraResultado.putExtras(params);
 
                 startActivity(entrarEcraResultado);
@@ -148,6 +167,10 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
 
     private void showToast(String text) {
         Toast.makeText(EcraEncriptacaoActivityView.this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    private String getCipherImageName() {
+        return CIPHER_IMAGE_RESOURCE_NAME + posCifraSelecionada;
     }
 }
 

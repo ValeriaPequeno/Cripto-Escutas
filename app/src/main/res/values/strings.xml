@@ -42,4 +42,12 @@
     <string name="C05">Tamanho da password inválida.</string>
     <string name="C06">Password vazia.</string>
     <string name="C07">A password só pode ter valores inteiros positivos.</string>
+
+    <string name="cipher_image_3">angular</string>
+    <string name="cipher_image_8">braille</string>
+    <string name="cipher_image_10">chinese1</string>
+    <string name="cipher_image_11">chinese2</string>
+    <string name="cipher_image_15">homograph</string>
+    <string name="cipher_image_19">morsek</string>
+    <string name="cipher_image_22">morsep</string>
 </resources>
