@@ -1,8 +1,11 @@
 package pt.ual.android.bhjencryption.ui.form.cipher.encrypt;
 
+import pt.ual.android.bhjencryption.cipher.CipherMessage;
+import pt.ual.android.bhjencryption.cipher.CipherResult;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoModel;
-import pt.ual.android.bhjencryption.utils.cipher.CipherFactory;
-import pt.ual.android.bhjencryption.utils.cipher.CipherValidationResult;
+import pt.ual.android.bhjencryption.cipher.CipherFactory;
+import pt.ual.android.bhjencryption.cipher.CipherValidationResult;
+import pt.ual.android.bhjencryption.ui.graphics.ImageTextMessage;
 
 public class EcraEncriptacaoPresenter implements EcraEncriptacaoContract.Presenter {
 
@@ -15,13 +18,19 @@ public class EcraEncriptacaoPresenter implements EcraEncriptacaoContract.Present
     }
 
     @Override
-    public EcraResultadoModel encrypt(String mensagem, String password, String cifraSelecionada, int posCifraSelecionada) {
-        CipherFactory cipherFactory = new CipherFactory(mensagem.trim(), password, cifraSelecionada);
+    public EcraResultadoModel encrypt(ImageTextMessage message, String password, String cipherType) {
+        CipherMessage cm = new CipherMessage(message, password);
+        CipherFactory cipherFactory = new CipherFactory(cm, cipherType);
         CipherValidationResult cvr = cipherFactory.validateEncrypt();
 
         if(cvr.hasErrors())
             return new EcraResultadoModel(null, cvr.getCipherErrorCode().getErrorCode());
 
-        return new EcraResultadoModel(cipherFactory.encrypt().getResultAsString());
+        CipherResult cr = cipherFactory.encrypt();
+
+        if(cr.hasResultAsCipherImageMessage())
+            return new EcraResultadoModel((ImageTextMessage) cr.getResultAsCipherImageMessage());
+
+        return new EcraResultadoModel(cr.getResultAsString());
     }
 }
