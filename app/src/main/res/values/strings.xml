@@ -43,11 +43,16 @@
     <string name="C06">Password vazia.</string>
     <string name="C07">A password só pode ter valores inteiros positivos.</string>
 
-    <string name="cipher_image_3">angular</string>
-    <string name="cipher_image_8">braille</string>
-    <string name="cipher_image_10">chinese1</string>
-    <string name="cipher_image_11">chinese2</string>
-    <string name="cipher_image_15">homograph</string>
-    <string name="cipher_image_19">morsek</string>
-    <string name="cipher_image_22">morsep</string>
+    <!-- Image cipher params - cipherType,charImageWidth,charImageHeight,maxLineCharImages,betweenCharSpacing,betweenLinesSpacing,lineCharSpaceWidth,maxMessageChars,isSquared -->
+    <string name="cipher_image_3">angular,20,20,14,10,30,30,140,1</string>
+    <string name="cipher_image_8">braille,20,20,14,10,30,30,140,1</string>
+    <string name="cipher_image_10">chinese1,20,20,14,10,30,30,140,1</string>
+    <string name="cipher_image_11">chinese2,30,20,10,10,30,30,100,1</string>
+    <string name="cipher_image_15">homograph,20,20,14,10,30,30,140,1</string>
+    <string name="cipher_image_19">morsek,60,20,6,10,30,30,42,1</string>
+    <string name="cipher_image_22">morsep,20,40,14,10,30,30,70,1</string>
+
+    <!-- Other cipher params -->
+    <string name="cipher_message_max_chars">64</string>
+
 </resources>

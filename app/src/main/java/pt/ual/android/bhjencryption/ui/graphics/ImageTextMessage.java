@@ -2,11 +2,8 @@ package pt.ual.android.bhjencryption.ui.graphics;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +14,9 @@ import pt.ual.android.bhjencryption.cipher.CipherImageMessage;
 import pt.ual.android.bhjencryption.ui.graphics.utils.ImagesUtils;
 
 public class ImageTextMessage implements CipherImageMessage, Parcelable {
-    private static final String CHARACTER_RESOURCE_NAME_FORMAT = "%s_%c";
+    private static final String CHARACTER_RESOURCE_NAME_FORMAT = "%s_%s";
+    private static final String CHARACTER_DOT = "dot";
+    private static final String CHARACTER_IPHEN = "iphen";
 
     private ImageTextMessageOptions resourceTypeOptions;
     private StringBuilder textMessage;
@@ -32,6 +31,8 @@ public class ImageTextMessage implements CipherImageMessage, Parcelable {
 
         addTextToMessage(textMessage);
     }
+
+    /* Código de Parcelablização */
 
     protected ImageTextMessage(Parcel in) {
         this.textMessage = new StringBuilder(in.readString());
@@ -61,10 +62,19 @@ public class ImageTextMessage implements CipherImageMessage, Parcelable {
         dest.writeParcelable(this.resourceTypeOptions, flags);
     }
 
+    /* Fim de código de Parcelablização */
+
     public void addTextToMessage(String text) {
         if(textMessage != null)
             if(!text.isEmpty())
                 this.textMessage.append(text.trim());
+    }
+
+    @Override
+    public void setMessageText(String text) {
+        this.textMessage = new StringBuilder();
+
+        addTextToMessage(text);
     }
 
     public String getMessageAsText() {
@@ -76,7 +86,8 @@ public class ImageTextMessage implements CipherImageMessage, Parcelable {
     }
 
     /**
-     * fazer o split do texto por palavras, isto é, por espaços
+     * Fazer o split do texto por palavras, isto é, por espaços.
+     *
      * @return
      */
     private String[] getTextMessageWordByWord() {
@@ -84,47 +95,70 @@ public class ImageTextMessage implements CipherImageMessage, Parcelable {
     }
 
     /**
-     *  TODO: definir estratégia: Quantos caracteres/palavras por linhas? E se eles não forem divisíveis? Fica tudo numa só linha.. Mas e se forem 3 palavras em que a primeira e a última excede os caracteres?
+     * A estratégia deste método é dividir segamente a mensagem por linhas, sem olhar à lógica das palavras e frases.
+     *
+     * Numa versão futura poder-se-á melhorar este algoritmo para realizar algo mais inteligente.
+     *
+     * @return
+     */
+    private List<String> getTextMessageLineByLine() {
+        String resourceableTextMessage = getResourceableTextMessage();
+        List<String> textMessageLines = new ArrayList<String>();
+        int idx = 0;
+
+        while (idx < resourceableTextMessage.length()) {
+            textMessageLines.add(resourceableTextMessage.substring(idx, Math.min(idx + this.resourceTypeOptions.getMaxLineCharImages(), resourceableTextMessage.length())));
+            idx += this.resourceTypeOptions.getMaxLineCharImages();
+        }
+
+        return textMessageLines;
+    }
+
+    /**
+     * Estratégia definida:
+     *  Uma vez que existem limitações em torno da imagem que é desenhada, em que seria necessário, provavelmente, criar funcionalidades de zoom in/zoom out na imagem resultante da cifra e eventualmente
+     *  até criar thumbnail da imagem final gerada para que ao clicar na imagem para zoom in e zoom out, decidiu-se impor restrições no número de caracteres com base em parâmetros definidos nos resources.
+     *
+     *  Uma vez que a imagem tem dimensões fixas, apesar de dinamicamente à cabeça definidas, foi necessário criar valores máximos de caracteres por linha. Como as palavras podem exceder o taamnho de uma linha,
+     *  ou existir mais que uma palavra numa linha em que a última palavra acabe por exceder o tamanho da linha, esta será cortada e continuará na linha de baixo.
+     *
+     *  Estamos certos de que existem outras estratégias, mais inteligentes, mas iria limitar o número de caracteres máximos a cfirar da mensagem. Deixaremos essas estratégias mais evoluidas e avançadas
+     *  para uma segunda release da aplicação
      *
      * @param value aid object to build the target image of the message text
      * @return
      */
     public <T> Bitmap getMessageAsImage(T value) {
         Context context = (Context) value;
+        List<List<Bitmap>> messageBitmaps = decodeTextToImage(context);
+
+        // calcula o valor final do bitmap dinamicamente, só com o tamanho que for estritamente necessário.
+        return ImagesUtils.drawBitmapsLines(700, resourceTypeOptions.getImageFinalHeight(messageBitmaps.size()), messageBitmaps, resourceTypeOptions);
+//        return ImagesUtils.drawBitmaps(700, 700, messageBitmaps);
+    }
+
+    private List<List<Bitmap>> decodeTextToImage(Context context) {
         Map<String, Bitmap> loadedDrawable = loadCharacterImagesResources(context);
-        char[] chArrMessage = getResourceableTextMessage().toCharArray();
-        Bitmap imageMessage = null;
-        List<Bitmap> messageBitmaps = new ArrayList<Bitmap>();
+        List<String> messageLineByLine = getTextMessageLineByLine();
+        List<List<Bitmap>> messageLinesBitmaps = new ArrayList<List<Bitmap>>();
 
-        for (char ch : chArrMessage) {
-            Bitmap bitmap = loadedDrawable.get(String.valueOf(ch));
-//            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+        for (String strLine : messageLineByLine) {
+            List<Bitmap> messageBitmaps = new ArrayList<Bitmap>();
+            char[] chArrLine = strLine.toCharArray();
 
-            //Log.e("Original   dimensions", String.valueOf(bitmap.getByteCount()) + " " + bitmap.getWidth() + "x" + bitmap.getHeight());
+            for (char ch : chArrLine) {
+                Bitmap bitmap = loadedDrawable.get(String.valueOf(ch));
 
-            messageBitmaps.add(bitmap);
+                messageBitmaps.add(bitmap);
+            }
 
-
-
-            // obter a dimensão máxima por frase por tipo de recurso (prefixo, neste caso)
-            // Definir dimensão da imagem e quantos
-            // Obter uma Lista de frases (aqui vai ter de aplicar o algoritmo para definir o tamanho da frase)
-            // Neste método, lista de imagens, uma imagem por frase em que esta vai sendo concatenada na horizontal cada caracter
-            // No final, junta todas as imagens verticalmente.
-
-            // NOTA: mesmo que não exista caracteres suficientes para fazer fill do tamanho máximo por frase, tem de se fazer fill com espaços quando fechar a frase Fica tipo matriz
+            messageLinesBitmaps.add(messageBitmaps);
         }
 
-        imageMessage = ImagesUtils.printBitmap(550, 80, messageBitmaps);
-
-        Log.e("Original dimensions", String.valueOf(imageMessage.getByteCount()) + " " + imageMessage.getWidth() + "x" + imageMessage.getHeight());
-
-        return imageMessage;
-        //return  Bitmap.createScaledBitmap(imageMessage, 550, 80, false);
+        return messageLinesBitmaps;
     }
 
     /**
-     * TODO: carregar as imagens já com um formato/tamano específico, ou só no final se trata do size do bitmap e reduz-se o tamanho?
      * @return
      */
     private Map<String, Bitmap> loadCharacterImagesResources(Context context) {
@@ -133,25 +167,44 @@ public class ImageTextMessage implements CipherImageMessage, Parcelable {
 
         for (char ch : chArrMessage) {
             if(!loadedBitmap.containsKey(String.valueOf(ch))) {
-                Drawable drawable = loadCharacterResource(ch, context);
-                Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 20, 20, false);
+                Bitmap scaledBitmapResource = null;
 
-                loadedBitmap.put(String.valueOf(ch), scaledBitmap);
+                switch(ch) {
+                    case '_':
+                        scaledBitmapResource = ImagesUtils.getEmptyTransparentBitmap(this.resourceTypeOptions.getBetweenCharSpacing(), this.resourceTypeOptions.getBetweenCharSpacing()); // a height é pouco relevante. O que interessa é dar largura.
+                        break;
+                    case '.':
+                        scaledBitmapResource = loadCharacterResource(CHARACTER_DOT, context);
+                        break;
+                    case '-':
+                        scaledBitmapResource = loadCharacterResource(CHARACTER_IPHEN, context);
+                        break;
+                    default:
+                        scaledBitmapResource = loadCharacterResource(String.valueOf(ch), context);
+                }
+
+                loadedBitmap.put(String.valueOf(ch), scaledBitmapResource);
             }
         }
 
         return loadedBitmap;
     }
 
-    private String getCharacterResourceName(char ch, Context context) {
-        return String.format(ImageTextMessage.CHARACTER_RESOURCE_NAME_FORMAT, this.resourceTypeOptions.getResourceType(), ch);
+    private String getCharacterResourceName(String value, Context context) {
+        return String.format(ImageTextMessage.CHARACTER_RESOURCE_NAME_FORMAT, this.resourceTypeOptions.getResourceType(), value);
     }
 
-    private Drawable loadCharacterResource(char ch, Context context) {
-        String resourceName = getCharacterResourceName(ch, context);
+    private Bitmap loadCharacterResource(String value, Context context) {
+        String resourceName = getCharacterResourceName(value, context);
         int id = context.getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
+        Bitmap bitmapResource;
 
-        return context.getResources().getDrawable(id, context.getTheme());
+        if(this.resourceTypeOptions.getIsSquared()) // Verificar se é um resource squared ou não e escolher o load conforme.
+            bitmapResource = ImagesUtils.decodeBitmapFromResource(context, id, this.resourceTypeOptions.getCharImageWidth(), this.resourceTypeOptions.getCharImageHeight());
+        else bitmapResource = ImagesUtils.decodeSampledBitmapFromResource(context.getResources(), id, this.resourceTypeOptions.getCharImageWidth(), this.resourceTypeOptions.getCharImageHeight());
+
+//&        Log.e("Original dimensions", String.valueOf(bitmapResource.getByteCount()) + " " + bitmapResource.getWidth() + "x" + bitmapResource.getHeight());
+
+        return bitmapResource;
     }
 }

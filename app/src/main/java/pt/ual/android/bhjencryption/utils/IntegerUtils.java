@@ -31,4 +31,13 @@ public class IntegerUtils {
     public static boolean validateRangeValues(int value, int minValue, int maxValue) {
         return (value >= minValue && value <= maxValue);
     }
+
+    public static boolean tryParseInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
