@@ -1,5 +1,6 @@
 package pt.ual.android.bhjencryption.ui.form.cipher.decrypt;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private EditText etxtPassInput;
     private TextView txtvMenDecript;
     private Spinner spnDropEncriptacoes;
+
     private LinearLayout llTecaldoImagens;
     private Button btnTecladoQ;
     private Button btnTecladoW;
@@ -66,6 +68,13 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private Button btnTecladoM;
     private Button btnTecladoSpace;
 
+    private LinearLayout llTecladoMorse;
+    private Button btnPonto;
+    private Button btnTraco;
+    private Button btnLetra;
+    private Button btnPalavra;
+
+
     // Atributos de instância
     private String mensagem;
     private String password;
@@ -87,6 +96,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void initView() {
         // Inicializar o Presenter da View
@@ -98,6 +108,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.etxtPassInput = findViewById(R.id.decriptCaixaPass);
         this.btnDecriptResult = findViewById(R.id.btDecriptResult);
         this.spnDropEncriptacoes = findViewById(R.id.decriptDrop);
+
         this.llTecaldoImagens = findViewById(R.id.tecladoImagens);
         this.btnTecladoQ = findViewById(R.id.button_q);
         this.btnTecladoW = findViewById(R.id.button_w);
@@ -126,6 +137,12 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.btnTecladoN = findViewById(R.id.button_n);
         this.btnTecladoM = findViewById(R.id.button_m);
         this.btnTecladoSpace = findViewById(R.id.button_space);
+
+        this.llTecladoMorse = findViewById(R.id.tecladoMorse);
+        this.btnPonto = findViewById(R.id.button_ponto);
+        this.btnTraco = findViewById(R.id.button_traco);
+        this.btnLetra = findViewById(R.id.button_letra);
+        this.btnPalavra = findViewById(R.id.button_palavra);
 
         // Inicializar o controlo menEcript com a mensagem desejada
         this.txtvMenDecript.setText("Este é o ecrã de desencriptação");
@@ -160,164 +177,186 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.btnTecladoQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonQ(v);
             }
         });
         this.btnTecladoW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonW(v);
             }
         });
         this.btnTecladoE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonE(v);
             }
         });
         this.btnTecladoR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonR(v);
             }
         });
         this.btnTecladoT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonT(v);
             }
         });
         this.btnTecladoY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonY(v);
             }
         });
         this.btnTecladoU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonU(v);
             }
         });
         this.btnTecladoI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonI(v);
             }
         });
         this.btnTecladoO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonO(v);
             }
         });
         this.btnTecladoP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonP(v);
             }
         });
         this.btnTecladoA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonA(v);
             }
         });
         this.btnTecladoS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonS(v);
             }
         });
         this.btnTecladoD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonD(v);
             }
         });
         this.btnTecladoF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonF(v);
             }
         });
         this.btnTecladoG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonG(v);
             }
         });
         this.btnTecladoH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonH(v);
             }
         });
         this.btnTecladoJ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonJ(v);
             }
         });
         this.btnTecladoK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonK(v);
             }
         });
         this.btnTecladoL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonL(v);
             }
         });
         this.btnTecladoZ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonZ(v);
             }
         });
         this.btnTecladoX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonX(v);
             }
         });
         this.btnTecladoC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonC(v);
             }
         });
         this.btnTecladoV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonV(v);
             }
         });
         this.btnTecladoB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonB(v);
             }
         });
         this.btnTecladoN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonN(v);
             }
         });
         this.btnTecladoM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardButton(v);
+                onClickButtonM(v);
             }
         });
         this.btnTecladoSpace.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {onClickKeyboardButton(v);
+            public void onClick(View v) {onClickButtonSpace(v);
             }
         });
+
+        this.btnPonto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickButtonPonto(v);
+            }
+        });
+        this.btnTraco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickButtonTraco(v);
+            }
+        });
+        this.btnLetra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickButtonLetra(v);
+            }
+        });
+        this.btnPalavra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickButtonPalavra(v);
+            }
+        });
+
     }
 
     /* Eventos */
@@ -325,32 +364,188 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private void onSelectedDropDesencriptacoes(AdapterView<?> parent, View view, int position, long id) {
         this.posCifraSelecionada = position;
 
-        if(isTextCipher()){
-            etxtPassInput.setVisibility(view.VISIBLE);
-            etxtMenInput.setVisibility(view.VISIBLE);
-            llTecaldoImagens.setVisibility(view.INVISIBLE);
-        }
-        else if(isImageCipher()){
-            etxtPassInput.setVisibility(view.INVISIBLE);
-
-            this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
-          
-            etxtMenInput.setVisibility(view.VISIBLE);
-            llTecaldoImagens.setVisibility(view.VISIBLE);
-
-            /**
-             *  inserção das imagens para cada botão do teclado
-             */
-        }
-        else if(position == 0){
+        if(position == 0){
             etxtPassInput.setVisibility(view.INVISIBLE);
             etxtMenInput.setVisibility(view.INVISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
+            llTecladoMorse.setVisibility(view.INVISIBLE);
+        }
+        else if(isPassCipher()){
+            etxtMenInput.setVisibility(view.VISIBLE);
+            etxtPassInput.setVisibility(view.VISIBLE);
+            llTecaldoImagens.setVisibility(view.INVISIBLE);
+            llTecladoMorse.setVisibility(view.INVISIBLE);
+        }
+        else if(isImageCipher()){
+            etxtMenInput.setVisibility(view.VISIBLE);
+            etxtPassInput.setVisibility(view.INVISIBLE);
+
+            //this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
+
+            if(this.posCifraSelecionada == 19 || this.posCifraSelecionada == 22){
+                if(this.posCifraSelecionada == 19){
+                    this.btnPonto.setBackgroundResource(R.drawable.morsek_dot);
+                    this.btnTraco.setBackgroundResource(R.drawable.morsek_iphen);
+                }
+                else{
+                    this.btnPonto.setBackgroundResource(R.drawable.morsep_dot);
+                    this.btnTraco.setBackgroundResource(R.drawable.morsep_iphen);
+                }
+
+                llTecladoMorse.setVisibility(view.VISIBLE);
+                llTecaldoImagens.setVisibility(view.INVISIBLE);
+            }
+            else{
+                if(this.posCifraSelecionada == 3){
+                    this.btnTecladoQ.setBackgroundResource(R.drawable.angular_q);
+                    this.btnTecladoW.setBackgroundResource(R.drawable.angular_w);
+                    this.btnTecladoE.setBackgroundResource(R.drawable.angular_e);
+                    this.btnTecladoR.setBackgroundResource(R.drawable.angular_r);
+                    this.btnTecladoT.setBackgroundResource(R.drawable.angular_t);
+                    this.btnTecladoY.setBackgroundResource(R.drawable.angular_y);
+                    this.btnTecladoU.setBackgroundResource(R.drawable.angular_u);
+                    this.btnTecladoI.setBackgroundResource(R.drawable.angular_i);
+                    this.btnTecladoO.setBackgroundResource(R.drawable.angular_o);
+                    this.btnTecladoP.setBackgroundResource(R.drawable.angular_p);
+                    this.btnTecladoA.setBackgroundResource(R.drawable.angular_a);
+                    this.btnTecladoS.setBackgroundResource(R.drawable.angular_s);
+                    this.btnTecladoD.setBackgroundResource(R.drawable.angular_d);
+                    this.btnTecladoF.setBackgroundResource(R.drawable.angular_f);
+                    this.btnTecladoG.setBackgroundResource(R.drawable.angular_g);
+                    this.btnTecladoH.setBackgroundResource(R.drawable.angular_h);
+                    this.btnTecladoJ.setBackgroundResource(R.drawable.angular_j);
+                    this.btnTecladoK.setBackgroundResource(R.drawable.angular_k);
+                    this.btnTecladoL.setBackgroundResource(R.drawable.angular_l);
+                    this.btnTecladoZ.setBackgroundResource(R.drawable.angular_z);
+                    this.btnTecladoX.setBackgroundResource(R.drawable.angular_x);
+                    this.btnTecladoC.setBackgroundResource(R.drawable.angular_c);
+                    this.btnTecladoV.setBackgroundResource(R.drawable.angular_v);
+                    this.btnTecladoB.setBackgroundResource(R.drawable.angular_b);
+                    this.btnTecladoN.setBackgroundResource(R.drawable.angular_n);
+                    this.btnTecladoM.setBackgroundResource(R.drawable.angular_m);
+                }
+                else if(this.posCifraSelecionada == 8){
+                    this.btnTecladoQ.setBackgroundResource(R.drawable.braille_q);
+                    this.btnTecladoW.setBackgroundResource(R.drawable.braille_w);
+                    this.btnTecladoE.setBackgroundResource(R.drawable.braille_e);
+                    this.btnTecladoR.setBackgroundResource(R.drawable.braille_r);
+                    this.btnTecladoT.setBackgroundResource(R.drawable.braille_t);
+                    this.btnTecladoY.setBackgroundResource(R.drawable.braille_y);
+                    this.btnTecladoU.setBackgroundResource(R.drawable.braille_u);
+                    this.btnTecladoI.setBackgroundResource(R.drawable.braille_i);
+                    this.btnTecladoO.setBackgroundResource(R.drawable.braille_o);
+                    this.btnTecladoP.setBackgroundResource(R.drawable.braille_p);
+                    this.btnTecladoA.setBackgroundResource(R.drawable.braille_a);
+                    this.btnTecladoS.setBackgroundResource(R.drawable.braille_s);
+                    this.btnTecladoD.setBackgroundResource(R.drawable.braille_d);
+                    this.btnTecladoF.setBackgroundResource(R.drawable.braille_f);
+                    this.btnTecladoG.setBackgroundResource(R.drawable.braille_g);
+                    this.btnTecladoH.setBackgroundResource(R.drawable.braille_h);
+                    this.btnTecladoJ.setBackgroundResource(R.drawable.braille_j);
+                    this.btnTecladoK.setBackgroundResource(R.drawable.braille_k);
+                    this.btnTecladoL.setBackgroundResource(R.drawable.braille_l);
+                    this.btnTecladoZ.setBackgroundResource(R.drawable.braille_z);
+                    this.btnTecladoX.setBackgroundResource(R.drawable.braille_x);
+                    this.btnTecladoC.setBackgroundResource(R.drawable.braille_c);
+                    this.btnTecladoV.setBackgroundResource(R.drawable.braille_v);
+                    this.btnTecladoB.setBackgroundResource(R.drawable.braille_b);
+                    this.btnTecladoN.setBackgroundResource(R.drawable.braille_n);
+                    this.btnTecladoM.setBackgroundResource(R.drawable.braille_m);
+                }
+                else if(this.posCifraSelecionada == 10){
+                    this.btnTecladoQ.setBackgroundResource(R.drawable.chinese1_q);
+                    this.btnTecladoW.setBackgroundResource(R.drawable.chinese1_w);
+                    this.btnTecladoE.setBackgroundResource(R.drawable.chinese1_e);
+                    this.btnTecladoR.setBackgroundResource(R.drawable.chinese1_r);
+                    this.btnTecladoT.setBackgroundResource(R.drawable.chinese1_t);
+                    this.btnTecladoY.setBackgroundResource(R.drawable.chinese1_y);
+                    this.btnTecladoU.setBackgroundResource(R.drawable.chinese1_u);
+                    this.btnTecladoI.setBackgroundResource(R.drawable.chinese1_i);
+                    this.btnTecladoO.setBackgroundResource(R.drawable.chinese1_o);
+                    this.btnTecladoP.setBackgroundResource(R.drawable.chinese1_p);
+                    this.btnTecladoA.setBackgroundResource(R.drawable.chinese1_a);
+                    this.btnTecladoS.setBackgroundResource(R.drawable.chinese1_s);
+                    this.btnTecladoD.setBackgroundResource(R.drawable.chinese1_d);
+                    this.btnTecladoF.setBackgroundResource(R.drawable.chinese1_f);
+                    this.btnTecladoG.setBackgroundResource(R.drawable.chinese1_g);
+                    this.btnTecladoH.setBackgroundResource(R.drawable.chinese1_h);
+                    this.btnTecladoJ.setBackgroundResource(R.drawable.chinese1_j);
+                    this.btnTecladoK.setBackgroundResource(R.drawable.chinese1_k);
+                    this.btnTecladoL.setBackgroundResource(R.drawable.chinese1_l);
+                    this.btnTecladoZ.setBackgroundResource(R.drawable.chinese1_z);
+                    this.btnTecladoX.setBackgroundResource(R.drawable.chinese1_x);
+                    this.btnTecladoC.setBackgroundResource(R.drawable.chinese1_c);
+                    this.btnTecladoV.setBackgroundResource(R.drawable.chinese1_v);
+                    this.btnTecladoB.setBackgroundResource(R.drawable.chinese1_b);
+                    this.btnTecladoN.setBackgroundResource(R.drawable.chinese1_n);
+                    this.btnTecladoM.setBackgroundResource(R.drawable.chinese1_m);
+                }
+                else if(this.posCifraSelecionada == 11){
+                    this.btnTecladoQ.setBackgroundResource(R.drawable.chinese2_q);
+                    this.btnTecladoW.setBackgroundResource(R.drawable.chinese2_w);
+                    this.btnTecladoE.setBackgroundResource(R.drawable.chinese2_e);
+                    this.btnTecladoR.setBackgroundResource(R.drawable.chinese2_r);
+                    this.btnTecladoT.setBackgroundResource(R.drawable.chinese2_t);
+                    this.btnTecladoY.setBackgroundResource(R.drawable.chinese2_y);
+                    this.btnTecladoU.setBackgroundResource(R.drawable.chinese2_u);
+                    this.btnTecladoI.setBackgroundResource(R.drawable.chinese2_i);
+                    this.btnTecladoO.setBackgroundResource(R.drawable.chinese2_o);
+                    this.btnTecladoP.setBackgroundResource(R.drawable.chinese2_p);
+                    this.btnTecladoA.setBackgroundResource(R.drawable.chinese2_a);
+                    this.btnTecladoS.setBackgroundResource(R.drawable.chinese2_s);
+                    this.btnTecladoD.setBackgroundResource(R.drawable.chinese2_d);
+                    this.btnTecladoF.setBackgroundResource(R.drawable.chinese2_f);
+                    this.btnTecladoG.setBackgroundResource(R.drawable.chinese2_g);
+                    this.btnTecladoH.setBackgroundResource(R.drawable.chinese2_h);
+                    this.btnTecladoJ.setBackgroundResource(R.drawable.chinese2_j);
+                    this.btnTecladoK.setBackgroundResource(R.drawable.chinese2_k);
+                    this.btnTecladoL.setBackgroundResource(R.drawable.chinese2_l);
+                    this.btnTecladoZ.setBackgroundResource(R.drawable.chinese2_z);
+                    this.btnTecladoX.setBackgroundResource(R.drawable.chinese2_x);
+                    this.btnTecladoC.setBackgroundResource(R.drawable.chinese2_c);
+                    this.btnTecladoV.setBackgroundResource(R.drawable.chinese2_v);
+                    this.btnTecladoB.setBackgroundResource(R.drawable.chinese2_b);
+                    this.btnTecladoN.setBackgroundResource(R.drawable.chinese2_n);
+                    this.btnTecladoM.setBackgroundResource(R.drawable.chinese2_m);
+                }
+                else{
+                    this.btnTecladoQ.setBackgroundResource(R.drawable.homograph_q);
+                    this.btnTecladoW.setBackgroundResource(R.drawable.homograph_w);
+                    this.btnTecladoE.setBackgroundResource(R.drawable.homograph_e);
+                    this.btnTecladoR.setBackgroundResource(R.drawable.homograph_r);
+                    this.btnTecladoT.setBackgroundResource(R.drawable.homograph_t);
+                    this.btnTecladoY.setBackgroundResource(R.drawable.homograph_y);
+                    this.btnTecladoU.setBackgroundResource(R.drawable.homograph_u);
+                    this.btnTecladoI.setBackgroundResource(R.drawable.homograph_i);
+                    this.btnTecladoO.setBackgroundResource(R.drawable.homograph_o);
+                    this.btnTecladoP.setBackgroundResource(R.drawable.homograph_p);
+                    this.btnTecladoA.setBackgroundResource(R.drawable.homograph_a);
+                    this.btnTecladoS.setBackgroundResource(R.drawable.homograph_s);
+                    this.btnTecladoD.setBackgroundResource(R.drawable.homograph_d);
+                    this.btnTecladoF.setBackgroundResource(R.drawable.homograph_f);
+                    this.btnTecladoG.setBackgroundResource(R.drawable.homograph_g);
+                    this.btnTecladoH.setBackgroundResource(R.drawable.homograph_h);
+                    this.btnTecladoJ.setBackgroundResource(R.drawable.homograph_j);
+                    this.btnTecladoK.setBackgroundResource(R.drawable.homograph_k);
+                    this.btnTecladoL.setBackgroundResource(R.drawable.homograph_l);
+                    this.btnTecladoZ.setBackgroundResource(R.drawable.homograph_z);
+                    this.btnTecladoX.setBackgroundResource(R.drawable.homograph_x);
+                    this.btnTecladoC.setBackgroundResource(R.drawable.homograph_c);
+                    this.btnTecladoV.setBackgroundResource(R.drawable.homograph_v);
+                    this.btnTecladoB.setBackgroundResource(R.drawable.homograph_b);
+                    this.btnTecladoN.setBackgroundResource(R.drawable.homograph_n);
+                    this.btnTecladoM.setBackgroundResource(R.drawable.homograph_m);
+                }
+
+                llTecladoMorse.setVisibility(view.INVISIBLE);
+                llTecaldoImagens.setVisibility(view.VISIBLE);
+            }
         }
         else{
-            etxtPassInput.setVisibility(view.INVISIBLE);
             etxtMenInput.setVisibility(view.VISIBLE);
+            etxtPassInput.setVisibility(view.INVISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
+            llTecladoMorse.setVisibility(view.INVISIBLE);
         }
     }
 
@@ -358,7 +553,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         return CIPHER_IMAGE_RESOURCE_NAME + posCifraSelecionada;
     }
 
-    private boolean isTextCipher() {
+    private boolean isPassCipher() {
         if(this.posCifraSelecionada == 2 || this.posCifraSelecionada == 4 || this.posCifraSelecionada == 5 ||
                 this.posCifraSelecionada == 7 || this.posCifraSelecionada == 12 || this.posCifraSelecionada == 13 ||
                 this.posCifraSelecionada == 14 || this.posCifraSelecionada == 16 || this.posCifraSelecionada == 26 ||
@@ -392,8 +587,98 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         }
     }
 
-    private void onClickKeyboardButton(View view){
-        Log.d(TAG, "onClick: Cliquei no botão" + view.getId());
+    private void onClickButtonQ(View view){
+        this.etxtMenInput.append("Q");
+    }
+    private void onClickButtonW(View view){
+        this.etxtMenInput.append("W");
+    }
+    private void onClickButtonE(View view){
+        this.etxtMenInput.append("E");
+    }
+    private void onClickButtonR(View view){
+        this.etxtMenInput.append("R");
+    }
+    private void onClickButtonT(View view){
+        this.etxtMenInput.append("T");
+    }
+    private void onClickButtonY(View view){
+        this.etxtMenInput.append("Y");
+    }
+    private void onClickButtonU(View view){
+        this.etxtMenInput.append("U");
+    }
+    private void onClickButtonI(View view){
+        this.txtvMenDecript.append("I");
+    }
+    private void onClickButtonO(View view){
+        this.etxtMenInput.append("O");
+    }
+    private void onClickButtonP(View view){
+        this.etxtMenInput.append("P");
+    }
+    private void onClickButtonA(View view){
+        this.etxtMenInput.append("A");
+    }
+    private void onClickButtonS(View view){
+        this.etxtMenInput.append("S");
+    }
+    private void onClickButtonD(View view){
+        this.etxtMenInput.append("D");
+    }
+    private void onClickButtonF(View view){
+        this.etxtMenInput.append("F");
+    }
+    private void onClickButtonG(View view){
+        this.etxtMenInput.append("G");
+    }
+    private void onClickButtonH(View view){
+        this.etxtMenInput.append("H");
+    }
+    private void onClickButtonJ(View view){
+        this.etxtMenInput.append("J");
+    }
+    private void onClickButtonK(View view){
+        this.etxtMenInput.append("K");
+    }
+    private void onClickButtonL(View view){
+        this.etxtMenInput.append("L");
+    }
+    private void onClickButtonZ(View view){
+        this.etxtMenInput.append("Z");
+    }
+    private void onClickButtonX(View view){
+        this.etxtMenInput.append("X");
+    }
+    private void onClickButtonC(View view){
+        this.etxtMenInput.append("C");
+    }
+    private void onClickButtonV(View view){
+        this.etxtMenInput.append("V");
+    }
+    private void onClickButtonB(View view){
+        this.etxtMenInput.append("B");
+    }
+    private void onClickButtonN(View view){
+        this.etxtMenInput.append("N");
+    }
+    private void onClickButtonM(View view){
+        this.etxtMenInput.append("M");
+    }
+    private void onClickButtonSpace(View view){
+        this.etxtMenInput.append(" ");
+    }
+    private void onClickButtonPalavra(View view){
+        this.etxtMenInput.append(" / ");
+    }
+    private void onClickButtonLetra(View view){
+        this.etxtMenInput.append(" ");
+    }
+    private void onClickButtonPonto(View view){
+        this.etxtMenInput.append(".");
+    }
+    private void onClickButtonTraco(View view){
+        this.etxtMenInput.append("-");
     }
 
     /* Outros métodos de instância */
