@@ -1,5 +1,6 @@
 package pt.ual.android.bhjencryption.ui.form.cipher.encrypt;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +52,7 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
         initView();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void initView() {
         // Inicializar o Presenter da View
@@ -106,18 +108,18 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
         this.posCifraSelecionada = position;
 
         //Como habilitar a visibilidade de uma view
-        if(position == 2 || position == 4 || position == 5 || position == 7 || position == 12 || position == 13 ||
-                position == 14 || position == 16 || position == 26 || position == 28){
-            etxtPassInput.setVisibility(view.VISIBLE);
-            etxtMenInput.setVisibility(view.VISIBLE);
+        if(position == 0){
+            etxtMenInput.setVisibility(View.INVISIBLE);
+            etxtPassInput.setVisibility(View.INVISIBLE);
         }
-        else if(position == 0){
-            etxtPassInput.setVisibility(view.INVISIBLE);
-            etxtMenInput.setVisibility(view.INVISIBLE);
+        else if(position == 2 || position == 4 || position == 5 || position == 7 || position == 12 || position == 13 ||
+                position == 14 || position == 16 || position == 26 || position == 28){
+            etxtMenInput.setVisibility(View.VISIBLE);
+            etxtPassInput.setVisibility(View.VISIBLE);
         }
         else{
-            etxtPassInput.setVisibility(view.INVISIBLE);
-            etxtMenInput.setVisibility(view.VISIBLE);
+            etxtMenInput.setVisibility(View.VISIBLE);
+            etxtPassInput.setVisibility(View.INVISIBLE);
         }
     }
 

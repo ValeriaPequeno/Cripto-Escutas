@@ -73,11 +73,10 @@
         android:layout_width="417dp"
         android:layout_height="200dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btDecriptResult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789">
+        app:layout_constraintTop_toBottomOf="@+id/decriptCaixaMen">
 
         <LinearLayout
             android:id="@+id/layoutTeclado1"
@@ -290,6 +289,62 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ESPAÇO" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tecladoMorse"
+        android:layout_width="417dp"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btDecriptResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/decriptCaixaMen">
+
+        <LinearLayout
+            android:id="@+id/tecladoMorse1"
+            android:layout_width="418dp"
+            android:layout_height="49dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_ponto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="." />
+
+            <Button
+                android:id="@+id/button_traco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="-" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tecladoMorse2"
+            android:layout_width="418dp"
+            android:layout_height="49dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_letra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fim da Letra" />
+
+            <Button
+                android:id="@+id/button_palavra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fim da palavra" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package pt.ual.android.bhjencryption.ui.form.cipher.decrypt;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private EditText etxtPassInput;
     private TextView txtvMenDecript;
     private Spinner spnDropEncriptacoes;
+
     private LinearLayout llTecaldoImagens;
     private Button btnTecladoQ;
     private Button btnTecladoW;
@@ -65,6 +67,13 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private Button btnTecladoM;
     private Button btnTecladoSpace;
 
+    private LinearLayout llTecladoMorse;
+    private Button btnPonto;
+    private Button btnTraco;
+    private Button btnLetra;
+    private Button btnPalavra;
+
+
     // Atributos de instância
     private String mensagem;
     private String password;
@@ -86,6 +95,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void initView() {
         // Inicializar o Presenter da View
@@ -97,6 +107,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.etxtPassInput = findViewById(R.id.decriptCaixaPass);
         this.btnDecriptResult = findViewById(R.id.btDecriptResult);
         this.spnDropEncriptacoes = findViewById(R.id.decriptDrop);
+
         this.llTecaldoImagens = findViewById(R.id.tecladoImagens);
         this.btnTecladoQ = findViewById(R.id.button_q);
         this.btnTecladoW = findViewById(R.id.button_w);
@@ -126,6 +137,12 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.btnTecladoM = findViewById(R.id.button_m);
         this.btnTecladoSpace = findViewById(R.id.button_space);
 
+        this.llTecladoMorse = findViewById(R.id.tecladoMorse);
+        this.btnPonto = findViewById(R.id.button_ponto);
+        this.btnTraco = findViewById(R.id.button_traco);
+        this.btnLetra = findViewById(R.id.button_letra);
+        this.btnPalavra = findViewById(R.id.button_palavra);
+
         // Inicializar o controlo menEcript com a mensagem desejada
         this.txtvMenDecript.setText("Este é o ecrã de desencriptação");
 
@@ -152,7 +169,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
         this.btnDecriptResult.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { onClickDecriptResultButton(v);
+            public void onClick(View v) { onClickDecryptResultButton(v);
             }
         });
 
@@ -317,6 +334,28 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
             public void onClick(View v) {onClickKeyboardButton(v);
             }
         });
+
+        this.btnPonto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickKeyboardButton(v);
+            }
+        });
+        this.btnTraco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickKeyboardButton(v);
+            }
+        });
+        this.btnLetra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickKeyboardButton(v);
+            }
+        });
+        this.btnPalavra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onClickKeyboardButton(v);
+            }
+        });
+
     }
 
     /* Eventos */
@@ -324,32 +363,42 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private void onSelectedDropDesencriptacoes(AdapterView<?> parent, View view, int position, long id) {
         this.posCifraSelecionada = position;
 
-        if(isTextCipher()){
-            etxtPassInput.setVisibility(view.VISIBLE);
-            etxtMenInput.setVisibility(view.VISIBLE);
+        if(position == 0){
+            etxtPassInput.setVisibility(view.INVISIBLE);
+            etxtMenInput.setVisibility(view.INVISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
+            llTecladoMorse.setVisibility(view.INVISIBLE);
+        }
+        else if(isPassCipher()){
+            etxtMenInput.setVisibility(view.VISIBLE);
+            etxtPassInput.setVisibility(view.VISIBLE);
+            llTecaldoImagens.setVisibility(view.INVISIBLE);
+            llTecladoMorse.setVisibility(view.INVISIBLE);
         }
         else if(isImageCipher()){
+            etxtMenInput.setVisibility(view.VISIBLE);
             etxtPassInput.setVisibility(view.INVISIBLE);
 
-            this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
-          
-            etxtMenInput.setVisibility(view.VISIBLE);
-            llTecaldoImagens.setVisibility(view.VISIBLE);
+            //this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
+
+            if(this.posCifraSelecionada == 19 || this.posCifraSelecionada == 22){
+                llTecladoMorse.setVisibility(view.VISIBLE);
+                llTecaldoImagens.setVisibility(view.INVISIBLE);
+            }
+            else{
+                llTecladoMorse.setVisibility(view.INVISIBLE);
+                llTecaldoImagens.setVisibility(view.VISIBLE);
+            }
 
             /**
              *  inserção das imagens para cada botão do teclado
              */
         }
-        else if(position == 0){
-            etxtPassInput.setVisibility(view.INVISIBLE);
-            etxtMenInput.setVisibility(view.INVISIBLE);
-            llTecaldoImagens.setVisibility(view.INVISIBLE);
-        }
         else{
-            etxtPassInput.setVisibility(view.INVISIBLE);
             etxtMenInput.setVisibility(view.VISIBLE);
+            etxtPassInput.setVisibility(view.INVISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
+            llTecladoMorse.setVisibility(view.INVISIBLE);
         }
     }
 
@@ -357,7 +406,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         return CIPHER_IMAGE_RESOURCE_NAME + posCifraSelecionada;
     }
 
-    private boolean isTextCipher() {
+    private boolean isPassCipher() {
         if(this.posCifraSelecionada == 2 || this.posCifraSelecionada == 4 || this.posCifraSelecionada == 5 ||
                 this.posCifraSelecionada == 7 || this.posCifraSelecionada == 12 || this.posCifraSelecionada == 13 ||
                 this.posCifraSelecionada == 14 || this.posCifraSelecionada == 16 || this.posCifraSelecionada == 26 ||
