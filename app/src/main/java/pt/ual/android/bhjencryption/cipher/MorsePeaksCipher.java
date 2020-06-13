@@ -33,6 +33,11 @@ public class MorsePeaksCipher extends ImageCipher {
 
     @Override
     public CipherResult encrypt() {
+        MorseCipher morseCipher = new MorseCipher(getCipherMessage());
+        String messageAsMorse = morseCipher.encrypt().getResultAsString().replace("/", " ");
+
+        getCipherMessage().getImageTextMessage().setMessageText(messageAsMorse);
+
         return new CipherResult(getCipherMessage().getImageTextMessage());
     }
 

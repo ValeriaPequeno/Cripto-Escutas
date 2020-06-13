@@ -1,5 +1,6 @@
 package pt.ual.android.bhjencryption.ui.graphics.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,8 +10,12 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 
 import java.util.List;
+
+import pt.ual.android.bhjencryption.ui.graphics.ImageTextMessageOptions;
 
 public class ImagesUtils {
 
@@ -32,6 +37,36 @@ public class ImagesUtils {
 
         return image;
     }
+
+//    public Bitmap drawMultilineTextToBitmap(Context gContext,
+//                                            int gResId,
+//                                            String gText) {
+//        Canvas canvas = new Canvas(bitmap);
+//
+//        TextPaint paint= new TextPaint(Paint.ANTI_ALIAS_FLAG);
+//        paint.setColor(Color.rgb(61, 61, 61));
+//        paint.setTextSize((int) (14 * scale));
+//
+//
+//        // init StaticLayout for text
+//        StaticLayout textLayout = new StaticLayout(
+//                gText, paint, textWidth, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false);
+//
+//        // get height of multiline text
+//        int textHeight = textLayout.getHeight();
+//
+//        // get position of text's top left corner
+//        float x = (bitmap.getWidth() - textWidth)/2;
+//        float y = (bitmap.getHeight() - textHeight)/2;
+//
+//        // draw text to the Canvas center
+//        canvas.save();
+//        canvas.translate(x, y);
+//        textLayout.draw(canvas);
+//        canvas.restore();
+//
+//        return bitmap;
+//    }
 
     /**
      * Solução alternativa mas que aparentemente não lida com todos os tipos de Drawable:
@@ -65,87 +100,50 @@ public class ImagesUtils {
         return bitmap;
     }
 
-    /**
-     * <p>This method combines two images into one by rendering them side by side (horizontally).</p>
-     *
-     * @param left The image that goes on the left side of the combined image.
-     * @param right The image that goes on the right side of the combined image.
-     * @return The combined image.
-     */
-    public static Bitmap combineBitmapsHorizontally(final Bitmap left, final Bitmap right){
-        // Get the size of the images combined side by side.
-        int width = left.getWidth() + right.getWidth();
-        int height = left.getHeight() > right.getHeight() ? left.getHeight() : right.getHeight();
-
-        // Create a Bitmap large enough to hold both input images and a canvas to draw to this
-        // combined bitmap.
-        Bitmap combined = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(combined);
-        canvas.drawColor(Color.TRANSPARENT);
-
-        // Render both input images into the combined bitmap and return it.
-        canvas.drawBitmap(left, 0f, 0f, null);
-        canvas.drawBitmap(right, left.getWidth() + right.getWidth(), 0f, null);
-
-        return combined;
-    }
-
-    public static Bitmap combineBitmapsVertically(final Bitmap top, final Bitmap down) {
-// Get the size of the images combined side by side.
-        int width = top.getWidth() > down.getWidth() ? top.getWidth() : down.getWidth();
-        int height = top.getHeight() + down.getHeight();
-
-        // Create a Bitmap large enough to hold both input images and a canvas to draw to this
-        // combined bitmap.
-        Bitmap combined = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(combined);
-        canvas.drawColor(Color.TRANSPARENT);
-
-        // Render both input images into the combined bitmap and return it.
-        canvas.drawBitmap(top, 0f, 0f, null);
-        canvas.drawBitmap(down, 0f, top.getHeight() + down.getHeight(), null);
-
-        return combined;
-
-//        int topWidth = top.getWidth();
-//        int topHeight = top.getHeight();
-//        int downWidth = down.getWidth();
-//        int downHeight = down.getHeight();
-//
-//        Bitmap finalTopBitmap = Bitmap.createBitmap(topWidth, topHeight, Bitmap.Config.ARGB_8888);
-//        Bitmap finalDownBitmap = Bitmap.createBitmap(downWidth, downHeight, Bitmap.Config.ARGB_8888);
-//        Bitmap finalBitmap = Bitmap.createBitmap(topWidth, topHeight + downHeight, Bitmap.Config.ARGB_8888);
-//
-//        Canvas c1 = new Canvas(b1);
-//        view1.draw(c1);
-//
-//        Canvas c2 = new Canvas(b2);
-//        view2.draw(c2);
-//
-//        Canvas canvas = new Canvas(b3);
-//
-//        canvas.drawBitmap(b2, new Matrix(), null);
-//        canvas.drawBitmap(b1, 0, view2.getHeight(), null);
-    }
-
-    public static Bitmap printBitmap(int width, int height, List<Bitmap> messageBitmaps) {
-        // Create a Bitmap large enough to hold both input images and a canvas to draw to this
-        // combined bitmap.
-        Bitmap combined = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(combined);
-        canvas.drawColor(Color.TRANSPARENT);
+    public static Bitmap drawBitmaps(int width, int height, List<Bitmap> messageBitmaps) {
+        Bitmap finalBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         float printWidth = 0f;
+        Canvas canvas = new Canvas(finalBitmap);
+
+        canvas.drawColor(Color.TRANSPARENT);
 
         for (int i = 0; i < messageBitmaps.size(); i++) {
             Bitmap bitmap = messageBitmaps.get(i);
-            // Render both input images into the combined bitmap and return it.
+            // Render both input images into the finalBitmap bitmap and return it.
             if(i > 0)
                 printWidth += (float) ((bitmap.getWidth() * 2) + 10);
 
             canvas.drawBitmap(bitmap, printWidth, 0f, null);
         }
 
-        return combined;
+        return finalBitmap;
+    }
+
+    public static Bitmap drawBitmapsLines(int width, int height, List<List<Bitmap>> messageBitmapsLines, ImageTextMessageOptions options) {
+        Bitmap finalBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        float printWidth = 0f;
+        float printHeight = 0f;
+        Canvas canvas = new Canvas(finalBitmap);
+
+        canvas.drawColor(Color.WHITE);
+
+        for(int i = 0; i < messageBitmapsLines.size(); i++) {
+            List<Bitmap> messageBitmaps = messageBitmapsLines.get(i);
+
+            for (int j = 0; j < messageBitmaps.size(); j++) {
+                Bitmap bitmap = messageBitmaps.get(j);
+
+                if (j > 0)
+                    printWidth += (float) ((bitmap.getWidth() * 2) + options.getBetweenCharSpacing()); // basear o deslocamento com base na largura da imagem, que pode variar.
+
+                canvas.drawBitmap(bitmap, printWidth, printHeight, null);
+            }
+
+            printHeight += (float) ((options.getCharImageHeight() * 2) + options.getBetweenLinesSpacing()); // forçar a altura da linha, pois as imagens terão sempre todas a mesma altura
+            printWidth = 0f;
+        }
+
+        return finalBitmap;
     }
 
     /**
@@ -199,7 +197,6 @@ public class ImagesUtils {
     }
 
     private static int calculateInSampleSizeByRatio(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
@@ -237,6 +234,13 @@ public class ImagesUtils {
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static Bitmap decodeBitmapFromResource(Context context, int resId, int finalWidth, int finalHeight) {
+        Drawable drawable = context.getResources().getDrawable(resId, context.getTheme());
+        Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+
+        return Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, false);
     }
 
     public static Bitmap getEmptyTransparentBitmap(int width, int height) {
