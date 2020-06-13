@@ -25,6 +25,7 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
     // Atributos de classe
     private static final String TAG = "EcraEncriptacaoView";
     private static final String CIPHER_IMAGE_RESOURCE_NAME = "cipher_image_";
+    private static final String CIPHER_IMAGE_DEFAULT_RESOURCE_NAME = "cipher_image_x";
 
     // Presenter
     private EcraEncriptacaoContract.Presenter ecraEncriptacaoPresenter;
@@ -149,12 +150,12 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
     private void triggerEncrypt() {
         EcraResultadoModel result = null;
 
-        if(isImageCipher())
+       // if(isImageCipher())
             result = this.ecraEncriptacaoPresenter.encrypt(new ImageTextMessage(this.mensagem,
                     getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName()))),
                     this.password,
                     this.strCifraSelecionada);
-        else result = this.ecraEncriptacaoPresenter.encrypt(new ImageTextMessage(this.mensagem,null), this.password, this.strCifraSelecionada);
+        //else result = this.ecraEncriptacaoPresenter.encrypt(new ImageTextMessage(this.mensagem,null), this.password, this.strCifraSelecionada);
 
         if (result != null) {
             if(!result.hasErrors()) {
@@ -167,8 +168,17 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
 
                 startActivity(entrarEcraResultado);
             }
-            else showToast(getResources().getString(getResources().getIdentifier(result.getErrorCode(), "string", getPackageName())));
+            else showToast(result);
         } else showToast("Não foi possível cifrar a mensagem solicitada.");
+    }
+
+    private void showToast(EcraResultadoModel result) {
+        String text = getResources().getString(getResources().getIdentifier(result.getErrorCode(), "string", getPackageName()));
+
+        if(result.hasErrorParams())
+            text = String.format(text, result.getErrorParams());
+
+        Toast.makeText(EcraEncriptacaoActivityView.this, text, Toast.LENGTH_SHORT).show();
     }
 
     private void showToast(String text) {

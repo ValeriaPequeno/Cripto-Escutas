@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import pt.ual.android.bhjencryption.R;
+import pt.ual.android.bhjencryption.ui.form.cipher.encrypt.EcraEncriptacaoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoActivityView;
 import pt.ual.android.bhjencryption.ui.form.cipher.result.EcraResultadoModel;
 import pt.ual.android.bhjencryption.ui.graphics.ImageTextMessage;
@@ -152,7 +153,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
         this.btnDecriptResult.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { onClickDecriptResultButton(v);
+            public void onClick(View v) { onClickDecryptResultButton(v);
             }
         });
 
@@ -410,8 +411,17 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
                 startActivity(entrarEcraResultado);
             }
-            else showToast(getResources().getString(getResources().getIdentifier(result.getErrorCode(), "string", getPackageName())));
+            else showToast(result);
         } else showToast("Não foi possível cifrar a mensagem solicitada.");
+    }
+
+    private void showToast(EcraResultadoModel result) {
+        String text = getResources().getString(getResources().getIdentifier(result.getErrorCode(), "string", getPackageName()));
+
+        if(result.hasErrorParams())
+            text = String.format(text, result.getErrorParams());
+
+        Toast.makeText(EcraDesencriptacaoActivityView.this, text, Toast.LENGTH_SHORT).show();
     }
 
     private void showToast(String text) {

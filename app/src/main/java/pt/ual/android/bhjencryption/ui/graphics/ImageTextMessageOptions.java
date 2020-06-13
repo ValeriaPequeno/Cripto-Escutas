@@ -3,9 +3,10 @@ package pt.ual.android.bhjencryption.ui.graphics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import pt.ual.android.bhjencryption.cipher.CipherImageMessageOptions;
 import pt.ual.android.bhjencryption.utils.IntegerUtils;
 
-public class ImageTextMessageOptions implements Parcelable {
+public class ImageTextMessageOptions implements Parcelable, CipherImageMessageOptions {
     private String strOptions;
     private String resourceType;
     private int charImageWidth;
@@ -108,6 +109,7 @@ public class ImageTextMessageOptions implements Parcelable {
         return lineCharSpaceWidth;
     }
 
+    @Override
     public int getMaxMessageChars() {
         return maxMessageChars;
     }

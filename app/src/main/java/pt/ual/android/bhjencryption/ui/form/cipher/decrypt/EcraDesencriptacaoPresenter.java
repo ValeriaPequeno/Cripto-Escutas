@@ -24,7 +24,7 @@ public class EcraDesencriptacaoPresenter implements EcraDesencriptacaoContract.P
         CipherValidationResult cvr = cipherFactory.validateDecrypt();
 
         if(cvr.hasErrors())
-            return new EcraResultadoModel(null, cvr.getCipherErrorCode().getErrorCode());
+            return new EcraResultadoModel(null, cvr.getCipherErrorCode().getErrorCode(), cvr.getCipherErrorCode().getErrorParams());
 
         CipherResult cr = cipherFactory.decrypt();
 

@@ -18,6 +18,9 @@ public abstract class Cipher {
         if(getCipherMessage().getMessageAsText().isEmpty())
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_MESSAGE));
 
+        if(getCipherMessage().getMessageAsText().length() > getCipherMessage().getMessageMaxLength())
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_MAX_LENGTH_REACHED, new String[] { String.valueOf(getCipherMessage().getMessageMaxLength()) }));
+
         return new CipherResult();
     }
 
