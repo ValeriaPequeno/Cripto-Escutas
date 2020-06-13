@@ -2,6 +2,8 @@ package pt.ual.android.bhjencryption.cipher;
 
 import java.util.Random;
 
+import pt.ual.android.bhjencryption.utils.StringUtils;
+
 public class FirstFakeCipher extends Cipher {
 
     public FirstFakeCipher(CipherMessage cipherMessage) {
@@ -10,12 +12,29 @@ public class FirstFakeCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
-    }
 
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
+    }
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -32,11 +51,11 @@ public class FirstFakeCipher extends Cipher {
 
     public static String firstFakeEnc(String enc) {
         StringBuilder output = new StringBuilder();
-        char[] alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        char[] alfabeto = CipherUtils.ALPHABET_LOWER.toUpperCase().toCharArray();
 
         Random random = new Random();
         String [] inputLetters;
-        inputLetters = enc.split("\\s+");
+        inputLetters = enc.toUpperCase().split("\\s+");
         for (String inputLetter : inputLetters) {
             int randomChartPosition = random.nextInt(alfabeto.length -1);
             if (!inputLetter.isEmpty()) {
@@ -52,7 +71,7 @@ public class FirstFakeCipher extends Cipher {
 
         StringBuilder output = new StringBuilder();
         String [] inputLetters;
-        inputLetters = enc.split("\\s+");
+        inputLetters = enc.toUpperCase().split("\\s+");
         for (String inputLetter : inputLetters) {
 
             if (!inputLetter.isEmpty()) {

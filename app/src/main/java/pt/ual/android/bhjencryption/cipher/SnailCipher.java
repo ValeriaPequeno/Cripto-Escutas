@@ -2,6 +2,8 @@ package pt.ual.android.bhjencryption.cipher;
 
 import java.util.Random;
 
+import pt.ual.android.bhjencryption.utils.StringUtils;
+
 public class SnailCipher  extends Cipher {
 
     public SnailCipher(CipherMessage cipherMessage) {
@@ -9,8 +11,41 @@ public class SnailCipher  extends Cipher {
     }
 
     @Override
+    public CipherValidationResult validate() {
+
+        CipherValidationResult result = super.validate();
+
+        if(!result.hasErrors()) {
+            result = validatePassword();
+        }
+
+        return result;
+    }
+
+    public CipherValidationResult validatePassword() {
+        if(getCipherMessage().getPasswordAsInt() == Integer.MIN_VALUE)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
+
+        if(getCipherMessage().getPasswordAsInt() == Integer.MIN_VALUE + 1)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
+
+        if(getCipherMessage().getPasswordAsInt() < 0)
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.NEGATIVE_INTEGER_PASSWORD));
+
+        return new CipherResult();
+    }
+
+    @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -32,7 +67,7 @@ public class SnailCipher  extends Cipher {
         StringBuilder output = new StringBuilder();
         String word = enc.replaceAll(" ", "").toUpperCase();
         char[][] spiral = new char[size][size];
-        char[] alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        char[] alfabeto = CipherUtils.ALPHABET_LOWER.toUpperCase().toCharArray();
         Random random = new Random();
         int diff = (size * size) - word.length();
         int value = 0, minCol = 0, maxCol = size - 1, minRow = 0, maxRow = size - 1;
