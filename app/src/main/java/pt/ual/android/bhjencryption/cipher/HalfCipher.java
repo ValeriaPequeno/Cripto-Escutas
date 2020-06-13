@@ -1,5 +1,7 @@
 package pt.ual.android.bhjencryption.cipher;
 
+import pt.ual.android.bhjencryption.utils.StringUtils;
+
 public class HalfCipher  extends Cipher {
 
     public HalfCipher(CipherMessage cipherMessage) {
@@ -8,12 +10,30 @@ public class HalfCipher  extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return null;
+
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+
+        CipherValidationResult result = this.validate();
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -28,7 +48,7 @@ public class HalfCipher  extends Cipher {
 
     public static String halfEnc(String enc) {
 
-        String inputLetters = enc.replaceAll(" ","");
+        String inputLetters = enc.toUpperCase().replaceAll(" ","");
         String output="";
         String output1="";
         for (int i = 0; i < inputLetters.length(); i += 2) {
@@ -46,7 +66,7 @@ public class HalfCipher  extends Cipher {
 
     public static String halfDecode(String enc) {
         //String exemplo = "CAAOOORSA HMRSCRIT";
-        String[] saida = enc.split(" ");
+        String[] saida = enc.toUpperCase().split(" ");
 
         String s = "";
         String a = saida[0];
