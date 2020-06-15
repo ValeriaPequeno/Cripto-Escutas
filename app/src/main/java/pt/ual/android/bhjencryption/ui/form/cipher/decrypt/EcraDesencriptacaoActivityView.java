@@ -2,6 +2,7 @@ package pt.ual.android.bhjencryption.ui.form.cipher.decrypt;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private EditText etxtPassInput;
     private TextView txtvMenDecript;
     private Spinner spnDropEncriptacoes;
+    private Button btnDescription;
 
     private LinearLayout llTecaldoImagens;
     private Button btnTecladoQ;
@@ -107,6 +109,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.etxtPassInput = findViewById(R.id.decriptCaixaPass);
         this.btnDecriptResult = findViewById(R.id.btDecriptResult);
         this.spnDropEncriptacoes = findViewById(R.id.decriptDrop);
+        this.btnDescription = findViewById(R.id.btDecriptDescription);
 
         this.llTecaldoImagens = findViewById(R.id.tecladoImagens);
         this.btnTecladoQ = findViewById(R.id.button_q);
@@ -163,13 +166,112 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
         this.btnDecriptResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { onClickDecryptResultButton(v);
+            }
+        });
+        this.btnDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openLink = new Intent();
+                openLink.setAction(Intent.ACTION_VIEW);
+                openLink.addCategory(Intent.CATEGORY_BROWSABLE);
+                switch (posCifraSelecionada){
+                    case 1:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo03.htm"));
+                        break;
+                    case 2:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo08.htm"));
+                        break;
+                    case 3:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo20.htm"));
+                        break;
+                    case 4:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo24.htm"));
+                        break;
+                    case 5:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo29.htm"));
+                        break;
+                    case 6:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo13.htm"));
+                        break;
+                    case 7:
+                        //openLink.setData(Uri.parse(""));
+                        break;
+                    case 8:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo01.htm"));
+                        break;
+                    case 9:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo17.htm"));
+                        break;
+                    case 10:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo18.htm"));
+                        break;
+                    case 11:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo19.htm"));
+                        break;
+                    case 12:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo02.htm"));
+                        break;
+                    case 13:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo14.htm"));
+                        break;
+                    case 14:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo15.htm"));
+                        break;
+                    case 15:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo22.htm"));
+                        break;
+                    case 16:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo28.htm"));
+                        break;
+                    case 17:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo10.htm"));
+                        break;
+                    case 18:
+                        //openLink.setData(Uri.parse(""));
+                        break;
+                    case 19:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo23.htm"));
+                        break;
+                    case 20:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo06.htm"));
+                        break;
+                    case 21:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo07.htm"));
+                        break;
+                    case 22:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo05.htm"));
+                        break;
+                    case 23:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo30.htm"));
+                        break;
+                    case 24:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo09.htm"));
+                        break;
+                    case 25:
+                        //openLink.setData(Uri.parse(""));
+                        break;
+                    case 26:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo04.htm"));
+                        break;
+                    case 27:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo21.htm"));
+                        break;
+                    case 28:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo27.htm"));
+                        break;
+                    case 29:
+                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo12.htm"));
+                        break;
+                    default:
+                        break;
+                }
+                startActivity(openLink);
             }
         });
 
@@ -366,20 +468,21 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         if(position == 0){
             etxtPassInput.setVisibility(view.INVISIBLE);
             etxtMenInput.setVisibility(view.INVISIBLE);
+            btnDescription.setVisibility(view.INVISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
             llTecladoMorse.setVisibility(view.INVISIBLE);
         }
         else if(isPassCipher()){
             etxtMenInput.setVisibility(view.VISIBLE);
             etxtPassInput.setVisibility(view.VISIBLE);
+            btnDescription.setVisibility(view.VISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
             llTecladoMorse.setVisibility(view.INVISIBLE);
         }
         else if(isImageCipher()){
             etxtMenInput.setVisibility(view.VISIBLE);
             etxtPassInput.setVisibility(view.INVISIBLE);
-
-            //this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
+            btnDescription.setVisibility(view.VISIBLE);
 
             if(this.posCifraSelecionada == 19 || this.posCifraSelecionada == 22){
                 if(this.posCifraSelecionada == 19){
@@ -543,13 +646,10 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         else{
             etxtMenInput.setVisibility(view.VISIBLE);
             etxtPassInput.setVisibility(view.INVISIBLE);
+            btnDescription.setVisibility(view.VISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
             llTecladoMorse.setVisibility(view.INVISIBLE);
         }
-    }
-
-    private String getCipherImageName() {
-        return CIPHER_IMAGE_RESOURCE_NAME + posCifraSelecionada;
     }
 
     private boolean isPassCipher() {
@@ -580,7 +680,6 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
             this.mensagem = etxtMenInput.getText().toString();
             this.password = etxtPassInput.getText().toString();
             this.strCifraSelecionada = this.myAdapter.getItem(posCifraSelecionada);
-            this.imageMessage = new ImageTextMessage(this.mensagem, getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
 
             triggerDecrypt();
         }
