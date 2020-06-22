@@ -107,91 +107,91 @@ public class EcraEncriptacaoActivityView extends AppCompatActivity implements Ec
                 openLink.addCategory(Intent.CATEGORY_BROWSABLE);
                 switch (posCifraSelecionada){
                     case 1:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo03.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Alfabeto-Invertido"));
                         break;
                     case 2:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo08.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Alfabeto-Numeral"));
                         break;
                     case 3:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo20.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Angular"));
                         break;
                     case 4:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo24.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Batalha-Naval"));
                         break;
                     case 5:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo29.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Caracol"));
                         break;
                     case 6:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo13.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Caranguejo"));
                         break;
                     case 7:
-                        //openLink.setData(Uri.parse(""));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/César"));
                         break;
                     case 8:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo01.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-de-Braile-Falso"));
                         break;
                     case 9:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo17.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-Mais-3"));
                         break;
                     case 10:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo18.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-Chinês-1"));
                         break;
                     case 11:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo19.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-Chinês-2"));
                         break;
                     case 12:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo02.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Data"));
                         break;
                     case 13:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo14.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Frase-Chave-Vertical"));
                         break;
                     case 14:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo15.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Frase-Chave-Horizontal"));
                         break;
                     case 15:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo22.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Homógrafo"));
                         break;
                     case 16:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo28.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Horizontal"));
                         break;
                     case 17:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo10.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Metades"));
                         break;
                     case 18:
-                        //openLink.setData(Uri.parse(""));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/C%C3%B3digo-de-Morse#internacional"));
                         break;
                     case 19:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo23.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/C%C3%B3digo-de-Morse#n%C3%B3s"));
                         break;
                     case 20:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo06.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Passa-um-Melro"));
                         break;
                     case 21:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo07.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Passa-dois-Melros"));
                         break;
                     case 22:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo05.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/C%C3%B3digo-de-Morse#picos"));
                         break;
                     case 23:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo30.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Primeira-Letra-Falsa"));
                         break;
                     case 24:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo09.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Romano-Árabe"));
                         break;
                     case 25:
-                        //openLink.setData(Uri.parse(""));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/SMS"));
                         break;
                     case 26:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo04.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Alfabeto-Transposto"));
                         break;
                     case 27:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo21.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Última-Letra-Falsa"));
                         break;
                     case 28:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo27.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Vertical"));
                         break;
                     case 29:
-                        openLink.setData(Uri.parse("http://cne-escutismo.pt/recursos/cscodigoscifras/codigo12.htm"));
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Vogais-por-Pontos"));
                         break;
                     default:
                         break;
