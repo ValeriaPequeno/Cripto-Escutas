@@ -34,4 +34,5 @@ Cifras implementadas na aplicação:
 - SMS;
 - Transposto;
 - Última Letra Falsa;
-- Vertical.
+- Vertical;
+- Vogais por Pontos.
