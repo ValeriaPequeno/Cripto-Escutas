@@ -70,8 +70,8 @@
 
     <LinearLayout
         android:id="@+id/tecladoImagens"
-        android:layout_width="417dp"
-        android:layout_height="200dp"
+        android:layout_width="0dp"
+        android:layout_height="183dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/btDecriptResult"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,182 +80,232 @@
 
         <LinearLayout
             android:id="@+id/layoutTeclado1"
-            android:layout_width="418dp"
-            android:layout_height="49dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_a"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_a"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_b"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_b"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_c"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_c"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_d"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_d"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_e"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_e"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_f"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_f"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_g"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_g"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_h"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_h"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_i"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_i"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutTeclado2"
-            android:layout_width="418dp"
-            android:layout_height="49dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_j"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_j"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_k"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_k"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_l"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_l"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_m"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_m"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_n"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_n"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_o"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_o"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_p"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_p"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_q"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_q"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_r"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_r"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutTeclado3"
-            android:layout_width="418dp"
-            android:layout_height="49dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_s"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_s"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_t"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_t"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_u"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_u"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_v"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_v"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
 
-            <Button
-                android:id="@+id/button_w"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_w"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
 
-            <Button
-                android:id="@+id/button_x"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_x"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
 
-            <Button
-                android:id="@+id/button_y"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_y"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <Button
-                android:id="@+id/button_z"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/imageButton_z"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
         </LinearLayout>
 
         <Button
@@ -268,7 +318,7 @@
 
     <LinearLayout
         android:id="@+id/tecladoMorse"
-        android:layout_width="417dp"
+        android:layout_width="0dp"
         android:layout_height="200dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/btDecriptResult"
@@ -278,28 +328,32 @@
 
         <LinearLayout
             android:id="@+id/tecladoMorse1"
-            android:layout_width="418dp"
-            android:layout_height="49dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button_ponto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
 
             <Button
                 android:id="@+id/button_traco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/tecladoMorse2"
-            android:layout_width="418dp"
-            android:layout_height="49dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
