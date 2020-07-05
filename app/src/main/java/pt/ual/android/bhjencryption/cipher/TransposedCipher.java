@@ -12,9 +12,9 @@ public class TransposedCipher extends Cipher {
     }
 
     @Override
-    public CipherValidationResult validate() {
+    public CipherValidationResult validate(boolean isEncrypt) {
 
-        CipherValidationResult result = super.validate();
+        CipherValidationResult result = super.validate(isEncrypt);
 
         if(!result.hasErrors()) {
             result = validatePassword();
@@ -39,14 +39,14 @@ public class TransposedCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(true);
 
         return result;
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         return result;
     }

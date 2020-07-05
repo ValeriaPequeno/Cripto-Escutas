@@ -10,8 +10,8 @@ public class MorsePeaksCipher extends ImageCipher {
     }
 
     @Override
-    public CipherValidationResult validate() {
-        CipherValidationResult result = super.validate();
+    public CipherValidationResult validate(boolean isEncrypt) {
+        CipherValidationResult result = super.validate(isEncrypt);
 
         if(!result.hasErrors()) {
             if (!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ASCII_ALPHABET_LOWER, true, false))
@@ -23,12 +23,14 @@ public class MorsePeaksCipher extends ImageCipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return this.validate();
+        return this.validate(true);
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return this.validate();
+        MorseCipher morseCipher = new MorseCipher(getCipherMessage());
+
+        return morseCipher.validateDecrypt();
     }
 
     @Override
@@ -43,6 +45,8 @@ public class MorsePeaksCipher extends ImageCipher {
 
     @Override
     public CipherResult decrypt() {
-        return new CipherResult(getCipherMessage().getMessageAsText());
+        MorseCipher morseCipher = new MorseCipher(getCipherMessage());
+
+        return morseCipher.decrypt();
     }
 }

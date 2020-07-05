@@ -609,7 +609,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.etxtMenInput.append("U");
     }
     private void onClickButtonI(View view){
-        this.txtvMenDecript.append("I");
+        this.etxtMenInput.append("I");
     }
     private void onClickButtonO(View view){
         this.etxtMenInput.append("O");

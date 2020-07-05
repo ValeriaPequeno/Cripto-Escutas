@@ -45,35 +45,35 @@
     <string name="C08">A mensagem não pode exceder os %s caracteres.</string>
 
     <!-- Image cipher params - cipherType,charImageWidth,charImageHeight,maxLineCharImages,betweenCharSpacing,betweenLinesSpacing,lineCharSpaceWidth,maxMessageChars,isSquared -->
-    <string name="cipher_image_3">angular,20,20,14,10,30,30,140,1</string>
-    <string name="cipher_image_8">braille,20,20,14,10,30,30,140,1</string>
-    <string name="cipher_image_10">chinese1,20,20,14,10,30,30,140,1</string>
-    <string name="cipher_image_11">chinese2,30,20,10,10,30,30,100,1</string>
-    <string name="cipher_image_15">homograph,20,20,14,10,30,30,140,1</string>
-    <string name="cipher_image_19">morsek,60,20,6,10,30,30,18,1</string>
-    <string name="cipher_image_22">morsep,20,40,14,10,30,30,32,1</string>
+    <string name="cipher_image_3">angular,20,20,14,10,30,30,140,64,1</string>
+    <string name="cipher_image_8">braille,20,20,14,10,30,30,140,64,1</string>
+    <string name="cipher_image_10">chinese1,20,20,14,10,30,30,140,64,1</string>
+    <string name="cipher_image_11">chinese2,30,20,10,10,30,30,100,64,1</string>
+    <string name="cipher_image_15">homograph,20,20,14,10,30,30,140,64,1</string>
+    <string name="cipher_image_19">morsek,60,20,6,10,30,30,18,192,1</string>
+    <string name="cipher_image_22">morsep,20,40,14,10,30,30,32,192,1</string>
 
     <!-- Text cipher params -->
-    <string name="cipher_image_1">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_2">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_4">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_5">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_6">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_7">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_9">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_12">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_13">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_14">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_16">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_17">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_18">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_20">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_21">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_23">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_24">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_25">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_26">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_27">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_28">default,0,0,0,0,0,0,64,0</string>
-    <string name="cipher_image_29">default,0,0,0,0,0,0,64,0</string>
+    <string name="cipher_image_1">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_2">default,0,0,0,0,0,0,32,64,0</string>
+    <string name="cipher_image_4">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_5">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_6">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_7">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_9">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_12">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_13">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_14">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_16">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_17">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_18">default,0,0,0,0,0,0,22,192,0</string>
+    <string name="cipher_image_20">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_21">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_23">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_24">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_25">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_26">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_27">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_28">default,0,0,0,0,0,0,64,64,0</string>
+    <string name="cipher_image_29">default,0,0,0,0,0,0,64,64,0</string>
 </resources>
