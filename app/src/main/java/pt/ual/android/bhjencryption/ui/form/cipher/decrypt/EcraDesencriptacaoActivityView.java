@@ -485,6 +485,8 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
             etxtPassInput.setVisibility(view.INVISIBLE);
             btnDescription.setVisibility(view.VISIBLE);
 
+            //this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
+
             if(this.posCifraSelecionada == 19 || this.posCifraSelecionada == 22){
                 if(this.posCifraSelecionada == 19){
                     this.btnPonto.setBackgroundResource(R.drawable.morsek_dot);
@@ -653,6 +655,10 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         }
     }
 
+    private String getCipherImageName() {
+        return CIPHER_IMAGE_RESOURCE_NAME + posCifraSelecionada;
+    }
+
     private boolean isPassCipher() {
         if(this.posCifraSelecionada == 2 || this.posCifraSelecionada == 4 || this.posCifraSelecionada == 5 ||
                 this.posCifraSelecionada == 7 || this.posCifraSelecionada == 12 || this.posCifraSelecionada == 13 ||
@@ -681,6 +687,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
             this.mensagem = etxtMenInput.getText().toString();
             this.password = etxtPassInput.getText().toString();
             this.strCifraSelecionada = this.myAdapter.getItem(posCifraSelecionada);
+            this.imageMessage = new ImageTextMessage(this.mensagem, getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
 
             triggerDecrypt();
         }
