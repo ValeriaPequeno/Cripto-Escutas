@@ -2,6 +2,7 @@ package pt.ual.android.bhjencryption.cipher;
 
 import java.util.Random;
 
+import pt.ual.android.bhjencryption.utils.IntegerUtils;
 import pt.ual.android.bhjencryption.utils.StringUtils;
 
 public class SnailCipher  extends Cipher {
@@ -23,14 +24,13 @@ public class SnailCipher  extends Cipher {
     }
 
     public CipherValidationResult validatePassword() {
-        if(getCipherMessage().getPasswordAsInt() == Integer.MIN_VALUE)
+        if(getCipherMessage().getPasswordAsText().isEmpty())
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_PASSWORD));
 
-        if(getCipherMessage().getPasswordAsInt() == Integer.MIN_VALUE + 1)
-            return new CipherResult(new CipherErrorCode(CipherErrorCode.PASSWORD_HAS_NOT_ALLOWED_CHARS));
-
-        if(getCipherMessage().getPasswordAsInt() < 0)
-            return new CipherResult(new CipherErrorCode(CipherErrorCode.NEGATIVE_INTEGER_PASSWORD));
+        String letras = getCipherMessage().getMessageAsText().replaceAll(" ", "");
+        if(letras.length() > (getCipherMessage().getPasswordAsInt() * getCipherMessage().getPasswordAsInt()) ){
+            return new CipherResult(new CipherErrorCode(CipherErrorCode.INVALID_PASSWORD_SIZE));
+        }
 
         return new CipherResult();
     }
@@ -50,7 +50,15 @@ public class SnailCipher  extends Cipher {
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return null;
+        CipherValidationResult result = this.validate(false);
+
+        if(!result.hasErrors()){
+            if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
+            }
+        }
+
+        return result;
     }
 
     @Override
