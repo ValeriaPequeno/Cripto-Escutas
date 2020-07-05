@@ -9,4 +9,5 @@ public interface CipherImageMessage {
     public void setMessageText(String text);
     public String getMessageAsText();
     public <T>  Bitmap getMessageAsImage(T value);
+    public CipherImageMessageOptions getImageMessageOptions();
 }

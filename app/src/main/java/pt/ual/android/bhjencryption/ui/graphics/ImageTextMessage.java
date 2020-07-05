@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import pt.ual.android.bhjencryption.cipher.CipherImageMessage;
+import pt.ual.android.bhjencryption.cipher.CipherImageMessageOptions;
 import pt.ual.android.bhjencryption.ui.graphics.utils.ImagesUtils;
 
 public class ImageTextMessage implements CipherImageMessage, Parcelable {
@@ -135,6 +136,11 @@ public class ImageTextMessage implements CipherImageMessage, Parcelable {
         // calcula o valor final do bitmap dinamicamente, só com o tamanho que for estritamente necessário.
         return ImagesUtils.drawBitmapsLines(700, resourceTypeOptions.getImageFinalHeight(messageBitmaps.size()), messageBitmaps, resourceTypeOptions);
 //        return ImagesUtils.drawBitmaps(700, 700, messageBitmaps);
+    }
+
+    @Override
+    public CipherImageMessageOptions getImageMessageOptions() {
+        return this.resourceTypeOptions;
     }
 
     private List<List<Bitmap>> decodeTextToImage(Context context) {

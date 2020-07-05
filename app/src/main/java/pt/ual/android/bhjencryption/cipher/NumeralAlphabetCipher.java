@@ -16,8 +16,8 @@ public class NumeralAlphabetCipher extends Cipher {
     }
 
     @Override
-    public CipherValidationResult validate() {
-        CipherValidationResult result = super.validate();
+    public CipherValidationResult validate(boolean isEncrypt) {
+        CipherValidationResult result = super.validate(isEncrypt);
 
         if(!result.hasErrors()) {
             result = validatePassword();
@@ -45,7 +45,7 @@ public class NumeralAlphabetCipher extends Cipher {
      */
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(true);
 
         if(!result.hasErrors()) {
             if (!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ASCII_ALPHABET_LOWER, true, false))
@@ -65,7 +65,7 @@ public class NumeralAlphabetCipher extends Cipher {
      */
     @Override
     public CipherValidationResult validateDecrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         if(!result.hasErrors()) {
             if (!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.NUMERIC, true, false))

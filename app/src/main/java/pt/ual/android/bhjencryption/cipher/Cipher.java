@@ -11,12 +11,21 @@ public abstract class Cipher {
         return cipherMessage;
     }
 
-    protected CipherValidationResult validate() {
+    protected CipherValidationResult validate(boolean isEncrypt) {
         if(getCipherMessage().getMessageAsText() == null)
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_MESSAGE));
 
         if(getCipherMessage().getMessageAsText().isEmpty())
             return new CipherResult(new CipherErrorCode(CipherErrorCode.EMPTY_MESSAGE));
+
+        if(isEncrypt) {
+            if (getCipherMessage().getMessageAsText().length() > getCipherMessage().getMessageMaxLengthEncrypt())
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_MAX_LENGTH_REACHED, new String[]{String.valueOf(getCipherMessage().getMessageMaxLengthEncrypt())}));
+        }
+        else {
+            if (getCipherMessage().getMessageAsText().length() > getCipherMessage().getMessageMaxLengthDecrypt())
+                return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_MAX_LENGTH_REACHED, new String[]{String.valueOf(getCipherMessage().getMessageMaxLengthDecrypt())}));
+        }
 
         return new CipherResult();
     }

@@ -3,9 +3,10 @@ package pt.ual.android.bhjencryption.ui.graphics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import pt.ual.android.bhjencryption.cipher.CipherImageMessageOptions;
 import pt.ual.android.bhjencryption.utils.IntegerUtils;
 
-public class ImageTextMessageOptions implements Parcelable {
+public class ImageTextMessageOptions implements Parcelable, CipherImageMessageOptions {
     private String strOptions;
     private String resourceType;
     private int charImageWidth;
@@ -14,7 +15,8 @@ public class ImageTextMessageOptions implements Parcelable {
     private int betweenCharSpacing;
     private int betweenLinesSpacing;
     private int lineCharSpaceWidth;
-    private int maxMessageChars;
+    private int maxMessageCharsEncrypt;
+    private int maxMessageCharsDecrypt;
     private int isSquared;
 
     public ImageTextMessageOptions(String options) {
@@ -32,7 +34,8 @@ public class ImageTextMessageOptions implements Parcelable {
         this.betweenCharSpacing = in.readInt();
         this.betweenLinesSpacing = in.readInt();
         this.lineCharSpaceWidth = in.readInt();
-        this.maxMessageChars = in.readInt();
+        this.maxMessageCharsEncrypt = in.readInt();
+        this.maxMessageCharsDecrypt = in.readInt();
         this.isSquared = in.readInt();
     }
 
@@ -46,7 +49,8 @@ public class ImageTextMessageOptions implements Parcelable {
         dest.writeInt(betweenCharSpacing);
         dest.writeInt(betweenLinesSpacing);
         dest.writeInt(lineCharSpaceWidth);
-        dest.writeInt(maxMessageChars);
+        dest.writeInt(maxMessageCharsEncrypt);
+        dest.writeInt(maxMessageCharsDecrypt);
         dest.writeInt(isSquared);
     }
 
@@ -79,8 +83,9 @@ public class ImageTextMessageOptions implements Parcelable {
                 this.betweenCharSpacing = IntegerUtils.tryParseInt(optionsArr[4]) ? Integer.parseInt(optionsArr[4]) : -1;
                 this.betweenLinesSpacing = IntegerUtils.tryParseInt(optionsArr[5]) ? Integer.parseInt(optionsArr[5]) : -1;
                 this.lineCharSpaceWidth = IntegerUtils.tryParseInt(optionsArr[6]) ? Integer.parseInt(optionsArr[6]) : -1;
-                this.maxMessageChars = IntegerUtils.tryParseInt(optionsArr[7]) ? Integer.parseInt(optionsArr[7]) : -1;
-                this.isSquared = IntegerUtils.tryParseInt(optionsArr[8]) ? Integer.parseInt(optionsArr[8]) : -1;
+                this.maxMessageCharsEncrypt = IntegerUtils.tryParseInt(optionsArr[7]) ? Integer.parseInt(optionsArr[7]) : -1;
+                this.maxMessageCharsDecrypt = IntegerUtils.tryParseInt(optionsArr[8]) ? Integer.parseInt(optionsArr[8]) : -1;
+                this.isSquared = IntegerUtils.tryParseInt(optionsArr[9]) ? Integer.parseInt(optionsArr[9]) : -1;
             }
     }
 
@@ -108,9 +113,13 @@ public class ImageTextMessageOptions implements Parcelable {
         return lineCharSpaceWidth;
     }
 
-    public int getMaxMessageChars() {
-        return maxMessageChars;
+    @Override
+    public int getMaxMessageCharsEncrypt() {
+        return maxMessageCharsEncrypt;
     }
+
+    @Override
+    public int getMaxMessageCharsDecrypt() { return maxMessageCharsDecrypt; }
 
     public boolean getIsSquared() {
         return isSquared == 1 ? true : false;
@@ -141,7 +150,7 @@ public class ImageTextMessageOptions implements Parcelable {
     }
 
     public int getImageTotalHeight() {
-        return (this.maxMessageChars / this.maxLineCharImages) * getCharImageTotalHeight();
+        return (this.maxMessageCharsEncrypt / this.maxLineCharImages) * getCharImageTotalHeight();
     }
 
     public int getImageFinalWidth(int numLines, int numCharFirstLine) {

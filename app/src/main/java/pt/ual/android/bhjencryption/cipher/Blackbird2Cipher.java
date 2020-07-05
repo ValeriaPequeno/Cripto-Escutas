@@ -12,7 +12,7 @@ public class Blackbird2Cipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = super.validate();
+        CipherValidationResult result = super.validate(true);
 
         if(!result.hasErrors()) {
             if (!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false))
@@ -25,7 +25,7 @@ public class Blackbird2Cipher extends Cipher {
     @Override
     public CipherValidationResult validateDecrypt() {
 
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){

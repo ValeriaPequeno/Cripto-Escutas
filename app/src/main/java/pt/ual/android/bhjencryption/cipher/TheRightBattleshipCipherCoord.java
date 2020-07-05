@@ -28,7 +28,8 @@ public class TheRightBattleshipCipherCoord {
 
     public static boolean validateCoords(String[] coords, boolean isCaseSensitive) {
         for(int i = 0; i < coords.length; i++) {
-            validateCoord(coords[i], isCaseSensitive);
+            if(!validateCoord(coords[i], isCaseSensitive))
+                return false;
         }
 
         return true;
@@ -37,11 +38,15 @@ public class TheRightBattleshipCipherCoord {
     public static boolean validateCoord(String coord, boolean isCaseSensitive) {
         String caseSensitiveCoord = isCaseSensitive ? coord : coord.toUpperCase();
 
-        if(caseSensitiveCoord != null)
+        if(caseSensitiveCoord != null) {
+            if(caseSensitiveCoord.length() == 1 && caseSensitiveCoord.compareTo(".") == 0)
+                return true;
+
             if(caseSensitiveCoord.length() == 2)
                 if(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD.indexOf(caseSensitiveCoord.charAt(0)) != -1)
                     if(TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD.indexOf(caseSensitiveCoord.charAt(1)) != -1)
                         return true;
+        }
 
         return false;
     }

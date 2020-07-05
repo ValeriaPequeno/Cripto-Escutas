@@ -9,9 +9,9 @@ public class HorizontalCipher extends Cipher {
     }
 
     @Override
-    public CipherValidationResult validate() {
+    public CipherValidationResult validate(boolean isEncrypt) {
 
-        CipherValidationResult result = super.validate();
+        CipherValidationResult result = super.validate(isEncrypt);
 
         if(!result.hasErrors()) {
             result = validatePassword();
@@ -35,7 +35,7 @@ public class HorizontalCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(true);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER_AND_NUMERIC, true, false)){
@@ -48,7 +48,7 @@ public class HorizontalCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER_AND_NUMERIC, true, false)){
