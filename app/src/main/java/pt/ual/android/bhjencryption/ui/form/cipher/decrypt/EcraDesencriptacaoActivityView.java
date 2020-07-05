@@ -2,6 +2,7 @@ package pt.ual.android.bhjencryption.ui.form.cipher.decrypt;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
     private EditText etxtPassInput;
     private TextView txtvMenDecript;
     private Spinner spnDropEncriptacoes;
+    private Button btnDescription;
 
     private LinearLayout llTecaldoImagens;
     private Button btnTecladoQ;
@@ -108,6 +110,7 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         this.etxtPassInput = findViewById(R.id.decriptCaixaPass);
         this.btnDecriptResult = findViewById(R.id.btDecriptResult);
         this.spnDropEncriptacoes = findViewById(R.id.decriptDrop);
+        this.btnDescription = findViewById(R.id.btDecriptDescription);
 
         this.llTecaldoImagens = findViewById(R.id.tecladoImagens);
         this.btnTecladoQ = findViewById(R.id.button_q);
@@ -164,13 +167,112 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
         this.btnDecriptResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { onClickDecryptResultButton(v);
+            }
+        });
+        this.btnDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openLink = new Intent();
+                openLink.setAction(Intent.ACTION_VIEW);
+                openLink.addCategory(Intent.CATEGORY_BROWSABLE);
+                switch (posCifraSelecionada){
+                    case 1:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Alfabeto-Invertido"));
+                        break;
+                    case 2:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Alfabeto-Numeral"));
+                        break;
+                    case 3:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Angular"));
+                        break;
+                    case 4:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Batalha-Naval"));
+                        break;
+                    case 5:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Caracol"));
+                        break;
+                    case 6:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Caranguejo"));
+                        break;
+                    case 7:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/César"));
+                        break;
+                    case 8:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-de-Braile-Falso"));
+                        break;
+                    case 9:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-Mais-3"));
+                        break;
+                    case 10:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-Chinês-1"));
+                        break;
+                    case 11:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Código-Chinês-2"));
+                        break;
+                    case 12:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Data"));
+                        break;
+                    case 13:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Frase-Chave-Vertical"));
+                        break;
+                    case 14:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Frase-Chave-Horizontal"));
+                        break;
+                    case 15:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Homógrafo"));
+                        break;
+                    case 16:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Horizontal"));
+                        break;
+                    case 17:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Metades"));
+                        break;
+                    case 18:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/C%C3%B3digo-de-Morse#internacional"));
+                        break;
+                    case 19:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/C%C3%B3digo-de-Morse#n%C3%B3s"));
+                        break;
+                    case 20:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Passa-um-Melro"));
+                        break;
+                    case 21:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Passa-dois-Melros"));
+                        break;
+                    case 22:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/C%C3%B3digo-de-Morse#picos"));
+                        break;
+                    case 23:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Primeira-Letra-Falsa"));
+                        break;
+                    case 24:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Romano-Árabe"));
+                        break;
+                    case 25:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/SMS"));
+                        break;
+                    case 26:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Alfabeto-Transposto"));
+                        break;
+                    case 27:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Última-Letra-Falsa"));
+                        break;
+                    case 28:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Vertical"));
+                        break;
+                    case 29:
+                        openLink.setData(Uri.parse("https://github.com/mrhenry549/BHJEncryption/wiki/Vogais-por-Pontos"));
+                        break;
+                    default:
+                        break;
+                }
+                startActivity(openLink);
             }
         });
 
@@ -367,20 +469,21 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         if(position == 0){
             etxtPassInput.setVisibility(view.INVISIBLE);
             etxtMenInput.setVisibility(view.INVISIBLE);
+            btnDescription.setVisibility(view.INVISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
             llTecladoMorse.setVisibility(view.INVISIBLE);
         }
         else if(isPassCipher()){
             etxtMenInput.setVisibility(view.VISIBLE);
             etxtPassInput.setVisibility(view.VISIBLE);
+            btnDescription.setVisibility(view.VISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
             llTecladoMorse.setVisibility(view.INVISIBLE);
         }
         else if(isImageCipher()){
             etxtMenInput.setVisibility(view.VISIBLE);
             etxtPassInput.setVisibility(view.INVISIBLE);
-
-            //this.imageMessage = new ImageTextMessage(getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
+            btnDescription.setVisibility(view.VISIBLE);
 
             if(this.posCifraSelecionada == 19 || this.posCifraSelecionada == 22){
                 if(this.posCifraSelecionada == 19){
@@ -544,13 +647,10 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
         else{
             etxtMenInput.setVisibility(view.VISIBLE);
             etxtPassInput.setVisibility(view.INVISIBLE);
+            btnDescription.setVisibility(view.VISIBLE);
             llTecaldoImagens.setVisibility(view.INVISIBLE);
             llTecladoMorse.setVisibility(view.INVISIBLE);
         }
-    }
-
-    private String getCipherImageName() {
-        return CIPHER_IMAGE_RESOURCE_NAME + posCifraSelecionada;
     }
 
     private boolean isPassCipher() {
@@ -581,7 +681,6 @@ public class EcraDesencriptacaoActivityView extends AppCompatActivity implements
             this.mensagem = etxtMenInput.getText().toString();
             this.password = etxtPassInput.getText().toString();
             this.strCifraSelecionada = this.myAdapter.getItem(posCifraSelecionada);
-            this.imageMessage = new ImageTextMessage(this.mensagem, getResources().getString(getResources().getIdentifier(getCipherImageName(), "string", getPackageName())));
 
             triggerDecrypt();
         }
