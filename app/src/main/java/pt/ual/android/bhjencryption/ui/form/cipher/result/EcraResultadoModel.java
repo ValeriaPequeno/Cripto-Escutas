@@ -17,6 +17,7 @@ import pt.ual.android.bhjencryption.ui.graphics.utils.ImagesUtils;
 public class EcraResultadoModel implements Parcelable {
     private static final String RESULT_IS_EMPTY = "O resultado obtido é nulo ou vazio.";
     private String errorCode;
+    private String[] errorParams;
     private String strResult;
     private ImageTextMessage imageTextMessage;
 
@@ -29,9 +30,10 @@ public class EcraResultadoModel implements Parcelable {
         setStrResult(strResult);
     }
 
-    public EcraResultadoModel(String strResult, String errorCode) {
+    public EcraResultadoModel(String strResult, String errorCode, String[] errorParams) {
         this(strResult);
 
+        this.errorParams = errorParams;
         this.errorCode = errorCode;
     }
 
@@ -116,4 +118,12 @@ public class EcraResultadoModel implements Parcelable {
             return new EcraResultadoModel[size];
         }
     };
+
+    public String[] getErrorParams() {
+        return errorParams;
+    }
+
+    public boolean hasErrorParams() {
+        return errorParams != null;
+    }
 }

@@ -15,7 +15,7 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(true);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER_AND_NUMERIC, true, false)){
@@ -28,7 +28,7 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ASCII_CONSONANTS_LOWER_NUMERIC_AND_POINT, true, false)){
@@ -56,18 +56,11 @@ public class VowelsByPointsCipher extends Cipher implements SpellCheckerSession.
 
         for(String pal : palavras){
             for(char let : pal.toCharArray()){
-                for(char vow : CipherUtils.VOWELS_LOWER.toCharArray()){
-                    if(Character.toLowerCase(let) == vow || let == Character.toUpperCase(vow)){
-                        encoded.append('.');
-                        break;
-                    }
-                    else if(let == '.'){
-                        break;
-                    }
-                    else{
-                        encoded.append(let);
-                        break;
-                    }
+                if(CipherUtils.VOWELS_LOWER.indexOf(let) != -1) {
+                    encoded.append('.');
+                }
+                else {
+                    encoded.append(let);
                 }
             }
 

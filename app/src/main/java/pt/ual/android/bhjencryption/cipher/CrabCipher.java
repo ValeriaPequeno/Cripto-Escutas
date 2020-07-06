@@ -8,12 +8,12 @@ public class CrabCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        return validate();
+        return validate(true);
     }
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        return validate();
+        return validate(false);
     }
 
     @Override

@@ -16,8 +16,8 @@ public class TheRightBattleshipCipher extends Cipher {
     }
 
     @Override
-    public CipherValidationResult validate() {
-        CipherValidationResult result = super.validate();
+    public CipherValidationResult validate(boolean isEncrypt) {
+        CipherValidationResult result = super.validate(isEncrypt);
 
         if(!result.hasErrors()) {
             result = validatePassword();
@@ -41,7 +41,7 @@ public class TheRightBattleshipCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(true);
 
         if(!result.hasErrors()) {
             if (!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ASCII_ALPHABET_LOWER, true, false))
@@ -53,11 +53,11 @@ public class TheRightBattleshipCipher extends Cipher {
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         if(!result.hasErrors()) {
             if (!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), new String(
-                            TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD + TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD),
+                            TheRightBattleshipCipherCoord.BATTLESHIP_MAP_COLUM_COORD + TheRightBattleshipCipherCoord.BATTLESHIP_MAP_LINE_COORD) + ".",
                     true, false))
                 return new CipherResult(new CipherErrorCode(CipherErrorCode.MESSAGE_HAS_NOT_ALLOWED_CHARS));
 
@@ -78,10 +78,14 @@ public class TheRightBattleshipCipher extends Cipher {
         for(int i = 0; i < upperMessage.length(); i++) {
             char ch = upperMessage.charAt(i);
 
-            if(ch == ' ' || ch == upperPassword.charAt(0)) // validar se a letra a cifrar é igual à pw e se for um espaço, fazer skip
+            if(ch == ' ') // validar se a letra a cifrar é igual à pw e se for um espaço, fazer skip
                 continue;
 
-            sbOutput.append(encodingTable.get(String.valueOf(ch)));
+            if(ch == upperPassword.charAt(0))
+                sbOutput.append(".");
+            else
+                sbOutput.append(encodingTable.get(String.valueOf(ch)));
+
             sbOutput.append(" ");
         }
 
@@ -95,7 +99,10 @@ public class TheRightBattleshipCipher extends Cipher {
         StringBuilder sbOutput = new StringBuilder();
 
         for(int i = 0; i < arrMessage.length; i++) {
-            sbOutput.append(encodingTable.get(arrMessage[i]));
+            if(arrMessage[i].compareTo(".") == 0)
+                sbOutput.append(getCipherMessage().getPasswordAsText().toUpperCase());
+            else
+                sbOutput.append(encodingTable.get(arrMessage[i]));
         }
 
         return new CipherResult(sbOutput.toString());

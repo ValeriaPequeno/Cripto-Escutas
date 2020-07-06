@@ -70,4 +70,12 @@ public class CipherMessage {
 
         return Integer.MIN_VALUE;
     }
+
+    public int getMessageMaxLengthEncrypt() {
+        return imageTextMessage.getImageMessageOptions().getMaxMessageCharsEncrypt();
+    }
+
+    public int getMessageMaxLengthDecrypt() {
+        return imageTextMessage.getImageMessageOptions().getMaxMessageCharsDecrypt();
+    }
 }

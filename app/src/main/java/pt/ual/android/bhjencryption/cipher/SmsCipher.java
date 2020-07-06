@@ -12,7 +12,7 @@ public class SmsCipher extends Cipher{
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(true);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ALPHABET_LOWER, true, false)){
@@ -25,7 +25,7 @@ public class SmsCipher extends Cipher{
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.NUMERIC_NATURAL, true, false)){

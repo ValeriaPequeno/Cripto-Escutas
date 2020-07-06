@@ -12,9 +12,9 @@ public class DateCipher extends Cipher{
     }
 
     @Override
-    public CipherValidationResult validate() {
+    public CipherValidationResult validate(boolean isEncrypt) {
 
-        CipherValidationResult result = super.validate();
+        CipherValidationResult result = super.validate(isEncrypt);
 
         if(!result.hasErrors()) {
             result = validatePassword();
@@ -41,7 +41,7 @@ public class DateCipher extends Cipher{
 
     @Override
     public CipherValidationResult validateEncrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(true);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.ASCII_ALPHABET_LOWER_AND_NUMERIC, true, false)){
@@ -54,7 +54,7 @@ public class DateCipher extends Cipher{
 
     @Override
     public CipherValidationResult validateDecrypt() {
-        CipherValidationResult result = this.validate();
+        CipherValidationResult result = this.validate(false);
 
         if(!result.hasErrors()){
             if(!StringUtils.matchingChars(getCipherMessage().getMessageAsText(), CipherUtils.NUMERIC, true, false)){
