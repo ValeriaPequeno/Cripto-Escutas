@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BHJEncryption</string>
+    <string name="app_name">Cripto Escutas</string>
 
     <string-array name="cifras">
         <item>Selecione uma cifra:</item>
