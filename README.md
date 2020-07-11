@@ -1,4 +1,4 @@
-# BHJEncryption
+# Cripto Escutas (anteriormente conhecida como BHJEncryption)
 
 ![Logo](https://i.imgur.com/Tgu1KJt.png)
 
