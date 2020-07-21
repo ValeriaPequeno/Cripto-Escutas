@@ -126,6 +126,7 @@ public class VerticalCipher extends Cipher {
                     }
                 }
             }
+            encoded.append(" ");
         }
 
         return encoded.toString();
