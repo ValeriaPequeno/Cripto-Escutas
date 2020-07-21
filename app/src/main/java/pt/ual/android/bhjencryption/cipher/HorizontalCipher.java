@@ -174,6 +174,7 @@ public class HorizontalCipher extends Cipher {
                     xIndex++;
                     yIndex = size - 1;
                 }
+                decoded.append(" ");
             } else if (sentido == "direita") {
                 xIndex = 0;
                 yIndex = 0;
@@ -189,6 +190,7 @@ public class HorizontalCipher extends Cipher {
                     xIndex++;
                     yIndex = 0;
                 }
+                decoded.append(" ");
             }
         }
 

@@ -174,6 +174,7 @@ public class VerticalCipher extends Cipher {
                     xIndex = size - 1;
                     yIndex++;
                 }
+                decoded.append(" ");
             } else if (sentido == "baixo") {
                 xIndex = 0;
                 yIndex = 0;
@@ -189,6 +190,7 @@ public class VerticalCipher extends Cipher {
                     xIndex = 0;
                     yIndex++;
                 }
+                decoded.append(" ");
             }
         }
 
